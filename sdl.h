@@ -9,6 +9,9 @@
 
 // SDL 관련함수들 넣으세요
 
+SDL_Window* window;         // SDL 창을 나타내는 포인터 변수
+SDL_Renderer* renderer;     // SDL 렌더러를 나타내는 포인터 변수
+
 
 // 초기화 함수
 static int initAll()
@@ -44,9 +47,6 @@ static int initAll()
 
 	return (1);
 }
-
-
-
 
 
 // SDL 종료 함수
