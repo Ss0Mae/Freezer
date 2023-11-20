@@ -1,11 +1,7 @@
 #pragma once
 #include <SDL.h>
 #include <SDL_image.h>
-#include <stdio.h>
-#include <stdbool.h>
 #include "variable.h"
-
-
 
 // SDL 관련함수들 넣으세요
 
@@ -49,18 +45,16 @@ static int initAll()
 }
 
 
+
 // SDL 종료 함수
 static void closeAll()
 {
-	// 사용한 이미지 메모리 모두 해제하세요
-	SDL_DestroyTexture(player);  // 텍스처 해제
-
-
 	SDL_DestroyRenderer(renderer);  // 렌더러 해제
 	SDL_DestroyWindow(window);      // 창 해제
 	IMG_Quit();                     // SDL_image 종료
 	SDL_Quit();                     // SDL 종료
 }
+
 
 // 텍스처 로딩 함수
 SDL_Texture* loadTexture(const char* file) {
