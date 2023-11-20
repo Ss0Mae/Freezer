@@ -7,30 +7,19 @@
 #include "sdl.h"
 
 
-SDL_Texture* player;
-SDL_Texture* map1;
-SDL_Texture* refrigerator;
-SDL_Texture* gogildong1;
-SDL_Texture* gogildong2;
-SDL_Texture* gogildong3;
-SDL_Texture* rock1;
-SDL_Texture* rock2;
-SDL_Texture* rock3;
-SDL_Texture* rock4;
+SDL_Texture* player_img;
+SDL_Texture* map1_img;
+SDL_Texture* refrigerator_img;
+SDL_Texture* gildong_img;
+SDL_Texture* rock_img;
 
 void loadImg(){
 
-player = loadTexture("./assets/player.png");
-map1 = loadTexture("./assets/map1.png");
-refrigerator = loadTexture("./assets/refrigerator.png");
-gogildong1 = loadTexture("./assets/gogildong.png");
-gogildong2 = loadTexture("./assets/gogildong.png");
-gogildong3 = loadTexture("./assets/gogildong.png");
-rock1 = loadTexture("./assets/rock.png");
-rock2 = loadTexture("./assets/rock.png");
-rock3 = loadTexture("./assets/rock.png");
-rock4 = loadTexture("./assets/rock.png");
-
+player_img = loadTexture("./assets/player.png");
+map1_img = loadTexture("./assets/map1.png");
+refrigerator_img = loadTexture("./assets/refrigerator.png");
+gildong_img = loadTexture("./assets/gildong.png");
+rock_img = loadTexture("./assets/rock.png");
 }
 
 

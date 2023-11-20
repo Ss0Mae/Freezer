@@ -3,7 +3,6 @@
 #include <SDL_image.h>
 #include "variable.h"
 
-// SDL 관련함수들 넣으세요
 
 SDL_Window* window;         // SDL 창을 나타내는 포인터 변수
 SDL_Renderer* renderer;     // SDL 렌더러를 나타내는 포인터 변수
@@ -19,7 +18,7 @@ static int initAll()
 	}
 
 	// SDL 창 생성
-	window = SDL_CreateWindow("Hello World", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_OPENGL);
+	window = SDL_CreateWindow("Freezer", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_OPENGL);
 	if (window == 0)
 	{
 		fprintf(stderr, "%s\n", (SDL_GetError()));
