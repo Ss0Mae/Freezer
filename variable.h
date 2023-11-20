@@ -12,10 +12,11 @@ SDL_Renderer* renderer;     // SDL 렌더러를 나타내는 포인터 변수
 
 
 // 창의 크기
-static const int width = 1200;
-static const int height = 800;
+static const int width = 1440;
+static const int height = 730;
 
 
-SDL_Texture* dora;
+SDL_Texture* player;
+SDL_Texture* bg1;
 int doraPosX, doraPosY;
 

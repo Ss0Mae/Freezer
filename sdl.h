@@ -53,7 +53,7 @@ static int initAll()
 static void closeAll()
 {
 	// 사용한 이미지 메모리 모두 해제하세요
-	SDL_DestroyTexture(dora);  // 텍스처 해제
+	SDL_DestroyTexture(player);  // 텍스처 해제
 
 
 	SDL_DestroyRenderer(renderer);  // 렌더러 해제

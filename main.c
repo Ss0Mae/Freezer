@@ -7,10 +7,11 @@
 
 // 메인 함수
 int main(int argc, char** argv) {
-	
-	initAll();  // 초기화 함수 호출
-	dora = loadTexture("doraemong.png");  // 텍스처 로딩
-	tmp = loadTexture("tmp.png");  // 텍스처 로딩
+
+	initAll();  // SDL 초기화 함수 호출
+
+	player = loadTexture("player.png");  // 텍스처 로딩
+	bg1 = loadTexture("bg1.png");
 
 	bool quit = false;
 	SDL_Event event;
@@ -18,29 +19,28 @@ int main(int argc, char** argv) {
 	while (!quit) {
 		while (SDL_PollEvent(&event)) {
 
-			switch (event.type) {
-			case SDL_QUIT:
-				quit = true;
-				break;
-			case SDL_KEYDOWN:
+			if (event.type == SDL_KEYDOWN) {
 				switch (event.key.keysym.sym) {
 				case 1073741903: // right
-					doraPosX+= 10;
+					doraPosX += 10;
 					break;
 				case 1073741904: // left
-					doraPosX-= 10;
+					doraPosX -= 10;
 					break;
 				case 1073741905: // down
-					doraPosY+= 10;
+					doraPosY += 10;
 					break;
 				case 1073741906: // up
-					doraPosY-= 10;
+					doraPosY -= 10;
+					break;
+				case 27: // ESC
+					quit = true;
 					break;
 				}
 			}
 		}
-		SDL_RenderClear(renderer);   // 렌더러 클리어
-		drawTexture(dora, doraPosX, doraPosY);  // 텍스처 그리기
+		drawTexture(bg1, 0, 0);  // 텍스처 그리기
+		drawTexture(player, doraPosX, doraPosY);  // 텍스처 그리기
 		SDL_RenderPresent(renderer);  // 렌더러 업데이트
 	}
 
