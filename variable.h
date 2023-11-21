@@ -40,6 +40,16 @@ typedef struct Gildong {
 	int arrY;
 }Gildong;
 
+typedef struct Refrigerator {
+
+	//화면에서 냉장고의 위치
+	int posX;
+	int posY;
+
+	// 게임판 배열에서 냉장고의 위치
+	int arrX;
+	int arrY;
+}Refrigerator;
 
 //걸음수
 int walkCnt=23;
@@ -66,6 +76,7 @@ Gildong stage1_gildong[3] = {
 	{ 750, 306, 5, 3 }
 };
 
+Refrigerator stage1_refrigerator = { 890, 446, 7, 6 };
 
 int stage1_map[8][9] = {
 	{1, 1, 1, 1, 1, 1, 1, 1, 1},

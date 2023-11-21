@@ -21,6 +21,7 @@ void stage1() {
 		drawTexture(refrigerator_img, 890, 446);
 		drawTexture(roundCnt_img, 1062, 485);
 
+		if (collision_pc_refrigerator()) quit = true;
 		if (walkCnt >= 0 && walkCnt <= 23) 
 			drawTexture(walkCnt_imgs[walkCnt], 136, 485);
 
@@ -34,8 +35,6 @@ void stage1() {
 		for (int i = 0; i < 4; i++) {
 			drawTexture(rock_img, stage1_rocks[i].posX, stage1_rocks[i].posY);
 		}
-
 		SDL_RenderPresent(renderer);
-
 	}
 }

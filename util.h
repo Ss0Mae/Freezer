@@ -35,14 +35,18 @@ int collision_pc_rock(int dx, int dy) {
 	return 0;
 }
 
-int collision_pc_gogildong(int dx, int dy) { //pc와 길동 충돌
+// pc와 냉장고 충돌 (스테이지 클리어)
+int collision_pc_refrigerator() {
+	if(stage1_refrigerator.arrX == pc.arrX  && stage1_refrigerator.arrY == pc.arrY )
+		return 1;
+	return 0;
+}
+
+//pc와 길동 충돌
+int collision_pc_gogildong(int dx, int dy) { 
 	for (int i = 0; i < 3; i++) {
 		if ( stage1_gildong[i].arrX == pc.arrX + dx && stage1_gildong[i].arrY == pc.arrY + dy) {
 			if (stage1_map[stage1_gildong[i].arrY + dy][stage1_gildong[i].arrX + dx] == 1) { // 길동 뒤에 벽 (사라짐)
-				Sleep(250);
-				Sleep(250);
-				Sleep(250);
-				Sleep(250);
 				stage1_gildong[i].posX += dx * CELL_WIDTH*1000;
 				stage1_gildong[i].posY += dy * CELL_WIDTH*1000;
 				stage1_gildong[i].arrX += dx;
@@ -50,8 +54,13 @@ int collision_pc_gogildong(int dx, int dy) { //pc와 길동 충돌
 				return 1;
 			}
 			for (int j = 0; j < 3; j++) { // 길동 뒤에 다른 길동가 있는 경우
-				if (stage1_gildong[j].arrX == stage1_gildong[i].arrX + dx && stage1_gildong[j].arrY == stage1_gildong[i].arrY + dy)
+				if (stage1_gildong[j].arrX == stage1_gildong[i].arrX + dx && stage1_gildong[j].arrY == stage1_gildong[i].arrY + dy) {
+					stage1_gildong[i].posX += dx * CELL_WIDTH * 1000;
+					stage1_gildong[i].posY += dy * CELL_WIDTH * 1000;
+					stage1_gildong[i].arrX += dx*2;
+					stage1_gildong[i].arrY += dy*2;
 					return 1;
+				}
 			}
 
 			for (int j = 0; j < 3; j++) { // 길동 뒤에 바위가 있는 경우
