@@ -1,8 +1,10 @@
 #pragma once
 #include <Windows.h>
 
-void processKeyInput();
+
+int processKeyInput();
 int collision_pc_map(int dx, int dy);
+int direction_flag = 1;
 
 // pc와 맵 충돌
 int collision_pc_map(int dx, int dy) {
@@ -75,6 +77,35 @@ void drawStage1(int isGildongRun, int idx) {
 
 }
 
+void pc_melting() {
+	if (direction_flag == 1) {
+		SDL_RenderClear(renderer);
+		pc_img = loadTexture("./assets/pc_right_melt2.png");
+		drawStage1(0, -1);
+		SDL_RenderPresent(renderer);
+		Sleep(1000);
+
+		SDL_RenderClear(renderer);
+		pc_img = loadTexture("./assets/pc_right_melt3.png");
+		drawStage1(0, -1);
+		SDL_RenderPresent(renderer);
+		Sleep(1000);
+	}
+	else {
+		SDL_RenderClear(renderer);
+		pc_img = loadTexture("./assets/pc_left_melt2.png");
+		drawStage1(0, -1);
+		SDL_RenderPresent(renderer);
+		Sleep(1000);
+
+		SDL_RenderClear(renderer);
+		pc_img = loadTexture("./assets/pc_left_melt3.png");
+		drawStage1(0, -1);
+		SDL_RenderPresent(renderer);
+		Sleep(1000);
+	}
+	pc_img = loadTexture("./assets/pc_left.png");
+}
 
 void gildong_run(int i) {
 
@@ -138,6 +169,8 @@ int collision_pc_gogildong(int dx, int dy) { //pc와 길동 충돌
 			}
 
 			for (int j = 0; j < 4; j++) { // 길동 뒤에 바위가 있는 경우
+				if (stage1_rocks[j].arrX == stage1_gildong[i].arrX + dx && stage1_rocks[j].arrY == stage1_gildong[i].arrY + dy)
+
 				if (stage1_rocks[j].arrX == stage1_gildong[i].arrX + dx && stage1_rocks[j].arrY == stage1_gildong[i].arrY + dy){
 					gildong_run(i); // 길동이 도망가는 에니메이션
 				stage1_gildong[i].posX += dx * CELL_WIDTH * 1000;
@@ -159,12 +192,13 @@ int collision_pc_gogildong(int dx, int dy) { //pc와 길동 충돌
 }
 
 SDL_Event event;
-void processKeyInput() {
+int processKeyInput() {
 	while (SDL_PollEvent(&event)) {
 
 		if (event.type == SDL_KEYDOWN)
 			switch (event.key.keysym.sym) {
 			case 1073741903: // right
+				direction_flag = 1;
 				pc_img = loadTexture("./assets/pc_right.png");
 				if (collision_pc_map(1, 0)) break;
 				if (collision_pc_rock(1, 0)) break;
@@ -174,6 +208,7 @@ void processKeyInput() {
 				pc.arrX++;
 				break;
 			case 1073741904: // left
+				direction_flag = 0;
 				pc_img = loadTexture("./assets/pc_left.png");
 				if (collision_pc_map(-1, 0)) break;
 				if (collision_pc_rock(-1, 0)) break;
@@ -181,6 +216,7 @@ void processKeyInput() {
 				if (collision_pc_gogildong(-1, 0)) break;
 				pc.posX -= CELL_WIDTH;
 				pc.arrX--;
+				return 3;
 				break;
 			case 1073741905: // down
 				if (collision_pc_map(0, 1)) break;
@@ -200,9 +236,11 @@ void processKeyInput() {
 				break;
 			case 27: // ESC
 				exit(0);
+				break;
 			case 114: // R
-				return 1;
+				return -1;
 				break;
 			}
+		return 1;
 	}
 }

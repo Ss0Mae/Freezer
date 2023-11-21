@@ -16,6 +16,7 @@ SDL_Texture* rock_img;
 SDL_Texture* walkCnt_imgs[24];
 SDL_Texture* roundCnt_img;
 SDL_Texture* game_clear_img;
+SDL_Texture* game_over_img;
 
 void loadImg(){
 
@@ -44,4 +45,9 @@ void gameClear() {
   Sleep(4000);
 }
 
-
+void gameOver() {
+	game_over_img = loadTexture("./assets/game_over.png");
+	drawTexture(game_over_img, 0, 0);
+	SDL_RenderPresent(renderer);
+	Sleep(4000);
+}

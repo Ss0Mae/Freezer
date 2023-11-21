@@ -71,14 +71,15 @@ void stage1() {
 		drawStage1(0, -1);
 		SDL_RenderPresent(renderer);
 
-		processKeyInput();
+		if (processKeyInput() == -1) { //R키 누르면 재시작
+			stage1();
+		}
 
 		if (collision_pc_refrigerator()) quit = true;
 		if (walkCnt == 0) {
+			pc_melting();
+			gameOver();
 			stage1();
-			// 얼음 녹기
-			// 게임오버 화면 띄우기
-			// stage1 재시작
 		}
 	}
 }
