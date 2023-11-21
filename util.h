@@ -2,7 +2,7 @@
 #include <Windows.h>
 
 
-void processKeyInput();
+int processKeyInput();
 int collision_pc_map(int dx, int dy);
 
 
@@ -82,18 +82,13 @@ void gildong_run(int i) {
 
 	SDL_RenderClear(renderer);
 	gildong_run_img = loadTexture("./assets/gildong_run_1.png");
-	processKeyInput();
 	drawStage1(1, i);
 	drawTexture(gildong_run_img, stage1_gildong[i].posX, stage1_gildong[i].posY);
 	SDL_RenderPresent(renderer);
 	Sleep(130);
 
-
 	SDL_RenderClear(renderer);
 	gildong_run_img = loadTexture("./assets/gildong_run_2.png");
-	processKeyInput();
-
-
 	drawStage1(1, i);
 	drawTexture(gildong_run_img, stage1_gildong[i].posX, stage1_gildong[i].posY);
 	SDL_RenderPresent(renderer);
@@ -101,8 +96,6 @@ void gildong_run(int i) {
 
 	SDL_RenderClear(renderer);
 	gildong_run_img = loadTexture("./assets/gildong_run_3.png");
-	processKeyInput();
-
 	drawStage1(1, i);
 	drawTexture(gildong_run_img, stage1_gildong[i].posX, stage1_gildong[i].posY);
 	SDL_RenderPresent(renderer);
@@ -110,8 +103,6 @@ void gildong_run(int i) {
 
 	SDL_RenderClear(renderer);
 	gildong_run_img = loadTexture("./assets/gildong_run_4.png");
-	processKeyInput();
-
 	drawStage1(1, i);
 	drawTexture(gildong_run_img, stage1_gildong[i].posX, stage1_gildong[i].posY);
 	SDL_RenderPresent(renderer);
@@ -119,8 +110,6 @@ void gildong_run(int i) {
 
 	SDL_RenderClear(renderer);
 	gildong_run_img = loadTexture("./assets/gildong_run_5.png");
-	processKeyInput();
-
 	drawStage1(1, i);
 	drawTexture(gildong_run_img, stage1_gildong[i].posX, stage1_gildong[i].posY);
 	SDL_RenderPresent(renderer);
@@ -173,29 +162,31 @@ int collision_pc_gogildong(int dx, int dy) { //pc와 길동 충돌
 	return 0;
 }
 
-
-
 SDL_Event event;
-void processKeyInput() {
+int processKeyInput() {
 	while (SDL_PollEvent(&event)) {
 
 		if (event.type == SDL_KEYDOWN)
 			switch (event.key.keysym.sym) {
 			case 1073741903: // right
+				pc_img = loadTexture("./assets/pc_right.png");
 				if (collision_pc_map(1, 0)) break;
 				if (collision_pc_rock(1, 0)) break;
 				walkCnt--;
 				if (collision_pc_gogildong(1, 0) == 1) break;
 				pc.posX += CELL_WIDTH;
 				pc.arrX++;
+				return 2;
 				break;
 			case 1073741904: // left
+				pc_img = loadTexture("./assets/pc_left.png");
 				if (collision_pc_map(-1, 0)) break;
 				if (collision_pc_rock(-1, 0)) break;
 				walkCnt--;
 				if (collision_pc_gogildong(-1, 0)) break;
 				pc.posX -= CELL_WIDTH;
 				pc.arrX--;
+				return 3;
 				break;
 			case 1073741905: // down
 				if (collision_pc_map(0, 1)) break;
@@ -214,13 +205,14 @@ void processKeyInput() {
 				pc.arrY--;
 				break;
 			case 27: // ESC
-				quit = true;
+				exit(0);
+				break;
+			case 114: // R
+				return -1;
 				break;
 
-			case SDLK_r: //R
-				SDL_RenderClear(renderer);
-				break;
 
 			}
+		return 1;
 	}
 }
