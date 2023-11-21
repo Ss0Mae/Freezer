@@ -46,8 +46,13 @@ int collision_pc_gogildong(int dx, int dy) { //pc와 길동 충돌
 				return 1;
 			}
 			for (int j = 0; j < 3; j++) { // 길동 뒤에 다른 길동가 있는 경우
-				if (stage1_gildong[j].arrX == stage1_gildong[i].arrX + dx && stage1_gildong[j].arrY == stage1_gildong[i].arrY + dy)
+				if (stage1_gildong[j].arrX == stage1_gildong[i].arrX + dx && stage1_gildong[j].arrY == stage1_gildong[i].arrY + dy) {
+					stage1_gildong[i].posX += dx * CELL_WIDTH * 1000;
+					stage1_gildong[i].posY += dy * CELL_WIDTH * 1000;
+					stage1_gildong[i].arrX += dx*2;
+					stage1_gildong[i].arrY += dy*2;
 					return 1;
+				}
 			}
 
 			for (int j = 0; j < 3; j++) { // 길동 뒤에 바위가 있는 경우
