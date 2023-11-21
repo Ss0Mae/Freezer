@@ -1,4 +1,5 @@
 #pragma once
+#include <Windows.h>
 
 
 // pc와 맵 충돌
@@ -37,8 +38,11 @@ int collision_pc_rock(int dx, int dy) {
 int collision_pc_gogildong(int dx, int dy) { //pc와 길동 충돌
 	for (int i = 0; i < 3; i++) {
 		if ( stage1_gildong[i].arrX == pc.arrX + dx && stage1_gildong[i].arrY == pc.arrY + dy) {
-			if (stage1_map[stage1_gildong[i].arrY + dy][stage1_gildong[i].arrX + dx] == 1) { //길동 뒤에 벽 (사라짐)
-				//SDL_DestroyTexture(gildong_img);
+			if (stage1_map[stage1_gildong[i].arrY + dy][stage1_gildong[i].arrX + dx] == 1) { // 길동 뒤에 벽 (사라짐)
+				Sleep(250);
+				Sleep(250);
+				Sleep(250);
+				Sleep(250);
 				stage1_gildong[i].posX += dx * CELL_WIDTH*1000;
 				stage1_gildong[i].posY += dy * CELL_WIDTH*1000;
 				stage1_gildong[i].arrX += dx;

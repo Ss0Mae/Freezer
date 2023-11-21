@@ -1,3 +1,4 @@
+#define  _CRT_SECURE_NO_WARNINGS
 #include <SDL.h>
 #include <SDL_image.h>
 #include <stdio.h>
@@ -6,6 +7,7 @@
 #include "display.h"
 #include "stage1.h"
 #include "util.h"
+
 
 
 int main(int argc, char** argv) {
