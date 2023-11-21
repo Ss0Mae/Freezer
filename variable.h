@@ -31,6 +31,7 @@ typedef struct Rock {
 
 typedef struct Gildong {
 
+
 	// 화면에서 길동의 위치
 	int posX;
 	int posY;
@@ -61,7 +62,7 @@ static const int height = 730;
 // 게임 종료조건
 bool quit = false;
 
-Pc pc = { 820, 170, 6, 1 };
+Pc pc = { 820, 120, 6, 1 };
 
 Rock stage1_rocks[4] = {
 	{ 540, 446, 2, 5 } ,
@@ -70,10 +71,11 @@ Rock stage1_rocks[4] = {
 	{ 750, 446, 5, 5 }
 };
 
+
 Gildong stage1_gildong[3] = {
-	{ 680, 236, 4, 2 } ,
-	{ 610, 306, 3, 3 } ,
-	{ 750, 306, 5, 3 }
+	{ 680, 200, 4, 2 } ,
+	{ 610, 270, 3, 3 } ,
+	{ 750, 270, 5, 3 }
 };
 
 Refrigerator stage1_refrigerator = { 890, 446, 7, 6 };
