@@ -41,6 +41,8 @@ typedef struct Gildong {
 }Gildong;
 
 
+//걸음수
+int walkCnt=23;
 
 // 창의 크기
 static const int width = 1440;

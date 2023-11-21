@@ -43,24 +43,28 @@ void processKeyInput() {
 			case 1073741903: // right
 				if (collision_pc_map(1, 0)) break;
 				if (collision_pc_rock(1, 0)) break;
+				walkCnt--;
 				pc.posX += CELL_WIDTH;
 				pc.arrX++;
 				break;
 			case 1073741904: // left
 				if (collision_pc_map(-1, 0)) break;
 				if (collision_pc_rock(-1, 0)) break;
+				walkCnt--;
 				pc.posX -= CELL_WIDTH;
 				pc.arrX--;
 				break;
 			case 1073741905: // down
 				if (collision_pc_map(0, 1)) break;
 				if (collision_pc_rock(0, 1)) break;
+				walkCnt--;
 				pc.posY += CELL_WIDTH;
 				pc.arrY++;
 				break;
 			case 1073741906: // up
 				if (collision_pc_map(0, -1)) break;
 				if (collision_pc_rock(0, -1)) break;
+				walkCnt--;
 				pc.posY -= CELL_WIDTH;
 				pc.arrY--;
 				break;
