@@ -16,6 +16,7 @@ int main(int argc, char** argv) {
 	loadImg();
 		
 		stage1();
+		gameClear();
 		//stage2();
 
 	closeAll(); // SDL 메모리 해제

@@ -4,6 +4,7 @@
 #include <SDL_image.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include <Windows.h>
 #include "sdl.h"
 
 SDL_Texture* pc_img;
@@ -12,14 +13,13 @@ SDL_Texture* refrigerator_img;
 SDL_Texture* gildong_img;
 SDL_Texture* gildong_run_img;
 SDL_Texture* rock_img;
-
 SDL_Texture* walkCnt_imgs[24];
-
 SDL_Texture* roundCnt_img;
+SDL_Texture* game_clear_img;
 
 void loadImg(){
 
-pc_img = loadTexture("./assets/pc.png");
+pc_img = loadTexture("./assets/pc_left.png");
 map1_img = loadTexture("./assets/map1.png");
 refrigerator_img = loadTexture("./assets/refrigerator.png");
 gildong_img = loadTexture("./assets/gildong.png");
@@ -34,6 +34,14 @@ for (int i = 0; i <= 23; i++) {
 }
 
 roundCnt_img = loadTexture("./assets/roundCnt.png");
+}
+
+
+void gameClear() {
+  game_clear_img= loadTexture("./assets/game_clear.png");
+  drawTexture(game_clear_img, 0, 0);
+  SDL_RenderPresent(renderer);
+  Sleep(4000);
 }
 
 

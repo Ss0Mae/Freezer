@@ -62,21 +62,9 @@ static const int height = 730;
 // 게임 종료조건
 bool quit = false;
 
-Pc pc = { 820, 120, 6, 1 };
-
-Rock stage1_rocks[4] = {
-	{ 540, 446, 2, 5 } ,
-	{ 540, 516, 2, 6 } ,
-	{ 680, 516, 4, 6 } ,
-	{ 750, 446, 5, 5 }
-};
-
-
-Gildong stage1_gildong[3] = {
-	{ 680, 200, 4, 2 } ,
-	{ 610, 270, 3, 3 } ,
-	{ 750, 270, 5, 3 }
-};
+Pc pc;
+Rock stage1_rocks[4];
+Gildong stage1_gildong[3];
 
 Refrigerator stage1_refrigerator = { 890, 446, 7, 6 };
 
