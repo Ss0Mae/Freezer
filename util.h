@@ -34,6 +34,36 @@ int collision_pc_rock(int dx, int dy) {
 	return 0;
 }
 
+int collision_pc_gogildong(int dx, int dy) { //pc와 길동 충돌
+	for (int i = 0; i < 3; i++) {
+		if ( stage1_gildong[i].arrX == pc.arrX + dx && stage1_gildong[i].arrY == pc.arrY + dy) {
+			if (stage1_map[stage1_gildong[i].arrY + dy][stage1_gildong[i].arrX + dx] == 1) { //길동 뒤에 벽 (사라짐)
+				//SDL_DestroyTexture(gildong_img);
+				stage1_gildong[i].posX += dx * CELL_WIDTH*1000;
+				stage1_gildong[i].posY += dy * CELL_WIDTH*1000;
+				stage1_gildong[i].arrX += dx;
+				stage1_gildong[i].arrY += dy;
+				return 1;
+			}
+			for (int j = 0; j < 3; j++) { // 길동 뒤에 다른 길동가 있는 경우
+				if (stage1_gildong[j].arrX == stage1_gildong[i].arrX + dx && stage1_gildong[j].arrY == stage1_gildong[i].arrY + dy)
+					return 1;
+			}
+
+			for (int j = 0; j < 3; j++) { // 길동 뒤에 바위가 있는 경우
+				if (stage1_gildong[j].arrX == stage1_rocks[i].arrX + dx && stage1_gildong[j].arrY == stage1_rocks[i].arrY + dy)
+					return 1;
+			}
+
+			// 충돌한 길동은 한 칸 밀려야 함
+			stage1_gildong[i].posX += dx * CELL_WIDTH;
+			stage1_gildong[i].posY += dy * CELL_WIDTH;
+			stage1_gildong[i].arrX += dx;
+			stage1_gildong[i].arrY += dy;
+		}
+	}
+	return 0;
+}
 SDL_Event event;
 void processKeyInput() {
 	while (SDL_PollEvent(&event)) {
@@ -44,6 +74,7 @@ void processKeyInput() {
 				if (collision_pc_map(1, 0)) break;
 				if (collision_pc_rock(1, 0)) break;
 				walkCnt--;
+				if (collision_pc_gogildong(1, 0) == 1 ) break;
 				pc.posX += CELL_WIDTH;
 				pc.arrX++;
 				break;
@@ -51,6 +82,7 @@ void processKeyInput() {
 				if (collision_pc_map(-1, 0)) break;
 				if (collision_pc_rock(-1, 0)) break;
 				walkCnt--;
+				if (collision_pc_gogildong(-1, 0)) break;
 				pc.posX -= CELL_WIDTH;
 				pc.arrX--;
 				break;
@@ -58,6 +90,7 @@ void processKeyInput() {
 				if (collision_pc_map(0, 1)) break;
 				if (collision_pc_rock(0, 1)) break;
 				walkCnt--;
+				if (collision_pc_gogildong(0, 1)) break;
 				pc.posY += CELL_WIDTH;
 				pc.arrY++;
 				break;
@@ -65,6 +98,7 @@ void processKeyInput() {
 				if (collision_pc_map(0, -1)) break;
 				if (collision_pc_rock(0, -1)) break;
 				walkCnt--;
+				if (collision_pc_gogildong(0, -1)) break;
 				pc.posY -= CELL_WIDTH;
 				pc.arrY--;
 				break;
