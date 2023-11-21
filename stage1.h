@@ -56,26 +56,37 @@ void stage1_initPos() {
 	stage1_rocks[3].arrX = 5;
 	stage1_rocks[3].arrY = 5;
 
+	// 냉장고
+	stage1_refrigerator.posX = 890;
+	stage1_refrigerator.posY = 446;
+	stage1_refrigerator.arrX = 7;
+	stage1_refrigerator.arrY = 6;
+
 	
 
-	walkCnt = 23;
+	walkCnt = 24;
 }
 
 void stage1() {
 
 	stage1_initPos();
 
-	while (!quit) {
+	while (1) {
 
 		SDL_RenderClear(renderer);
+
+		if (processKeyInput() == -1) { // R키 누르면 재시작
+			stage1();
+		}
 		drawStage1(0, -1);
 		SDL_RenderPresent(renderer);
 
-		if (processKeyInput() == -1) { //R키 누르면 재시작
-			stage1();
+		if (collision_pc_refrigerator()) { 
+			return;
 		}
 
-		if (collision_pc_refrigerator()) quit = true;
+		
+
 		if (walkCnt == 0) {
 			pc_melting();
 			gameOver();

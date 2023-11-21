@@ -59,14 +59,10 @@ int walkCnt=23;
 static const int width = 1440;
 static const int height = 730;
 
-// 게임 종료조건
-bool quit = false;
-
 Pc pc;
 Rock stage1_rocks[4];
 Gildong stage1_gildong[3];
-
-Refrigerator stage1_refrigerator = { 890, 446, 7, 6 };
+Refrigerator stage1_refrigerator;
 
 int stage1_map[8][9] = {
 	{1, 1, 1, 1, 1, 1, 1, 1, 1},

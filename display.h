@@ -42,12 +42,12 @@ void gameClear() {
   game_clear_img= loadTexture("./assets/game_clear.png");
   drawTexture(game_clear_img, 0, 0);
   SDL_RenderPresent(renderer);
-  Sleep(4000);
+  Sleep(3000);
 }
 
 void gameOver() {
 	game_over_img = loadTexture("./assets/game_over.png");
 	drawTexture(game_over_img, 0, 0);
 	SDL_RenderPresent(renderer);
-	Sleep(4000);
+	Sleep(3000);
 }
