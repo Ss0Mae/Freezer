@@ -52,7 +52,7 @@ typedef struct Refrigerator {
 	int arrY;
 }Refrigerator;
 
-//걸음수
+//남은 걸음수
 int walkCnt=23;
 
 // 창의 크기

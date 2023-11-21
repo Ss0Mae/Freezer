@@ -39,7 +39,7 @@ roundCnt_img = loadTexture("./assets/roundCnt.png");
 
 
 void gameClear() {
-  game_clear_img= loadTexture("./assets/game_clear.png");
+  game_clear_img = loadTexture("./assets/game_clear.png");
   drawTexture(game_clear_img, 0, 0);
   SDL_RenderPresent(renderer);
   Sleep(3000);
