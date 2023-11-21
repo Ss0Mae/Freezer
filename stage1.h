@@ -61,34 +61,6 @@ void stage1_initPos() {
 	walkCnt = 23;
 }
 
-void pc_melting(int idx) {
-	if (idx == 2) {
-		SDL_RenderClear(renderer);
-		pc_img = loadTexture("./assets/pc_right_melt2.png");
-		drawStage1(0, -1);
-		SDL_RenderPresent(renderer);
-		Sleep(1000);
-
-		SDL_RenderClear(renderer);
-		pc_img = loadTexture("./assets/pc_right_melt3.png");
-		drawStage1(0, -1);
-		SDL_RenderPresent(renderer);
-		Sleep(1000);
-	}
-	else {
-		SDL_RenderClear(renderer);
-		pc_img = loadTexture("./assets/pc_left_melt2.png");
-		drawStage1(0, -1);
-		SDL_RenderPresent(renderer);
-		Sleep(1000);
-
-		SDL_RenderClear(renderer);
-		pc_img = loadTexture("./assets/pc_left_melt3.png");
-		drawStage1(0, -1);
-		SDL_RenderPresent(renderer);
-		Sleep(1000);
-	}
-}
 void stage1() {
 
 	stage1_initPos();
@@ -105,15 +77,9 @@ void stage1() {
 
 		if (collision_pc_refrigerator()) quit = true;
 		if (walkCnt == 0) {
-			
-				pc_melting(2);
-			
+			pc_melting();
 			gameOver();
 			stage1();
-			//오른쪽
-			// 얼음 녹기
-			// 게임오버 화면 띄우기
-			// stage1 재시작
 		}
 	}
 }
