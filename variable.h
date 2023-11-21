@@ -76,7 +76,8 @@ Gildong stage1_gildong[3] = {
 	{ 750, 306, 5, 3 }
 };
 
-Refrigerator stage1_refrigerator = { 890, 446, 7, 5 };
+Refrigerator stage1_refrigerator = { 890, 446, 7, 6 };
+
 int stage1_map[8][9] = {
 	{1, 1, 1, 1, 1, 1, 1, 1, 1},
 	{1, 1, 1, 1, 1, 0, 0, 1, 1},
