@@ -6,25 +6,24 @@
 #include <stdbool.h>
 #include "sdl.h"
 
-
-
-SDL_Texture* player_img;
+SDL_Texture* pc_img;
 SDL_Texture* map1_img;
 SDL_Texture* refrigerator_img;
 SDL_Texture* gildong_img;
+SDL_Texture* gildong_run_img;
 SDL_Texture* rock_img;
 
 SDL_Texture* walkCnt_imgs[24];
-
 
 SDL_Texture* roundCnt_img;
 
 void loadImg(){
 
-player_img = loadTexture("./assets/player.png");
+pc_img = loadTexture("./assets/pc.png");
 map1_img = loadTexture("./assets/map1.png");
 refrigerator_img = loadTexture("./assets/refrigerator.png");
 gildong_img = loadTexture("./assets/gildong.png");
+gildong_run_img = loadTexture("./assets/gildong_run_1.png");
 rock_img = loadTexture("./assets/rock.png");
 
 
