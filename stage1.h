@@ -9,7 +9,6 @@
 
 
 void stage1() {
-
 	while (!quit) {
 
 

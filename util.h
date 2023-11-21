@@ -1,7 +1,6 @@
 #pragma once
 #include <Windows.h>
 
-
 // pc와 맵 충돌
 int collision_pc_map(int dx, int dy) {
 	if (stage1_map[pc.arrY + dy][pc.arrX + dx] == 1) return 1;
@@ -63,8 +62,8 @@ int collision_pc_gogildong(int dx, int dy) {
 				}
 			}
 
-			for (int j = 0; j < 3; j++) { // 길동 뒤에 바위가 있는 경우
-				if (stage1_gildong[j].arrX == stage1_rocks[i].arrX + dx && stage1_gildong[j].arrY == stage1_rocks[i].arrY + dy)
+			for (int j = 0; j < 4; j++) { // 길동 뒤에 바위가 있는 경우
+				if (stage1_rocks[j].arrX == stage1_gildong[i].arrX + dx && stage1_rocks[j].arrY == stage1_gildong[i].arrY + dy)
 					return 1;
 			}
 
@@ -118,8 +117,11 @@ void processKeyInput() {
 			case 27: // ESC
 				quit = true;
 				break;
-			}
 
+			case SDLK_r: //R
+				SDL_RenderClear(renderer);
+				break;
+			}
 	}
 }
 
