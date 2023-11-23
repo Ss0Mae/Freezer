@@ -53,7 +53,7 @@ typedef struct Refrigerator {
 }Refrigerator;
 
 //남은 걸음수
-int walkCnt=23;
+int walkCnt = 23;
 
 // 창의 크기
 static const int width = 1440;

@@ -74,10 +74,6 @@ void stage1() {
 	while (1) {
 
 		SDL_RenderClear(renderer);
-
-		if (processKeyInput() == -1) { // R키 누르면 재시작
-			stage1();
-		}
 		drawStage1(0, -1);
 		SDL_RenderPresent(renderer);
 
@@ -85,7 +81,9 @@ void stage1() {
 			return;
 		}
 
-		
+		if (processKeyInput() == -1) { // R키 누르면 재시작
+			stage1();
+		}
 
 		if (walkCnt == 0) {
 			pc_melting();
