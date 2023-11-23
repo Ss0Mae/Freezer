@@ -13,7 +13,7 @@ SDL_Texture* refrigerator_img;
 SDL_Texture* gildong_img;
 SDL_Texture* gildong_run_img;
 SDL_Texture* rock_img;
-SDL_Texture* walkCnt_imgs[24];
+SDL_Texture* walkCnt_imgs[100];
 SDL_Texture* roundCnt_img;
 SDL_Texture* game_clear_img;
 SDL_Texture* game_over_img;
@@ -28,7 +28,7 @@ gildong_run_img = loadTexture("./assets/gildong_run_1.png");
 rock_img = loadTexture("./assets/rock.png");
 
 
-for (int i = 0; i <= 23; i++) {
+for (int i = 0; i <= 24; i++) {
   char path[50]; 
   sprintf(path, "./assets/walkCnt_%d.png", i);
   walkCnt_imgs[i] = loadTexture(path);

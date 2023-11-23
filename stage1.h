@@ -64,6 +64,8 @@ void stage1_initPos() {
 
 	
 
+
+
 	walkCnt = 24;
 }
 

@@ -137,7 +137,7 @@ void drawStage1(int isGildongRun, int idx) {
 		drawTexture(rock_img, stage1_rocks[i].posX, stage1_rocks[i].posY);
 	}
 
-	if (walkCnt >= 0 && walkCnt <= 23)
+	if (walkCnt >= 0 && walkCnt <= 24)
 		drawTexture(walkCnt_imgs[walkCnt], 136, 485);
 
 }
