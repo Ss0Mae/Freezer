@@ -27,7 +27,7 @@ refrigerator_img = loadTexture("./assets/refrigerator.png");
 gildong_img = loadTexture("./assets/gildong.png");
 gildong_run_img = loadTexture("./assets/gildong_run_1.png");
 rock_img = loadTexture("./assets/rock.png");
-
+map2_img = loadTexture("./assets/map2.png");
 
 for (int i = 0; i <= 24; i++) {
   char path[50]; 

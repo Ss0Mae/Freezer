@@ -3,8 +3,9 @@
 #include <SDL_image.h>
 #include <stdio.h>
 #include <stdbool.h>
-#include "util.h"
+#include "util2.h"
 #include "sdl.h"
+#include "util.h"
 
 void stage2_initPos() {
 	pc.arrX = 1;
@@ -50,4 +51,32 @@ void stage2_initPos() {
 	stage2_refrigerator.arrY = 6;
 
 	walkCnt = 24;
+}
+
+void stage2() {
+
+	stage2_initPos();
+
+	while (1) {
+
+		SDL_RenderClear(renderer);
+
+		if (processKeyInput_stage2() == -1) { // R키 누르면 재시작
+			stage2();
+		}
+		drawStage2(0, -1);
+		SDL_RenderPresent(renderer);
+
+		if (collision_pc_refrigerator_stage2()) {
+			return;
+		}
+
+
+
+		if (walkCnt == 0) {
+			pc_melting();
+			gameOver();
+			stage2();
+		}
+	}
 }

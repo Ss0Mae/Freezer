@@ -35,5 +35,11 @@
     <ClInclude Include="util.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="stage2.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="util2.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

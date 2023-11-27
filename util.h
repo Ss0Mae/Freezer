@@ -142,6 +142,7 @@ void drawStage1(int isGildongRun, int idx) {
 
 }
 
+
 void pc_melting() {
 	if (direction_flag == 1) {
 		SDL_RenderClear(renderer);

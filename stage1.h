@@ -5,7 +5,7 @@
 #include <stdbool.h>
 #include "util.h"
 #include "sdl.h"
-
+#include "stage2.h"
 
 
 void stage1_initPos() {
@@ -84,7 +84,7 @@ void stage1() {
 		SDL_RenderPresent(renderer);
 
 		if (collision_pc_refrigerator()) { 
-			return;
+			stage2();
 		}
 
 		
