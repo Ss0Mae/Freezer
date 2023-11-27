@@ -52,6 +52,13 @@ typedef struct Refrigerator {
 	int arrY;
 }Refrigerator;
 
+typedef struct Crap {
+	int posX;
+	int posY;
+
+	int arrX;
+	int arrY;
+}Crap;
 //남은 걸음수
 int walkCnt;
 
@@ -75,3 +82,20 @@ int stage1_map[8][9] = {
 	{1, 1, 1, 1, 1, 1, 1, 1, 1},
 };
 
+/* 스테이지2 변수들 */
+
+Rock stage2_rocks[3];
+Gildong stage2_gildong[3];
+Refrigerator stage2_refrigerator;
+Crap stage2_crap[6];
+
+int stage2_map[8][9] = {
+	{1, 1, 1, 1, 1, 1, 1, 1, 1},
+	{1, 1, 0, 0, 0, 0, 1, 1, 1},
+	{1, 1, 0, 1, 0, 0, 0, 0, 1},
+	{1, 0, 0, 1, 1, 0, 0, 0, 1},
+	{1, 0, 0, 1, 1, 0, 0, 0, 1},
+	{1, 0, 0, 1, 1, 0, 0, 0, 1},
+	{1, 1, 1, 1, 1, 0, 0, 0, 1},
+	{1, 1, 1, 1, 1, 1, 1, 1, 1}
+};

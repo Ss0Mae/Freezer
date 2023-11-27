@@ -9,6 +9,7 @@
 
 SDL_Texture* pc_img;
 SDL_Texture* map1_img;
+SDL_Texture* map2_img;
 SDL_Texture* refrigerator_img;
 SDL_Texture* gildong_img;
 SDL_Texture* gildong_run_img;

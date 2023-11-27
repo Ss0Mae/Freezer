@@ -7,6 +7,7 @@
 #include "display.h"
 #include "stage1.h"
 #include "util.h"
+#include "stage2.h"
 
 
 
