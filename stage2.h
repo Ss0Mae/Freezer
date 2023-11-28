@@ -13,8 +13,8 @@ void stage2_initPos() {
 	pc_img = loadTexture("assets/pc_right.png");
 	pc.arrX = 1;
 	pc.arrY = 5;
-	pc.posX = 500;
-	pc.posY = 390;
+	pc.posX = 490;
+	pc.posY = 400;
 
 	//길동
 	stage2_gildong[0].arrX = 2;
@@ -26,13 +26,13 @@ void stage2_initPos() {
 	stage2_gildong[1].arrX = 6;
 	stage2_gildong[1].arrY = 5;
 	stage2_gildong[1].posX = 830;
-	stage2_gildong[1].posY = 390;
+	stage2_gildong[1].posY = 400;
 
 
 	stage2_gildong[2].arrX = 7;
 	stage2_gildong[2].arrY = 6;
 	stage2_gildong[2].posX = 900;
-	stage2_gildong[2].posY = 440;
+	stage2_gildong[2].posY = 450;
 
 
 	// 바위
@@ -59,22 +59,22 @@ void stage2_initPos() {
 
 	stage2_crab[1].arrX = 4;
 	stage2_crab[1].arrY = 2;
-	stage2_crab[1].posX = 690;
-	stage2_crab[1].posY = 180;
+	stage2_crab[1].posX = 700;
+	stage2_crab[1].posY = 190;
 
 	stage2_crab[2].arrX = 5;
 	stage2_crab[2].arrY = 2;
-	stage2_crab[2].posX = 760;
-	stage2_crab[2].posY = 180;
+	stage2_crab[2].posX = 770;
+	stage2_crab[2].posY = 190;
 	
 	stage2_crab[3].arrX = 5;
 	stage2_crab[3].arrY = 3;
-	stage2_crab[3].posX = 760;
+	stage2_crab[3].posX = 770;
 	stage2_crab[3].posY = 250;
 
 	stage2_crab[4].arrX = 6;
 	stage2_crab[4].arrY = 3;
-	stage2_crab[4].posX = 830;
+	stage2_crab[4].posX = 840;
 	stage2_crab[4].posY = 250;
 
 	stage2_crab[5].arrX = 6;
@@ -84,11 +84,11 @@ void stage2_initPos() {
 	// 냉장고
 	stage2_refrigerator.arrX = 5;
 	stage2_refrigerator.arrY = 6;
-	stage2_refrigerator.posX = 780;
+	stage2_refrigerator.posX = 760;
 	stage2_refrigerator.posY = 440;
 
 
-	walkCnt = 24;
+	walkCnt = 26;
 }
 
 void stage2() {

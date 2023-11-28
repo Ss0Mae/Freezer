@@ -112,8 +112,17 @@ void drawStage2(int isGildongRun, int idx) {
 	drawTexture(refrigerator_img, stage2_refrigerator.posX, stage2_refrigerator.posY);
 	drawTexture(roundCnt_img, 1062, 485);
 
-	drawTexture(pc_img, pc.posX, pc.posY);
 
+	for (int i = 0; i < 6; i++) {
+		drawTexture(crab_img, stage2_crab[i].posX, stage2_crab[i].posY);
+	}
+	
+	for (int i = 0; i < 3; i++) {
+		drawTexture(rock_img, stage2_rocks[i].posX, stage2_rocks[i].posY);
+	}
+	
+	drawTexture(pc_img, pc.posX, pc.posY);
+	
 	if (!isGildongRun) {
 		for (int i = 0; i < 3; i++) {
 			drawTexture(gildong_img, stage2_gildong[i].posX, stage2_gildong[i].posY);
@@ -126,14 +135,6 @@ void drawStage2(int isGildongRun, int idx) {
 			drawTexture(gildong_img, stage2_gildong[i].posX, stage2_gildong[i].posY);
 		}
 	}
-	for (int i = 0; i < 6; i++) {
-		drawTexture(crab_img, stage2_crab[i].posX, stage2_crab[i].posY);
-	}
-	for (int i = 0; i < 3; i++) {
-		drawTexture(rock_img, stage2_rocks[i].posX, stage2_rocks[i].posY);
-	}
-
-
 	if (walkCnt >= 0 && walkCnt <= 24)
 		drawTexture(walkCnt_imgs[walkCnt], 136, 485);
 
@@ -224,7 +225,7 @@ int processKeyInput_stage2() {
 				if (collision_pc_gogildong_stage2(1, 0)) break;
 				if (collision_pc_crab_stage2(1, 0)) walkCnt--;
 				walkCnt--;
-				pc.posX += CELL_WIDTH -3;
+				pc.posX += CELL_WIDTH;
 				pc.arrX++;
 				break;
 			case 1073741904: // left
@@ -235,7 +236,7 @@ int processKeyInput_stage2() {
 				if (collision_pc_gogildong_stage2(-1, 0)) break;
 				if (collision_pc_crab_stage2(-1, 0)) walkCnt--;
 				walkCnt--;
-				pc.posX -= CELL_WIDTH -3;
+				pc.posX -= CELL_WIDTH;
 				pc.arrX--;
 				return 3;
 				break;
@@ -245,7 +246,7 @@ int processKeyInput_stage2() {
 				if (collision_pc_gogildong_stage2(0, 1)) break;
 				if (collision_pc_crab_stage2(0, 1)) walkCnt--;
 				walkCnt--;
-				pc.posY += CELL_WIDTH -3;
+				pc.posY += CELL_WIDTH;
 				pc.arrY++;
 				break;
 			case 1073741906: // up
@@ -254,7 +255,7 @@ int processKeyInput_stage2() {
 				if (collision_pc_gogildong_stage2(0, -1)) break;
 				if (collision_pc_crab_stage2(0, -1)) walkCnt--;
 				walkCnt--;
-				pc.posY -= CELL_WIDTH-3;
+				pc.posY -= CELL_WIDTH;
 				pc.arrY--;
 				break;
 			case 27: // ESC
