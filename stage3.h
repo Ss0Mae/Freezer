@@ -52,6 +52,46 @@ void stage3_initPos() {
 	refrigerator.arrX = pc.arrX - 4;
 	refrigerator.arrY = pc.arrY - 2;
 
+	// °Ô
+	crabs[0].posX = pc.posX - CELL_WIDTH * 4;
+	crabs[0].posY = pc.posY;
+	crabs[0].arrX = pc.arrX - 4;
+	crabs[0].arrY = pc.arrY;
+
+	crabs[1].posX = pc.posX - CELL_WIDTH * 3;
+	crabs[1].posY = pc.posY;
+	crabs[1].arrX = pc.arrX - 3;
+	crabs[1].arrY = pc.arrY;
+
+	crabs[2].posX = pc.posX - CELL_WIDTH * 5;
+	crabs[2].posY = pc.posY + CELL_WIDTH * 1;
+	crabs[2].arrX = pc.arrX - 5;
+	crabs[2].arrY = pc.arrY + 1;
+
+	crabs[3].posX = pc.posX - CELL_WIDTH * 3;
+	crabs[3].posY = pc.posY + CELL_WIDTH * 1;
+	crabs[3].arrX = pc.arrX - 3;
+	crabs[3].arrY = pc.arrY + 1;
+
+	crabs[4].posX = pc.posX - CELL_WIDTH * 2;
+	crabs[4].posY = pc.posY + CELL_WIDTH * 2;
+	crabs[4].arrX = pc.arrX - 2;
+	crabs[4].arrY = pc.arrY + 2;
+
+	crabs[5].posX = pc.posX - CELL_WIDTH * 1;
+	crabs[5].posY = pc.posY + CELL_WIDTH * 2;
+	crabs[5].arrX = pc.arrX - 1;
+	crabs[5].arrY = pc.arrY + 2;
+
+	crabs[6].posX = pc.posX - CELL_WIDTH * 5;
+	crabs[6].posY = pc.posY + CELL_WIDTH * 3;
+	crabs[6].arrX = pc.arrX - 5;
+	crabs[6].arrY = pc.arrY + 3;
+
+	crabs[7].posX = pc.posX - CELL_WIDTH * 3;
+	crabs[7].posY = pc.posY + CELL_WIDTH * 3;
+	crabs[7].arrX = pc.arrX - 3;
+	crabs[7].arrY = pc.arrY + 3;
 
 	walkCnt = 32;
 }
