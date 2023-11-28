@@ -59,7 +59,7 @@ static void closeAll()
 SDL_Texture* loadTexture(const char* file) {
 	SDL_Surface* surface;
 	SDL_Texture* texture;
-
+	
 	surface = IMG_Load(file);
 	if (surface == NULL) {
 		printf("fail to read %s\n", file);

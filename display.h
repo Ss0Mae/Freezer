@@ -40,7 +40,6 @@ void loadImg() {
 	map4_img = loadTexture("./assets/map4.png");
 	map5_img = loadTexture("./assets/map5.png");
 
-
 	for (int i = 0; i <= 50; i++) {
 		char path[50];
 		sprintf(path, "./assets/walkCnt_%d.png", i);

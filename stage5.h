@@ -135,7 +135,7 @@ void stage5_initPos() {
 }
 
 void stage5() {
-
+	
 	curStage = 5;
 	walkForcrab = 43;
 
@@ -147,20 +147,6 @@ void stage5() {
 
 		if (processKeyInput() == -1) { // R키 누르면 재시작
 			stage5();
-		}
-
-
-		if (walkForcrab % 2 == 0) {
-			crab_img = loadTexture("./assets/crab_up.png");
-			for (int i = 0; i < MAX_NUM_NPC; i++) {
-				drawTexture(crab_img, crabs[i].posX, crabs[i].posY);
-			}
-		}
-		else {
-			crab_img = loadTexture("./assets/crab_down.png");
-			for (int i = 0; i < MAX_NUM_NPC; i++) {
-				drawTexture(crab_img, crabs[i].posX, crabs[i].posY);
-			}
 		}
 
 		drawStage(0, -1);
