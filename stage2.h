@@ -3,89 +3,80 @@
 #include <SDL_image.h>
 #include <stdio.h>
 #include <stdbool.h>
-#include "util2.h"
-#include "sdl.h"
 #include "util.h"
+#include "sdl.h"
+#include "display.h"
+
 
 void stage2_initPos() {
 
-	//pc초기 이미지 바꾸고 생성
-	pc_img = loadTexture("assets/pc_right.png");
+	// 게임에 쓰이는 NPC를 제외하고는 게임 화면의 바깥쪽에 그려줌
+	for (int i = 0; i < MAX_NUM_NPC; i++) {
+		gildongs[i].posX = -100;
+		gildongs[i].posY = -100;
+		gildongs[i].arrX = -1;
+		gildongs[i].arrY = -1;
+
+		rocks[i].posX = -100;
+		rocks[i].posY = -100;
+		rocks[i].arrX = -1;
+		rocks[i].arrY = -1;
+
+		craps[i].posX = -100;
+		craps[i].posY = -100;
+		craps[i].arrX = -1;
+		craps[i].arrY = -1;
+	}
+
+	// pc
+	pc.posX = 480;
+	pc.posY = 390;
 	pc.arrX = 1;
 	pc.arrY = 5;
 	pc.posX = 490;
 	pc.posY = 400;
 
-	//길동
-	stage2_gildong[0].arrX = 2;
-	stage2_gildong[0].arrY = 2;
-	stage2_gildong[0].posX = 550;
-	stage2_gildong[0].posY = 180;
+	// 길동
+	gildongs[0].posX = pc.posX + CELL_WIDTH * 1;
+	gildongs[0].posY = pc.posY - CELL_WIDTH * 3;
+	gildongs[0].arrX = pc.arrX + 1;
+	gildongs[0].arrY = pc.arrY - 3;
+
+	gildongs[1].posX = pc.posX + CELL_WIDTH * 5;
+	gildongs[1].posY = pc.posY + CELL_WIDTH * 0;
+	gildongs[1].arrX = pc.arrX + 5;
+	gildongs[1].arrY = pc.arrY + 0;
 
 
-	stage2_gildong[1].arrX = 6;
-	stage2_gildong[1].arrY = 5;
-	stage2_gildong[1].posX = 830;
-	stage2_gildong[1].posY = 400;
-
-
-	stage2_gildong[2].arrX = 7;
-	stage2_gildong[2].arrY = 6;
-	stage2_gildong[2].posX = 900;
-	stage2_gildong[2].posY = 450;
+	gildongs[2].posX = pc.posX + CELL_WIDTH * 6;
+	gildongs[2].posY = pc.posY + CELL_WIDTH * 1;
+	gildongs[2].arrX = pc.arrX + 6;
+	gildongs[2].arrY = pc.arrY + 1;
 
 
 	// 바위
-	stage2_rocks[0].arrX = 5;
-	stage2_rocks[0].arrY = 3;
-	stage2_rocks[0].posX = 760;
-	stage2_rocks[0].posY = 320;
+	rocks[0].posX = pc.posX + CELL_WIDTH * 4;
+	rocks[0].posY = pc.posY - CELL_WIDTH * 2;
+	rocks[0].arrX = pc.arrX + 4;
+	rocks[0].arrY = pc.arrY - 2;
 
-	stage2_rocks[1].arrX = 6;
-	stage2_rocks[1].arrY = 3;
-	stage2_rocks[1].posX = 830;
-	stage2_rocks[1].posY = 320;
 
-	stage2_rocks[2].arrX = 7;
-	stage2_rocks[2].arrY = 3;
-	stage2_rocks[2].posX = 900;
-	stage2_rocks[2].posY = 320;
+	rocks[1].posX = pc.posX + CELL_WIDTH * 5;
+	rocks[1].posY = pc.posY - CELL_WIDTH * 2;
+	rocks[1].arrX = pc.arrX + 5;
+	rocks[1].arrY = pc.arrY - 2;
 
-	// 게
-	stage2_crab[0].arrX = 2;
-	stage2_crab[0].arrY = 3;
-	stage2_crab[0].posX = 550;
-	stage2_crab[0].posY = 250;
 
-	stage2_crab[1].arrX = 4;
-	stage2_crab[1].arrY = 2;
-	stage2_crab[1].posX = 700;
-	stage2_crab[1].posY = 190;
+	rocks[2].posX = pc.posX + CELL_WIDTH * 6;
+	rocks[2].posY = pc.posY - CELL_WIDTH * 2;
+	rocks[2].arrX = pc.arrX + 6;
+	rocks[2].arrY = pc.arrY - 2;
 
-	stage2_crab[2].arrX = 5;
-	stage2_crab[2].arrY = 2;
-	stage2_crab[2].posX = 770;
-	stage2_crab[2].posY = 190;
-	
-	stage2_crab[3].arrX = 5;
-	stage2_crab[3].arrY = 3;
-	stage2_crab[3].posX = 770;
-	stage2_crab[3].posY = 250;
-
-	stage2_crab[4].arrX = 6;
-	stage2_crab[4].arrY = 3;
-	stage2_crab[4].posX = 840;
-	stage2_crab[4].posY = 250;
-
-	stage2_crab[5].arrX = 6;
-	stage2_crab[5].arrY = 4;
-	stage2_crab[5].posX = 830;
-	stage2_crab[5].posY = 320;
 	// 냉장고
-	stage2_refrigerator.arrX = 5;
-	stage2_refrigerator.arrY = 6;
-	stage2_refrigerator.posX = 760;
-	stage2_refrigerator.posY = 440;
+	refrigerator.posX = pc.posX + CELL_WIDTH * 4; 
+	refrigerator.posY = pc.posY + CELL_WIDTH * 1; 
+	refrigerator.arrX = pc.arrX + 4;
+	refrigerator.arrY = pc.arrY + 1;
 
 
 	walkCnt = 26;
@@ -93,25 +84,28 @@ void stage2_initPos() {
 
 void stage2() {
 
+	curStage = 2;
+
 	stage2_initPos();
 
 	while (1) {
 
 		SDL_RenderClear(renderer);
 
-		if (processKeyInput_stage2() == -1) { // R키 누르면 재시작
+		if (processKeyInput() == -1) { // R키 누르면 재시작
 			stage2();
 		}
-		drawStage2(0, -1);
+		drawStage(0, -1);
 		SDL_RenderPresent(renderer);
 
-		if (collision_pc_refrigerator_stage2()) {
-			return;
+		if (collision_pc_refrigerator()) {
+			gameClear();
+			break;
 		}
 
 
-		if (walkCnt <= 0) {
-			pc_melting_stage2();
+		if (walkCnt == 0) {
+			pc_melting();
 			gameOver();
 			stage2();
 		}

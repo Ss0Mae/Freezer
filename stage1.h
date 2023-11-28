@@ -10,66 +10,73 @@
 
 void stage1_initPos() {
 
+	// 게임에 쓰이는 NPC를 제외하고는 게임 화면의 바깥쪽에 그려줌
+	for (int i = 0; i < MAX_NUM_NPC; i++) {
+		gildongs[i].posX = -1000;
+		gildongs[i].posY = -1000;
+		gildongs[i].arrX = -1;
+		gildongs[i].arrY = -1;
+	}
+
 	// pc
-	pc.posX = 820;
-	pc.posY = 120;
+	pc.posX = 830;
+	pc.posY = 110;
 	pc.arrX = 6;
 	pc.arrY = 1;
 
 	// 길동
-	stage1_gildong[0].posX = 680;
-	stage1_gildong[0].posY = 200;
-	stage1_gildong[0].arrX = 4;
-	stage1_gildong[0].arrY = 2;
+	gildongs[0].posX = pc.posX + CELL_WIDTH * -1;
+	gildongs[0].posY = pc.posY + CELL_WIDTH * 2;
+	gildongs[0].arrX = pc.arrX + -1;
+	gildongs[0].arrY = pc.arrY + 2;
 
-	stage1_gildong[1].posX = 610;
-	stage1_gildong[1].posY = 270;
-	stage1_gildong[1].arrX = 3;
-	stage1_gildong[1].arrY = 3;
+	gildongs[1].posX = pc.posX + CELL_WIDTH * -2;
+	gildongs[1].posY = pc.posY + CELL_WIDTH * 1;
+	gildongs[1].arrX = pc.arrX + -2;
+	gildongs[1].arrY = pc.arrY + 1;
 
 
-	stage1_gildong[2].posX = 750;
-	stage1_gildong[2].posY = 270;
-	stage1_gildong[2].arrX = 5;
-	stage1_gildong[2].arrY = 3;
+	gildongs[2].posX = pc.posX + CELL_WIDTH * -3;
+	gildongs[2].posY = pc.posY + CELL_WIDTH * 2;
+	gildongs[2].arrX = pc.arrX + -3;
+	gildongs[2].arrY = pc.arrY + 2;
+
 
 	// 바위
-	stage1_rocks[0].posX = 540;
-	stage1_rocks[0].posY = 446;
-	stage1_rocks[0].arrX = 2;
-	stage1_rocks[0].arrY = 5;
+	rocks[0].posX = pc.posX + CELL_WIDTH * -1;
+	rocks[0].posY = pc.posY + CELL_WIDTH * 4;
+	rocks[0].arrX = pc.arrX + -1;
+	rocks[0].arrY = pc.arrY + 4;
 
 
-	stage1_rocks[1].posX = 540;
-	stage1_rocks[1].posY = 516;
-	stage1_rocks[1].arrX = 2;
-	stage1_rocks[1].arrY = 6;
+	rocks[1].posX = pc.posX + CELL_WIDTH * -4;
+	rocks[1].posY = pc.posY + CELL_WIDTH * 4;
+	rocks[1].arrX = pc.arrX + -4;
+	rocks[1].arrY = pc.arrY + 4;
 
 
-	stage1_rocks[2].posX = 680;
-	stage1_rocks[2].posY = 516;
-	stage1_rocks[2].arrX = 4;
-	stage1_rocks[2].arrY = 6;
+	rocks[2].posX = pc.posX + CELL_WIDTH * -2;
+	rocks[2].posY = pc.posY + CELL_WIDTH * 5;
+	rocks[2].arrX = pc.arrX + -2;
+	rocks[2].arrY = pc.arrY + 5;
 
-	stage1_rocks[3].posX = 750;
-	stage1_rocks[3].posY = 446;
-	stage1_rocks[3].arrX = 5;
-	stage1_rocks[3].arrY = 5;
+	rocks[3].posX = pc.posX + CELL_WIDTH * -4;
+	rocks[3].posY = pc.posY + CELL_WIDTH * 5;
+	rocks[3].arrX = pc.arrX + -4;
+	rocks[3].arrY = pc.arrY + 5;
 
 	// 냉장고
-	stage1_refrigerator.posX = 890;
-	stage1_refrigerator.posY = 446;
-	stage1_refrigerator.arrX = 7;
-	stage1_refrigerator.arrY = 6;
-
-	
-
-
+	refrigerator.posX = pc.posX + CELL_WIDTH * 1;
+	refrigerator.posY = pc.posY + CELL_WIDTH * 5;
+	refrigerator.arrX = pc.arrX + 1;
+	refrigerator.arrY = pc.arrY + 5;
 
 	walkCnt = 24;
 }
 
 void stage1() {
+
+	curStage = 1;
 
 	stage1_initPos();
 
@@ -80,15 +87,13 @@ void stage1() {
 		if (processKeyInput() == -1) { // R키 누르면 재시작
 			stage1();
 		}
-		drawStage1(0, -1);
+		drawStage(0, -1);
 		SDL_RenderPresent(renderer);
 
-		if (collision_pc_refrigerator()) { 
+		if (collision_pc_refrigerator()) {
 			gameClear();
 			break;
 		}
-
-		
 
 		if (walkCnt == 0) {
 			pc_melting();

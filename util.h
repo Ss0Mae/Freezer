@@ -1,50 +1,49 @@
 #pragma once
 #include <Windows.h>
 
-
-
-
 int collision_pc_map(int dx, int dy);
 int collision_pc_rock(int dx, int dy);
 int collision_pc_gogildong(int dx, int dy);
 int collision_pc_refrigerator();
-void drawStage1(int isGildongRun, int idx);
-void pc_melting();
-void gildong_run(int i);
 int processKeyInput();
-
+void gildong_run(int i);
+void pc_melting();
+void drawStage(int isGildongRun, int idx);
 
 int direction_flag = 1;
 
+
+
 // pc와 맵 충돌
 int collision_pc_map(int dx, int dy) {
-	if (stage1_map[pc.arrY + dy][pc.arrX + dx] == 1) return 1;
+	if (maps[curStage][pc.arrY + dy][pc.arrX + dx] == 1) return 1;
 	return 0;
 }
 
+
 // pc와 바위 충돌
 int collision_pc_rock(int dx, int dy) {
-	for (int i = 0; i < 4; i++) { // 바위 4개를 순회하며 각각 pc와 충돌검사
-		if (stage1_rocks[i].arrX == pc.arrX + dx && stage1_rocks[i].arrY == pc.arrY + dy) {
-			if (stage1_map[stage1_rocks[i].arrY + dy][stage1_rocks[i].arrX + dx] == 1) { // 바위 뒤에 벽이 있는 경우
+	for (int i = 0; i < MAX_NUM_NPC; i++) { // 바위를 순회하며 각각 pc와 충돌검사
+		if (rocks[i].arrX == pc.arrX + dx && rocks[i].arrY == pc.arrY + dy) {
+			if (maps[curStage][rocks[i].arrY + dy][rocks[i].arrX + dx] == 1) { // 바위 뒤에 벽이 있는 경우
 				return 1;
 			}
-			for (int j = 0; j < 4; j++) { // 바위 뒤에 다른 바위가 있는 경우
-				if (stage1_rocks[j].arrX == stage1_rocks[i].arrX + dx && stage1_rocks[j].arrY == stage1_rocks[i].arrY + dy)
+			for (int j = 0; j < MAX_NUM_NPC; j++) { // 바위 뒤에 다른 바위가 있는 경우
+				if (rocks[j].arrX == rocks[i].arrX + dx && rocks[j].arrY == rocks[i].arrY + dy)
 					return 1;
 			}
 
-			for (int j = 0; j < 3; j++) { // 바위 뒤에 길동이 있는 경우
-				if (stage1_gildong[j].arrX == stage1_rocks[i].arrX + dx && stage1_gildong[j].arrY == stage1_rocks[i].arrY + dy)
+			for (int j = 0; j < MAX_NUM_NPC; j++) { // 바위 뒤에 길동이 있는 경우
+				if (gildongs[j].arrX == rocks[i].arrX + dx && gildongs[j].arrY == rocks[i].arrY + dy)
 					return 1;
 			}
 
 
 			// 충돌한 바위는 한칸 밀려야 함
-			stage1_rocks[i].posX += dx * CELL_WIDTH;
-			stage1_rocks[i].posY += dy * CELL_WIDTH;
-			stage1_rocks[i].arrX += dx;
-			stage1_rocks[i].arrY += dy;
+			rocks[i].posX += dx * CELL_WIDTH;
+			rocks[i].posY += dy * CELL_WIDTH;
+			rocks[i].arrX += dx;
+			rocks[i].arrY += dy;
 			walkCnt--;
 			return 1;
 		}
@@ -52,50 +51,54 @@ int collision_pc_rock(int dx, int dy) {
 	return 0;
 }
 
-int collision_pc_gogildong(int dx, int dy) { //pc와 길동 충돌
-	for (int i = 0; i < 3; i++) {
-		if (stage1_gildong[i].arrX == pc.arrX + dx && stage1_gildong[i].arrY == pc.arrY + dy) {
-			if (stage1_map[stage1_gildong[i].arrY + dy][stage1_gildong[i].arrX + dx] == 1) { // 길동 뒤에 벽 (사라짐)
+
+
+int collision_pc_gogildong(int dx, int dy) { // pc와 길동 충돌
+
+
+	for (int i = 0; i < MAX_NUM_NPC; i++) {
+		if (gildongs[i].arrX == pc.arrX + dx && gildongs[i].arrY == pc.arrY + dy) {
+			if (maps[curStage][gildongs[i].arrY + dy][gildongs[i].arrX + dx] == 1) { // 길동 뒤에 벽 (사라짐)
 				walkCnt--;
 				gildong_run(i); // 길동이 도망가는 에니메이션
-				stage1_gildong[i].posX += dx * CELL_WIDTH * 1000;
-				stage1_gildong[i].posY += dy * CELL_WIDTH * 1000;
-				stage1_gildong[i].arrX += dx;
-				stage1_gildong[i].arrY += dy;
+				gildongs[i].posX += dx * CELL_WIDTH * 1000;
+				gildongs[i].posY += dy * CELL_WIDTH * 1000;
+				gildongs[i].arrX += dx;
+				gildongs[i].arrY += dy;
 				return 1;
 			}
-			for (int j = 0; j < 3; j++) { // 길동 뒤에 다른 길동이 있는 경우
-				if (stage1_gildong[j].arrX == stage1_gildong[i].arrX + dx && stage1_gildong[j].arrY == stage1_gildong[i].arrY + dy) {
+			for (int j = 0; j < MAX_NUM_NPC; j++) { // 길동 뒤에 다른 길동이 있는 경우
+				if (gildongs[j].arrX == gildongs[i].arrX + dx && gildongs[j].arrY == gildongs[i].arrY + dy) {
 					walkCnt--;
 					gildong_run(i); // 길동이 도망가는 에니메이션
-					stage1_gildong[i].posX += dx * CELL_WIDTH * 1000;
-					stage1_gildong[i].posY += dy * CELL_WIDTH * 1000;
-					stage1_gildong[i].arrX += dx * 2;
-					stage1_gildong[i].arrY += dy * 2;
+					gildongs[i].posX += dx * CELL_WIDTH * 1000;
+					gildongs[i].posY += dy * CELL_WIDTH * 1000;
+					gildongs[i].arrX += dx * 2;
+					gildongs[i].arrY += dy * 2;
 					return 1;
 				}
 			}
 
-			for (int j = 0; j < 4; j++) { // 길동 뒤에 바위가 있는 경우
-				if (stage1_rocks[j].arrX == stage1_gildong[i].arrX + dx && stage1_rocks[j].arrY == stage1_gildong[i].arrY + dy)
+			for (int j = 0; j < MAX_NUM_NPC; j++) { // 길동 뒤에 바위가 있는 경우
+				if (rocks[j].arrX == gildongs[i].arrX + dx && rocks[j].arrY == gildongs[i].arrY + dy)
 
-					if (stage1_rocks[j].arrX == stage1_gildong[i].arrX + dx && stage1_rocks[j].arrY == stage1_gildong[i].arrY + dy) {
+					if (rocks[j].arrX == gildongs[i].arrX + dx && rocks[j].arrY == gildongs[i].arrY + dy) {
 						walkCnt--;
 						gildong_run(i); // 길동이 도망가는 에니메이션
-						stage1_gildong[i].posX += dx * CELL_WIDTH * 1000;
-						stage1_gildong[i].posY += dy * CELL_WIDTH * 1000;
-						stage1_gildong[i].arrX += dx * 2;
-						stage1_gildong[i].arrY += dy * 2;
+						gildongs[i].posX += dx * CELL_WIDTH * 1000;
+						gildongs[i].posY += dy * CELL_WIDTH * 1000;
+						gildongs[i].arrX += dx * 2;
+						gildongs[i].arrY += dy * 2;
 						return 1;
 					}
 			}
 
 
 			// 충돌한 길동은 한 칸 밀려야 함
-			stage1_gildong[i].posX += dx * CELL_WIDTH;
-			stage1_gildong[i].posY += dy * CELL_WIDTH;
-			stage1_gildong[i].arrX += dx;
-			stage1_gildong[i].arrY += dy;
+			gildongs[i].posX += dx * CELL_WIDTH;
+			gildongs[i].posY += dy * CELL_WIDTH;
+			gildongs[i].arrX += dx;
+			gildongs[i].arrY += dy;
 			walkCnt--;
 			return 1;
 
@@ -104,114 +107,128 @@ int collision_pc_gogildong(int dx, int dy) { //pc와 길동 충돌
 	return 0;
 }
 
+
 // pc와 냉장고 충돌 (스테이지 클리어)
 int collision_pc_refrigerator() {
-	if (stage1_refrigerator.arrX == pc.arrX && stage1_refrigerator.arrY == pc.arrY)
+	if (refrigerator.arrX == pc.arrX && refrigerator.arrY == pc.arrY)
 		return 1;
 	return 0;
 }
 
 
-void drawStage1(int isGildongRun, int idx) {
+void drawStage(int isGildongRun, int idx) {
 
-	drawTexture(map1_img, 0, 0);
-	drawTexture(refrigerator_img, stage1_refrigerator.posX, stage1_refrigerator.posY);
-	drawTexture(roundCnt_img, 1062, 485);
+	switch (curStage) {
+	case 1:
+		drawTexture(map1_img, 0, 0);
+		break;
 
+	case 2:
+		drawTexture(map2_img, 0, 0);
+		break;
+
+	case 3:
+		drawTexture(map3_img, 0, 0);
+		break;
+	}
+
+	drawTexture(refrigerator_img, refrigerator.posX, refrigerator.posY);
+	drawTexture(roundCnt_img[curStage], 1062, 485);
 	drawTexture(pc_img, pc.posX, pc.posY);
 
+	// 바위 그리기
+	for (int i = 0; i < MAX_NUM_NPC; i++) {
+		drawTexture(rock_img, rocks[i].posX, rocks[i].posY);
+	}
+
+
+
+	// 길동 그리기
 	if (!isGildongRun) {
-		for (int i = 0; i < 3; i++) {
-			drawTexture(gildong_img, stage1_gildong[i].posX, stage1_gildong[i].posY);
+		for (int i = 0; i < MAX_NUM_NPC; i++) {
+			drawTexture(gildong_img, gildongs[i].posX, gildongs[i].posY);
 		}
 	}
 
 	else {
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < MAX_NUM_NPC; i++) {
 			if (idx == i) continue;
-			drawTexture(gildong_img, stage1_gildong[i].posX, stage1_gildong[i].posY);
+			drawTexture(gildong_img, gildongs[i].posX, gildongs[i].posY);
 		}
 	}
 
-	for (int i = 0; i < 4; i++) {
-		drawTexture(rock_img, stage1_rocks[i].posX, stage1_rocks[i].posY);
-	}
-
-	if (walkCnt >= 0 && walkCnt <= 24)
-		drawTexture(walkCnt_imgs[walkCnt], 136, 485);
-
+	drawTexture(walkCnt_imgs[walkCnt], 136, 485);
 }
-
 
 void pc_melting() {
 	if (direction_flag == 1) {
 		SDL_RenderClear(renderer);
 		pc_img = loadTexture("./assets/pc_right_melt2.png");
-		drawStage1(0, -1);
+		drawStage(0, -1);
 		SDL_RenderPresent(renderer);
 		Sleep(1000);
 
 		SDL_RenderClear(renderer);
 		pc_img = loadTexture("./assets/pc_right_melt3.png");
-		drawStage1(0, -1);
+		drawStage(0, -1);
 		SDL_RenderPresent(renderer);
 		Sleep(1000);
 	}
 	else {
 		SDL_RenderClear(renderer);
 		pc_img = loadTexture("./assets/pc_left_melt2.png");
-		drawStage1(0, -1);
+		drawStage(0, -1);
 		SDL_RenderPresent(renderer);
 		Sleep(1000);
 
 		SDL_RenderClear(renderer);
 		pc_img = loadTexture("./assets/pc_left_melt3.png");
-		drawStage1(0, -1);
+		drawStage(0, -1);
 		SDL_RenderPresent(renderer);
 		Sleep(1000);
 	}
 	pc_img = loadTexture("./assets/pc_left.png");
 }
 
+
 void gildong_run(int i) {
 
 	SDL_RenderClear(renderer);
 	gildong_run_img = loadTexture("./assets/gildong_run_1.png");
-	drawStage1(1, i);
-	drawTexture(gildong_run_img, stage1_gildong[i].posX, stage1_gildong[i].posY);
+	drawStage(1, i);
+	drawTexture(gildong_run_img, gildongs[i].posX, gildongs[i].posY);
 	SDL_RenderPresent(renderer);
 	Sleep(130);
 
 	SDL_RenderClear(renderer);
 	gildong_run_img = loadTexture("./assets/gildong_run_2.png");
-	drawStage1(1, i);
-	drawTexture(gildong_run_img, stage1_gildong[i].posX, stage1_gildong[i].posY);
+	drawStage(1, i);
+	drawTexture(gildong_run_img, gildongs[i].posX, gildongs[i].posY);
 	SDL_RenderPresent(renderer);
 	Sleep(130);
 
 	SDL_RenderClear(renderer);
 	gildong_run_img = loadTexture("./assets/gildong_run_3.png");
-	drawStage1(1, i);
-	drawTexture(gildong_run_img, stage1_gildong[i].posX, stage1_gildong[i].posY);
+	drawStage(1, i);
+	drawTexture(gildong_run_img, gildongs[i].posX, gildongs[i].posY);
 	SDL_RenderPresent(renderer);
 	Sleep(130);
 
 	SDL_RenderClear(renderer);
 	gildong_run_img = loadTexture("./assets/gildong_run_4.png");
-	drawStage1(1, i);
-	drawTexture(gildong_run_img, stage1_gildong[i].posX, stage1_gildong[i].posY);
+	drawStage(1, i);
+	drawTexture(gildong_run_img, gildongs[i].posX, gildongs[i].posY);
 	SDL_RenderPresent(renderer);
 	Sleep(130);
 
 	SDL_RenderClear(renderer);
 	gildong_run_img = loadTexture("./assets/gildong_run_5.png");
-	drawStage1(1, i);
-	drawTexture(gildong_run_img, stage1_gildong[i].posX, stage1_gildong[i].posY);
+	drawStage(1, i);
+	drawTexture(gildong_run_img, gildongs[i].posX, gildongs[i].posY);
 	SDL_RenderPresent(renderer);
 	Sleep(130);
 
 }
-
 
 
 SDL_Event event;

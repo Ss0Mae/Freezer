@@ -137,8 +137,8 @@
     <ClInclude Include="sdl.h" />
     <ClInclude Include="stage1.h" />
     <ClInclude Include="stage2.h" />
+    <ClInclude Include="stage3.h" />
     <ClInclude Include="util.h" />
-    <ClInclude Include="util2.h" />
     <ClInclude Include="variable.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
