@@ -23,8 +23,7 @@ int main(int argc, char** argv) {
 	//stage3();
 
 	stage5();
-
-
+	
 	closeAll(); // SDL 메모리 해제
 	return 0;
 }
