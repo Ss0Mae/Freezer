@@ -51,10 +51,34 @@ int collision_pc_rock(int dx, int dy) {
 	return 0;
 }
 
+
+
+
+void pc_damage() {
+
+	// pc의 색이 변함
+	pc_img = direction_flag == 1 ? loadTexture("./assets/pc_right_damage.png") : loadTexture("./assets/pc_left_damage.png");
+
+	// 키 입력 받으면서 시간때우기
+	for (int i = 0; i < 20; i++) {
+		SDL_RenderClear(renderer);
+		drawStage(0, -1);
+		SDL_RenderPresent(renderer);
+		processKeyInput();
+		Sleep(20);
+	}
+
+	// 원래 색깔로 돌아옴
+	pc_img = direction_flag == 1 ? loadTexture("./assets/pc_right.png") : loadTexture("./assets/pc_left.png");
+
+}
+
 //pc 와 게 충돌
-int collision_pc_crab(int dx, int dy) {
+int collision_pc_crab() {
 	for (int i = 0; i < MAX_NUM_NPC; i++) {
-		if (crabs[i].arrX == pc.arrX + dx && crabs[i].arrY == pc.arrY + dy) {
+		if (crabs[i].arrX == pc.arrX && crabs[i].arrY == pc.arrY) {
+			walkCnt--;
+			pc_damage(); // pc가 붉은색으로 변하는 애니메이션
 			return 1;
 		}
 	}
@@ -171,8 +195,8 @@ void drawStage(int isGildongRun, int idx) {
 	drawTexture(roundCnt_img[curStage], 1062, 485);
 	drawTexture(key_img, key.posX, key.posY);
 	drawTexture(door_img, door.posX, door.posY);
-	
-	
+
+
 	// 바위 그리기
 	for (int i = 0; i < MAX_NUM_NPC; i++) {
 		drawTexture(rock_img, rocks[i].posX, rocks[i].posY);
@@ -201,10 +225,12 @@ void drawStage(int isGildongRun, int idx) {
 		}
 	}
 
-	drawTexture(walkCnt_imgs[walkCnt], 136, 485);
+	if(walkCnt >= 0) 
+		drawTexture(walkCnt_imgs[walkCnt], 136, 485);
 }
 
 void pc_melting() {
+
 	if (direction_flag == 1) {
 		SDL_RenderClear(renderer);
 		pc_img = loadTexture("./assets/pc_right_melt2.png");
@@ -287,11 +313,11 @@ int processKeyInput() {
 				if (collision_pc_map(1, 0)) break;
 				if (collision_pc_rock(1, 0)) break;
 				if (collision_pc_gogildong(1, 0) == 1) break;
-				if (collision_pc_crab(1, 0)) walkCnt--;
 				if (collision_pc_door(1, 0)) break;
 				walkCnt--;
 				pc.posX += CELL_WIDTH;
 				pc.arrX++;
+				collision_pc_crab();
 				collision_pc_key();
 				break;
 			case 1073741904: // left
@@ -300,33 +326,33 @@ int processKeyInput() {
 				if (collision_pc_map(-1, 0)) break;
 				if (collision_pc_rock(-1, 0)) break;
 				if (collision_pc_gogildong(-1, 0)) break;
-				if (collision_pc_crab(-1, 0)) walkCnt--;
 				if (collision_pc_door(-1, 0)) break;
 				walkCnt--;
 				pc.posX -= CELL_WIDTH;
 				pc.arrX--;
+				collision_pc_crab();
 				collision_pc_key();
 				break;
 			case 1073741905: // down
 				if (collision_pc_map(0, 1)) break;
 				if (collision_pc_rock(0, 1)) break;
 				if (collision_pc_gogildong(0, 1)) break;
-				if (collision_pc_crab(0, 1)) walkCnt--;
 				if (collision_pc_door(0, 1)) break;
 				walkCnt--;
 				pc.posY += CELL_WIDTH;
 				pc.arrY++;
+				collision_pc_crab();
 				collision_pc_key();
 				break;
 			case 1073741906: // up
 				if (collision_pc_map(0, -1)) break;
 				if (collision_pc_rock(0, -1)) break;
 				if (collision_pc_gogildong(0, -1)) break;
-				if (collision_pc_crab(0, -1)) walkCnt--;
 				if (collision_pc_door(0, -1)) break;
 				walkCnt--;
 				pc.posY -= CELL_WIDTH;
 				pc.arrY--;
+				collision_pc_crab();
 				collision_pc_key();
 				break;
 			case 27: // ESC

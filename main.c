@@ -17,7 +17,7 @@ int main(int argc, char** argv) {
 	initAll(); // SDL √ ±‚»≠
 	loadImg();
 
-	stage1();
+	//stage1();
 	stage2();
 	stage3();
 
