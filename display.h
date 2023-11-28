@@ -11,6 +11,8 @@ SDL_Texture* pc_img;
 SDL_Texture* map1_img;
 SDL_Texture* map2_img;
 SDL_Texture* map3_img;
+SDL_Texture* map4_img;
+SDL_Texture* map5_img;
 SDL_Texture* refrigerator_img;
 SDL_Texture* gildong_img;
 SDL_Texture* gildong_run_img;
@@ -35,6 +37,9 @@ void loadImg() {
 	map1_img = loadTexture("./assets/map1.png");
 	map2_img = loadTexture("./assets/map2.png");
 	map3_img = loadTexture("./assets/map3.png");
+	map4_img = loadTexture("./assets/map4.png");
+	map5_img = loadTexture("./assets/map5.png");
+
 
 	for (int i = 0; i <= 50; i++) {
 		char path[50];
