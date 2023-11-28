@@ -56,13 +56,14 @@ typedef struct Refrigerator {
 	int arrY;
 }Refrigerator;
 
-typedef struct Crap {
+typedef struct Crab {
 	int posX;
 	int posY;
 
 	int arrX;
 	int arrY;
-}Crap;
+}Crab;
+
 //남은 걸음수
 int walkCnt;
 

@@ -19,6 +19,7 @@ SDL_Texture* walkCnt_imgs[100];
 SDL_Texture* roundCnt_img[20];
 SDL_Texture* game_clear_img;
 SDL_Texture* game_over_img;
+SDL_Texture* crab_img;
 
 void loadImg() {
 

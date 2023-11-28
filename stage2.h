@@ -33,6 +33,8 @@ void stage2_initPos() {
 	pc.posY = 390;
 	pc.arrX = 1;
 	pc.arrY = 5;
+	pc.posX = 490;
+	pc.posY = 400;
 
 	// ±æµ¿
 	gildongs[0].posX = pc.posX + CELL_WIDTH * 1;
@@ -77,7 +79,7 @@ void stage2_initPos() {
 	refrigerator.arrY = pc.arrY + 1;
 
 
-	walkCnt = 24;
+	walkCnt = 26;
 }
 
 void stage2() {
