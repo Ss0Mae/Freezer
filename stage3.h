@@ -132,7 +132,7 @@ void stage3() {
 
 
 
-		if (walkCnt < 0) {
+		if (walkCnt <= 0) {
 			pc_melting();
 			gameOver();
 			stage3();
