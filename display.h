@@ -18,6 +18,7 @@ SDL_Texture* walkCnt_imgs[100];
 SDL_Texture* roundCnt_img;
 SDL_Texture* game_clear_img;
 SDL_Texture* game_over_img;
+SDL_Texture* crab_img;
 
 void loadImg(){
 
@@ -28,6 +29,7 @@ gildong_img = loadTexture("./assets/gildong.png");
 gildong_run_img = loadTexture("./assets/gildong_run_1.png");
 rock_img = loadTexture("./assets/rock.png");
 map2_img = loadTexture("./assets/map2.png");
+crab_img = loadTexture("./assets/crab_up.png");
 
 for (int i = 0; i <= 24; i++) {
   char path[50]; 

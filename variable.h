@@ -52,13 +52,14 @@ typedef struct Refrigerator {
 	int arrY;
 }Refrigerator;
 
-typedef struct Crap {
+typedef struct Crab {
 	int posX;
 	int posY;
 
 	int arrX;
 	int arrY;
-}Crap;
+}Crab;
+
 //남은 걸음수
 int walkCnt;
 
@@ -87,7 +88,7 @@ int stage1_map[8][9] = {
 Rock stage2_rocks[3];
 Gildong stage2_gildong[3];
 Refrigerator stage2_refrigerator;
-Crap stage2_crap[6];
+Crab stage2_crab[6];
 
 int stage2_map[8][9] = {
 	{1, 1, 1, 1, 1, 1, 1, 1, 1},

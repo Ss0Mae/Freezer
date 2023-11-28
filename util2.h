@@ -2,10 +2,11 @@
 #include <Windows.h>
 
 int direction_flag_stage2 = 1;
+void gildong_run_stage2(int i);
 
 // pc와 맵 충돌
 int collision_pc_map_stage2(int dx, int dy) {
-	if (stage1_map[pc.arrY + dy][pc.arrX + dx] == 1) return 1;
+	if (stage2_map[pc.arrY + dy][pc.arrX + dx] == 1) return 1;
 	return 0;
 }
 int collision_pc_rock_stage2(int dx, int dy) {
@@ -42,7 +43,7 @@ int collision_pc_gogildong_stage2(int dx, int dy) { //pc와 길동 충돌
 		if (stage2_gildong[i].arrX == pc.arrX + dx && stage2_gildong[i].arrY == pc.arrY + dy) {
 			if (stage2_map[stage2_gildong[i].arrY + dy][stage2_gildong[i].arrX + dx] == 1) { // 길동 뒤에 벽 (사라짐)
 				walkCnt--;
-				gildong_run(i); // 길동이 도망가는 에니메이션
+				gildong_run_stage2(i); // 길동이 도망가는 에니메이션
 				stage2_gildong[i].posX += dx * CELL_WIDTH * 1000;
 				stage2_gildong[i].posY += dy * CELL_WIDTH * 1000;
 				stage2_gildong[i].arrX += dx;
@@ -52,7 +53,7 @@ int collision_pc_gogildong_stage2(int dx, int dy) { //pc와 길동 충돌
 			for (int j = 0; j < 3; j++) { // 길동 뒤에 다른 길동이 있는 경우
 				if (stage2_gildong[j].arrX == stage2_gildong[i].arrX + dx && stage2_gildong[j].arrY == stage2_gildong[i].arrY + dy) {
 					walkCnt--;
-					gildong_run(i); // 길동이 도망가는 에니메이션
+					gildong_run_stage2(i); // 길동이 도망가는 에니메이션
 					stage2_gildong[i].posX += dx * CELL_WIDTH * 1000;
 					stage2_gildong[i].posY += dy * CELL_WIDTH * 1000;
 					stage2_gildong[i].arrX += dx * 2;
@@ -66,7 +67,7 @@ int collision_pc_gogildong_stage2(int dx, int dy) { //pc와 길동 충돌
 
 					if (stage2_rocks[j].arrX == stage2_gildong[i].arrX + dx && stage2_rocks[j].arrY == stage2_gildong[i].arrY + dy) {
 						walkCnt--;
-						gildong_run(i); // 길동이 도망가는 에니메이션
+						gildong_run_stage2(i); // 길동이 도망가는 에니메이션
 						stage2_gildong[i].posX += dx * CELL_WIDTH * 1000;
 						stage2_gildong[i].posY += dy * CELL_WIDTH * 1000;
 						stage2_gildong[i].arrX += dx * 2;
@@ -89,6 +90,14 @@ int collision_pc_gogildong_stage2(int dx, int dy) { //pc와 길동 충돌
 	return 0;
 }
 
+int collision_pc_crab_stage2(int dx, int dy) {
+	for (int i = 0; i < 6; i++) {
+		if (stage2_crab[i].arrX == pc.arrX + dx  && stage2_crab[i].arrY == pc.arrY + dy ) {
+			return 1;
+		}
+	}
+	return 0;
+}
 // pc와 냉장고 충돌 (스테이지 클리어)
 int collision_pc_refrigerator_stage2() {
 	if (stage2_refrigerator.arrX == pc.arrX && stage2_refrigerator.arrY == pc.arrY)
@@ -117,10 +126,13 @@ void drawStage2(int isGildongRun, int idx) {
 			drawTexture(gildong_img, stage2_gildong[i].posX, stage2_gildong[i].posY);
 		}
 	}
-
+	for (int i = 0; i < 6; i++) {
+		drawTexture(crab_img, stage2_crab[i].posX, stage2_crab[i].posY);
+	}
 	for (int i = 0; i < 3; i++) {
 		drawTexture(rock_img, stage2_rocks[i].posX, stage2_rocks[i].posY);
 	}
+
 
 	if (walkCnt >= 0 && walkCnt <= 24)
 		drawTexture(walkCnt_imgs[walkCnt], 136, 485);
@@ -209,9 +221,10 @@ int processKeyInput_stage2() {
 				pc_img = loadTexture("./assets/pc_right.png");
 				if (collision_pc_map_stage2(1, 0)) break;
 				if (collision_pc_rock_stage2(1, 0)) break;
-				if (collision_pc_gogildong_stage2(1, 0) == 1) break;
+				if (collision_pc_gogildong_stage2(1, 0)) break;
+				if (collision_pc_crab_stage2(1, 0)) walkCnt--;
 				walkCnt--;
-				pc.posX += CELL_WIDTH;
+				pc.posX += CELL_WIDTH -3;
 				pc.arrX++;
 				break;
 			case 1073741904: // left
@@ -220,8 +233,9 @@ int processKeyInput_stage2() {
 				if (collision_pc_map_stage2(-1, 0)) break;
 				if (collision_pc_rock_stage2(-1, 0)) break;
 				if (collision_pc_gogildong_stage2(-1, 0)) break;
+				if (collision_pc_crab_stage2(-1, 0)) walkCnt--;
 				walkCnt--;
-				pc.posX -= CELL_WIDTH;
+				pc.posX -= CELL_WIDTH -3;
 				pc.arrX--;
 				return 3;
 				break;
@@ -229,16 +243,18 @@ int processKeyInput_stage2() {
 				if (collision_pc_map_stage2(0, 1)) break;
 				if (collision_pc_rock_stage2(0, 1)) break;
 				if (collision_pc_gogildong_stage2(0, 1)) break;
+				if (collision_pc_crab_stage2(0, 1)) walkCnt--;
 				walkCnt--;
-				pc.posY += CELL_WIDTH;
+				pc.posY += CELL_WIDTH -3;
 				pc.arrY++;
 				break;
 			case 1073741906: // up
 				if (collision_pc_map_stage2(0, -1)) break;
 				if (collision_pc_rock_stage2(0, -1)) break;
 				if (collision_pc_gogildong_stage2(0, -1)) break;
+				if (collision_pc_crab_stage2(0, -1)) walkCnt--;
 				walkCnt--;
-				pc.posY -= CELL_WIDTH;
+				pc.posY -= CELL_WIDTH-3;
 				pc.arrY--;
 				break;
 			case 27: // ESC

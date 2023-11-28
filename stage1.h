@@ -84,7 +84,8 @@ void stage1() {
 		SDL_RenderPresent(renderer);
 
 		if (collision_pc_refrigerator()) { 
-			stage2();
+			gameClear();
+			break;
 		}
 
 		
