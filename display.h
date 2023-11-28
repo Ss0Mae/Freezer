@@ -10,6 +10,7 @@
 SDL_Texture* pc_img;
 SDL_Texture* map1_img;
 SDL_Texture* map2_img;
+SDL_Texture* map3_img;
 SDL_Texture* refrigerator_img;
 SDL_Texture* gildong_img;
 SDL_Texture* gildong_run_img;
@@ -22,12 +23,13 @@ SDL_Texture* game_over_img;
 void loadImg(){
 
 pc_img = loadTexture("./assets/pc_left.png");
-map1_img = loadTexture("./assets/map1.png");
 refrigerator_img = loadTexture("./assets/refrigerator.png");
 gildong_img = loadTexture("./assets/gildong.png");
 gildong_run_img = loadTexture("./assets/gildong_run_1.png");
 rock_img = loadTexture("./assets/rock.png");
+map1_img = loadTexture("./assets/map1.png");
 map2_img = loadTexture("./assets/map2.png");
+map3_img = loadTexture("./assets/map3.png");
 
 for (int i = 0; i <= 24; i++) {
   char path[50]; 

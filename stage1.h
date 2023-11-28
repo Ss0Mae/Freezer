@@ -71,6 +71,8 @@ void stage1_initPos() {
 
 void stage1() {
 
+	curStage = 1;
+
 	stage1_initPos();
 
 	while (1) {
@@ -86,8 +88,6 @@ void stage1() {
 		if (collision_pc_refrigerator()) { 
 			stage2();
 		}
-
-		
 
 		if (walkCnt == 0) {
 			pc_melting();

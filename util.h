@@ -16,9 +16,25 @@ int processKeyInput();
 
 int direction_flag = 1;
 
+
 // pc¿Í ¸Ê Ãæµ¹
-int collision_pc_map(int dx, int dy) {
-	if (stage1_map[pc.arrY + dy][pc.arrX + dx] == 1) return 1;
+int collision_pc_map( int dx, int dy) {
+
+	switch (curStage) {
+	case 1: // stage1
+		if (stage1_map[pc.arrY + dy][pc.arrX + dx] == 1) return 1;
+		break;
+
+	case 2: // stage2
+		if (stage2_map[pc.arrY + dy][pc.arrX + dx] == 1) return 1;
+		break;
+
+	case 3: // stage3
+		if (stage3_map[pc.arrY + dy][pc.arrX + dx] == 1) return 1;
+		break;
+
+	}
+
 	return 0;
 }
 
@@ -143,6 +159,33 @@ void drawStage1(int isGildongRun, int idx) {
 }
 
 
+void drawStage3(int isGildongRun, int idx) {
+
+	drawTexture(map3_img, 0, 0);
+	drawTexture(refrigerator_img, stage1_refrigerator.posX, stage1_refrigerator.posY);
+	drawTexture(roundCnt_img, 1062, 485);
+
+	drawTexture(pc_img, pc.posX, pc.posY);
+
+	if (!isGildongRun) {
+		for (int i = 0; i < 2; i++) {
+			drawTexture(gildong_img, stage3_gildong[i].posX, stage3_gildong[i].posY);
+		}
+	}
+
+	else {
+		for (int i = 0; i < 2; i++) {
+			if (idx == i) continue;
+			drawTexture(gildong_img, stage3_gildong[i].posX, stage3_gildong[i].posY);
+		}
+	}
+
+
+	if (walkCnt >= 0 && walkCnt <= 24)
+		drawTexture(walkCnt_imgs[walkCnt], 136, 485);
+
+}
+
 void pc_melting() {
 	if (direction_flag == 1) {
 		SDL_RenderClear(renderer);
@@ -223,7 +266,7 @@ int processKeyInput() {
 			case 1073741903: // right
 				direction_flag = 1;
 				pc_img = loadTexture("./assets/pc_right.png");
-				if (collision_pc_map(1, 0)) break;
+				if (collision_pc_map( 1, 0)) break;
 				if (collision_pc_rock(1, 0)) break;
 				if (collision_pc_gogildong(1, 0) == 1) break;
 				walkCnt--;
@@ -233,7 +276,7 @@ int processKeyInput() {
 			case 1073741904: // left
 				direction_flag = 0;
 				pc_img = loadTexture("./assets/pc_left.png");
-				if (collision_pc_map(-1, 0)) break;
+				if (collision_pc_map( -1, 0)) break;
 				if (collision_pc_rock(-1, 0)) break;
 				if (collision_pc_gogildong(-1, 0)) break;
 				walkCnt--;
@@ -242,7 +285,7 @@ int processKeyInput() {
 				return 3;
 				break;
 			case 1073741905: // down
-				if (collision_pc_map(0, 1)) break;
+				if (collision_pc_map( 0, 1)) break;
 				if (collision_pc_rock(0, 1)) break;
 				if (collision_pc_gogildong(0, 1)) break;
 				walkCnt--;
@@ -250,7 +293,7 @@ int processKeyInput() {
 				pc.arrY++;
 				break;
 			case 1073741906: // up
-				if (collision_pc_map(0, -1)) break;
+				if (collision_pc_map( 0, -1)) break;
 				if (collision_pc_rock(0, -1)) break;
 				if (collision_pc_gogildong(0, -1)) break;
 				walkCnt--;
