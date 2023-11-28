@@ -10,29 +10,47 @@
 
 void stage3_initPos() {
 
+	// 게임에 쓰이는 NPC를 제외하고는 게임 화면의 바깥쪽에 그려줌
+	for (int i = 0; i < MAX_NUM_NPC; i++) {
+		gildongs[i].posX = -100;
+		gildongs[i].posY = -100;
+		gildongs[i].arrX = -1;
+		gildongs[i].arrY = -1;
+
+		rocks[i].posX = -100;
+		rocks[i].posY = -100;
+		rocks[i].arrX = -1;
+		rocks[i].arrY = -1;
+
+		craps[i].posX = -100;
+		craps[i].posY = -100;
+		craps[i].arrX = -1;
+		craps[i].arrY = -1;
+	}
+
 	// pc
-	pc.posX = 920;
-	pc.posY = 220;
+	pc.posX = 930;
+	pc.posY = 200;
 	pc.arrX = 8;
 	pc.arrY = 3;
 
 	// 길동
-	stage3_gildong[0].posX = 680;
-	stage3_gildong[0].posY = 200;
-	stage3_gildong[0].arrX = 4;
-	stage3_gildong[0].arrY = 2;
+	gildongs[0].posX = pc.posX - CELL_WIDTH * 3;
+	gildongs[0].posY = pc.posY + CELL_WIDTH * 2;
+	gildongs[0].arrX = pc.arrX - 3;
+	gildongs[0].arrY = pc.arrY + 2;
 
-	stage3_gildong[1].posX = 610;
-	stage3_gildong[1].posY = 270;
-	stage3_gildong[1].arrX = 3;
-	stage3_gildong[1].arrY = 3;
+	gildongs[1].posX = pc.posX - CELL_WIDTH * 2;
+	gildongs[1].posY = pc.posY + CELL_WIDTH * 4;
+	gildongs[1].arrX = pc.arrX - 2;
+	gildongs[1].arrY = pc.arrY + 4;
 
 
 	// 냉장고
-	stage3_refrigerator.posX = 890;
-	stage3_refrigerator.posY = 446;
-	stage3_refrigerator.arrX = 7;
-	stage3_refrigerator.arrY = 6;
+	refrigerator.posX = pc.posX - CELL_WIDTH * 4;
+	refrigerator.posY = pc.posY - CELL_WIDTH * 2;
+	refrigerator.arrX = pc.arrX - 4;
+	refrigerator.arrY = pc.arrY - 2;
 
 
 	walkCnt = 32;
@@ -51,17 +69,18 @@ void stage3() {
 		if (processKeyInput() == -1) { // R키 누르면 재시작
 			stage3();
 		}
-		drawStage3(0, -1);
+		drawStage(0, -1);
 		SDL_RenderPresent(renderer);
 
 		if (collision_pc_refrigerator()) {
-			stage3();
+			gameClear();
+			break;
 		}
 
 
 
 		if (walkCnt == 0) {
-			//pc_melting();
+			pc_melting();
 			gameOver();
 			stage3();
 		}
