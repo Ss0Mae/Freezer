@@ -169,21 +169,23 @@ void drawStage(int isGildongRun, int idx) {
 
 	drawTexture(refrigerator_img, refrigerator.posX, refrigerator.posY);
 	drawTexture(roundCnt_img[curStage], 1062, 485);
-	drawTexture(pc_img, pc.posX, pc.posY);
 	drawTexture(key_img, key.posX, key.posY);
 	drawTexture(door_img, door.posX, door.posY);
 	
-	// 게 그리기
-	for (int i = 0; i < MAX_NUM_NPC; i++) {
-		drawTexture(crab_img, crabs[i].posX, crabs[i].posY);
-	}
 	
 	// 바위 그리기
 	for (int i = 0; i < MAX_NUM_NPC; i++) {
 		drawTexture(rock_img, rocks[i].posX, rocks[i].posY);
 	}
 
+	// 게 그리기
+	for (int i = 0; i < MAX_NUM_NPC; i++) {
+		drawTexture(crab_img, crabs[i].posX, crabs[i].posY);
+	}
 
+
+
+	drawTexture(pc_img, pc.posX, pc.posY);
 
 	// 길동 그리기
 	if (!isGildongRun) {

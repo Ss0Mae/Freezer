@@ -42,8 +42,6 @@ void stage2_initPos() {
 	pc.posY = 390;
 	pc.arrX = 1;
 	pc.arrY = 5;
-	pc.posX = 490;
-	pc.posY = 400;
 
 	// ±æµ¿
 	gildongs[0].posX = pc.posX + CELL_WIDTH * 1;
@@ -142,7 +140,7 @@ void stage2() {
 		}
 
 
-		if (walkCnt == 0) {
+		if (walkCnt < 0) {
 			pc_melting();
 			gameOver();
 			stage2();

@@ -115,7 +115,7 @@ void stage1() {
 			break;
 		}
 
-		if (walkCnt == 0) {
+		if (walkCnt < 0) {
 			pc_melting();
 			gameOver();
 			stage1();

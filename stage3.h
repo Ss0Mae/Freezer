@@ -106,7 +106,7 @@ void stage3_initPos() {
 	key.arrX = pc.arrX - 7;
 	key.arrY = pc.arrY + 3;
 
-	walkCnt = 32;
+	walkCnt = 35;
 }
 
 void stage3() {
@@ -132,7 +132,7 @@ void stage3() {
 
 
 
-		if (walkCnt == 0) {
+		if (walkCnt < 0) {
 			pc_melting();
 			gameOver();
 			stage3();
