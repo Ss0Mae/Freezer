@@ -93,6 +93,19 @@ void stage3_initPos() {
 	crabs[7].arrX = pc.arrX - 3;
 	crabs[7].arrY = pc.arrY + 3;
 
+
+	// ÀÚ¹°¼è
+	door.posX = pc.posX - CELL_WIDTH * 1;
+	door.posY = pc.posY - CELL_WIDTH * 1;
+	door.arrX = pc.arrX - 1;
+	door.arrY = pc.arrY - 1;
+	
+	// Å°
+	key.posX = pc.posX - CELL_WIDTH * 7;
+	key.posY = pc.posY + CELL_WIDTH * 3;
+	key.arrX = pc.arrX - 7;
+	key.arrY = pc.arrY + 3;
+
 	walkCnt = 32;
 }
 

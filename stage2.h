@@ -27,6 +27,15 @@ void stage2_initPos() {
 		crabs[i].arrX = -1;
 		crabs[i].arrY = -1;
 	}
+	key.posX = -100;
+	key.posY = -100;
+	key.arrX = -1;
+	key.arrY = -1;
+
+	door.posX = -100;
+	door.posY = -100;
+	door.arrX = -1;
+	door.arrY = -1;
 
 	// pc
 	pc.posX = 480;

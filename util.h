@@ -11,7 +11,7 @@ void pc_melting();
 void drawStage(int isGildongRun, int idx);
 
 int direction_flag = 1;
-
+int key_flag = 0;
 
 
 // pc와 맵 충돌
@@ -123,6 +123,33 @@ int collision_pc_refrigerator() {
 	return 0;
 }
 
+// pc와 키 충돌검사
+void collision_pc_key() {
+	if (key.arrX == pc.arrX && key.arrY == pc.arrY) {
+		key_flag = 1;
+		key.arrX = -1;
+		key.arrY = -1;
+		key.posX = -100;
+		key.posY = -100;
+		return;
+	}
+}
+
+// pc와 문 충돌검사
+int collision_pc_door(int dx, int dy) {
+	if (door.arrX == pc.arrX + dx && door.arrY == pc.arrY + dy) {
+		if (key_flag == 0)
+			return 1;
+		if (key_flag == 1) {
+			door.posX = -100;
+			door.posY = -100;
+			door.arrX = -1;
+			door.arrY = -1;
+			return 0;
+		}
+	}
+	return 0;
+}
 
 void drawStage(int isGildongRun, int idx) {
 
@@ -143,7 +170,9 @@ void drawStage(int isGildongRun, int idx) {
 	drawTexture(refrigerator_img, refrigerator.posX, refrigerator.posY);
 	drawTexture(roundCnt_img[curStage], 1062, 485);
 	drawTexture(pc_img, pc.posX, pc.posY);
-
+	drawTexture(key_img, key.posX, key.posY);
+	drawTexture(door_img, door.posX, door.posY);
+	
 	// 게 그리기
 	for (int i = 0; i < MAX_NUM_NPC; i++) {
 		drawTexture(crab_img, crabs[i].posX, crabs[i].posY);
@@ -257,9 +286,11 @@ int processKeyInput() {
 				if (collision_pc_rock(1, 0)) break;
 				if (collision_pc_gogildong(1, 0) == 1) break;
 				if (collision_pc_crab(1, 0)) walkCnt--;
+				if (collision_pc_door(1, 0)) break;
 				walkCnt--;
 				pc.posX += CELL_WIDTH;
 				pc.arrX++;
+				collision_pc_key();
 				break;
 			case 1073741904: // left
 				direction_flag = 0;
@@ -268,28 +299,33 @@ int processKeyInput() {
 				if (collision_pc_rock(-1, 0)) break;
 				if (collision_pc_gogildong(-1, 0)) break;
 				if (collision_pc_crab(-1, 0)) walkCnt--;
+				if (collision_pc_door(-1, 0)) break;
 				walkCnt--;
 				pc.posX -= CELL_WIDTH;
 				pc.arrX--;
-				return 3;
+				collision_pc_key();
 				break;
 			case 1073741905: // down
 				if (collision_pc_map(0, 1)) break;
 				if (collision_pc_rock(0, 1)) break;
 				if (collision_pc_gogildong(0, 1)) break;
 				if (collision_pc_crab(0, 1)) walkCnt--;
+				if (collision_pc_door(0, 1)) break;
 				walkCnt--;
 				pc.posY += CELL_WIDTH;
 				pc.arrY++;
+				collision_pc_key();
 				break;
 			case 1073741906: // up
 				if (collision_pc_map(0, -1)) break;
 				if (collision_pc_rock(0, -1)) break;
 				if (collision_pc_gogildong(0, -1)) break;
 				if (collision_pc_crab(0, -1)) walkCnt--;
+				if (collision_pc_door(0, -1)) break;
 				walkCnt--;
 				pc.posY -= CELL_WIDTH;
 				pc.arrY--;
+				collision_pc_key();
 				break;
 			case 27: // ESC
 				exit(0);

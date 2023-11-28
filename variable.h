@@ -64,6 +64,22 @@ typedef struct Crab {
 	int arrY;
 }Crab;
 
+typedef struct Key{
+	int posX;
+	int posY;
+
+	int arrX;
+	int arrY;
+}Key;
+
+typedef struct Door {
+	int posX;
+	int posY;
+
+	int arrX;
+	int arrY;
+}Door;
+
 //남은 걸음수
 int walkCnt;
 
@@ -76,7 +92,8 @@ Refrigerator refrigerator;
 Rock rocks[MAX_NUM_NPC];
 Gildong gildongs[MAX_NUM_NPC];
 Crab crabs[MAX_NUM_NPC];
-
+Key key;
+Door door;
 
 int maps[10][15][15] = {
 	{{0}},

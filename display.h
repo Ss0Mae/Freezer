@@ -20,7 +20,8 @@ SDL_Texture* roundCnt_img[20];
 SDL_Texture* game_clear_img;
 SDL_Texture* game_over_img;
 SDL_Texture* crab_img;
-
+SDL_Texture* key_img;
+SDL_Texture* door_img;
 void loadImg() {
 
 	pc_img = loadTexture("./assets/pc_left.png");
@@ -29,6 +30,8 @@ void loadImg() {
 	gildong_run_img = loadTexture("./assets/gildong_run_1.png");
 	crab_img = loadTexture("./assets/crab_up.png");
 	rock_img = loadTexture("./assets/rock.png");
+	key_img = loadTexture("./assets/key.png");
+	door_img = loadTexture("./assets/treasurebox.png");
 	map1_img = loadTexture("./assets/map1.png");
 	map2_img = loadTexture("./assets/map2.png");
 	map3_img = loadTexture("./assets/map3.png");
