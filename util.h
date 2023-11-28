@@ -51,7 +51,15 @@ int collision_pc_rock(int dx, int dy) {
 	return 0;
 }
 
-
+//pc 와 게 충돌
+int collision_pc_crab(int dx, int dy) {
+	for (int i = 0; i < MAX_NUM_NPC; i++) {
+		if (crabs[i].arrX == pc.arrX + dx && crabs[i].arrY == pc.arrY + dy) {
+			return 1;
+		}
+	}
+	return 0;
+}
 
 int collision_pc_gogildong(int dx, int dy) { // pc와 길동 충돌
 
@@ -136,6 +144,11 @@ void drawStage(int isGildongRun, int idx) {
 	drawTexture(roundCnt_img[curStage], 1062, 485);
 	drawTexture(pc_img, pc.posX, pc.posY);
 
+	// 게 그리기
+	for (int i = 0; i < MAX_NUM_NPC; i++) {
+		drawTexture(crab_img, crabs[i].posX, crabs[i].posY);
+	}
+	
 	// 바위 그리기
 	for (int i = 0; i < MAX_NUM_NPC; i++) {
 		drawTexture(rock_img, rocks[i].posX, rocks[i].posY);
@@ -243,6 +256,7 @@ int processKeyInput() {
 				if (collision_pc_map(1, 0)) break;
 				if (collision_pc_rock(1, 0)) break;
 				if (collision_pc_gogildong(1, 0) == 1) break;
+				if (collision_pc_crab(1, 0)) walkCnt--;
 				walkCnt--;
 				pc.posX += CELL_WIDTH;
 				pc.arrX++;
@@ -253,6 +267,7 @@ int processKeyInput() {
 				if (collision_pc_map(-1, 0)) break;
 				if (collision_pc_rock(-1, 0)) break;
 				if (collision_pc_gogildong(-1, 0)) break;
+				if (collision_pc_crab(-1, 0)) walkCnt--;
 				walkCnt--;
 				pc.posX -= CELL_WIDTH;
 				pc.arrX--;
@@ -262,6 +277,7 @@ int processKeyInput() {
 				if (collision_pc_map(0, 1)) break;
 				if (collision_pc_rock(0, 1)) break;
 				if (collision_pc_gogildong(0, 1)) break;
+				if (collision_pc_crab(0, 1)) walkCnt--;
 				walkCnt--;
 				pc.posY += CELL_WIDTH;
 				pc.arrY++;
@@ -270,6 +286,7 @@ int processKeyInput() {
 				if (collision_pc_map(0, -1)) break;
 				if (collision_pc_rock(0, -1)) break;
 				if (collision_pc_gogildong(0, -1)) break;
+				if (collision_pc_crab(0, -1)) walkCnt--;
 				walkCnt--;
 				pc.posY -= CELL_WIDTH;
 				pc.arrY--;

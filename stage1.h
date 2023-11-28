@@ -16,6 +16,16 @@ void stage1_initPos() {
 		gildongs[i].posY = -1000;
 		gildongs[i].arrX = -1;
 		gildongs[i].arrY = -1;
+
+		rocks[i].posX = -100;
+		rocks[i].posY = -100;
+		rocks[i].arrX = -1;
+		rocks[i].arrY = -1;
+
+		crabs[i].posX = -100;
+		crabs[i].posY = -100;
+		crabs[i].arrX = -1;
+		crabs[i].arrY = -1;
 	}
 
 	// pc

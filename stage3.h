@@ -22,10 +22,10 @@ void stage3_initPos() {
 		rocks[i].arrX = -1;
 		rocks[i].arrY = -1;
 
-		craps[i].posX = -100;
-		craps[i].posY = -100;
-		craps[i].arrX = -1;
-		craps[i].arrY = -1;
+		crabs[i].posX = -100;
+		crabs[i].posY = -100;
+		crabs[i].arrX = -1;
+		crabs[i].arrY = -1;
 	}
 
 	// pc

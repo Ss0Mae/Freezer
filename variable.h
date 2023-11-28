@@ -75,7 +75,7 @@ Pc pc;
 Refrigerator refrigerator;
 Rock rocks[MAX_NUM_NPC];
 Gildong gildongs[MAX_NUM_NPC];
-Crap craps[MAX_NUM_NPC];
+Crab crabs[MAX_NUM_NPC];
 
 
 int maps[10][15][15] = {

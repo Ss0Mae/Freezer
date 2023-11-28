@@ -27,6 +27,7 @@ void loadImg() {
 	refrigerator_img = loadTexture("./assets/refrigerator.png");
 	gildong_img = loadTexture("./assets/gildong.png");
 	gildong_run_img = loadTexture("./assets/gildong_run_1.png");
+	crab_img = loadTexture("./assets/crab_up.png");
 	rock_img = loadTexture("./assets/rock.png");
 	map1_img = loadTexture("./assets/map1.png");
 	map2_img = loadTexture("./assets/map2.png");
