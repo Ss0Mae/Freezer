@@ -9,6 +9,7 @@
 #include "stage1.h"
 #include "stage2.h"
 #include "stage3.h"
+#include "stage5.h"
 
 
 
@@ -17,9 +18,11 @@ int main(int argc, char** argv) {
 	initAll(); // SDL 초기화
 	loadImg();
 
-	stage1();
-	stage2();
-	stage3();
+	//stage1();
+	//stage2();
+	//stage3();
+
+	stage5();
 
 
 	closeAll(); // SDL 메모리 해제

@@ -175,33 +175,32 @@ void drawStage(int isGildongRun, int idx) {
 		break;
 	}
 
-	drawTexture(refrigerator_img, refrigerator.posX, refrigerator.posY);
-	drawTexture(roundCnt_img[curStage], 1062, 485);
-	drawTexture(key_img, key.posX, key.posY);
-	drawTexture(door_img, door.posX, door.posY);
-	
-	
+
+
 	// 바위 그리기
 	for (int i = 0; i < MAX_NUM_NPC; i++) {
 		drawTexture(rock_img, rocks[i].posX, rocks[i].posY);
 	}
 
+	drawTexture(refrigerator_img, refrigerator.posX, refrigerator.posY);
+	drawTexture(roundCnt_img[curStage], 1062, 485);
+	drawTexture(key_img, key.posX, key.posY);
+	drawTexture(door_img, door.posX, door.posY);
+	
+	drawTexture(refrigerator_img, refrigerator.posX, refrigerator.posY);
+	
+
 	// 게 그리기
 	for (int i = 0; i < MAX_NUM_NPC; i++) {
 		drawTexture(crab_img, crabs[i].posX, crabs[i].posY);
 	}
-
-
-
-	drawTexture(pc_img, pc.posX, pc.posY);
-
+	
 	// 길동 그리기
 	if (!isGildongRun) {
 		for (int i = 0; i < MAX_NUM_NPC; i++) {
 			drawTexture(gildong_img, gildongs[i].posX, gildongs[i].posY);
 		}
 	}
-
 	else {
 		for (int i = 0; i < MAX_NUM_NPC; i++) {
 			if (idx == i) continue;
@@ -210,6 +209,9 @@ void drawStage(int isGildongRun, int idx) {
 	}
 
 	drawTexture(walkCnt_imgs[walkCnt], 136, 485);
+
+	drawTexture(pc_img, pc.posX, pc.posY);
+
 }
 
 void pc_melting() {
@@ -297,6 +299,7 @@ int processKeyInput() {
 				if (collision_pc_gogildong(1, 0) == 1) break;
 				if (collision_pc_crab(1, 0)) walkCnt--;
 				if (collision_pc_door(1, 0)) break;
+				walkForcrab--;
 				walkCnt--;
 				pc.posX += CELL_WIDTH;
 				pc.arrX++;
@@ -310,6 +313,7 @@ int processKeyInput() {
 				if (collision_pc_gogildong(-1, 0)) break;
 				if (collision_pc_crab(-1, 0)) walkCnt--;
 				if (collision_pc_door(-1, 0)) break;
+				walkForcrab--;
 				walkCnt--;
 				pc.posX -= CELL_WIDTH;
 				pc.arrX--;
@@ -321,6 +325,7 @@ int processKeyInput() {
 				if (collision_pc_gogildong(0, 1)) break;
 				if (collision_pc_crab(0, 1)) walkCnt--;
 				if (collision_pc_door(0, 1)) break;
+				walkForcrab--;
 				walkCnt--;
 				pc.posY += CELL_WIDTH;
 				pc.arrY++;
@@ -332,6 +337,7 @@ int processKeyInput() {
 				if (collision_pc_gogildong(0, -1)) break;
 				if (collision_pc_crab(0, -1)) walkCnt--;
 				if (collision_pc_door(0, -1)) break;
+				walkForcrab--;
 				walkCnt--;
 				pc.posY -= CELL_WIDTH;
 				pc.arrY--;
