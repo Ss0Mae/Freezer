@@ -138,12 +138,12 @@ void stage5_initPos() {
 
 	// ½Å¹ß
 	shoe.posX = pc.posX + CELL_WIDTH * 2;
-	shoe.posY = pc.posY + CELL_WIDTH * 3;
+	shoe.posY = pc.posY + CELL_WIDTH * 4;
 	shoe.arrX = pc.arrX + 2;
-	shoe.arrY = pc.arrY + 3;
+	shoe.arrY = pc.arrY + 4;
 
 
-	walkCnt = 44;
+	walkCnt = 41;
 }
 
 void stage5() {

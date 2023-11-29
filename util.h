@@ -68,9 +68,9 @@ int collision_pc_rock(int dx, int dy) {
 					return 1;
 				}
 			}
-				if (door.arrX == rocks[i].arrX + dx && door.arrY == rocks[i].arrY + dy) { // 바위뒤에 상자
-					return 1;
-				}
+			if (door.arrX == rocks[i].arrX + dx && door.arrY == rocks[i].arrY + dy) { // 바위뒤에 상자
+				return 1;
+			}
 
 			// 충돌한 바위는 한칸 밀려야 함
 			rocks[i].posX += dx * CELL_WIDTH;
@@ -129,20 +129,21 @@ int collision_pc_gogildong(int dx, int dy) { // pc와 길동 충돌
 			if (maps[curStage][gildongs[i].arrY + dy][gildongs[i].arrX + dx] == 1) { // 길동 뒤에 벽 (사라짐)
 				walkCnt--;
 				gildong_run(i); // 길동이 도망가는 에니메이션
-				gildongs[i].posX += dx * CELL_WIDTH * 1000;
-				gildongs[i].posY += dy * CELL_WIDTH * 1000;
-				gildongs[i].arrX += dx;
-				gildongs[i].arrY += dy;
+				gildongs[i].posX = -100;
+				gildongs[i].posY = -100;
+				gildongs[i].arrX = -1;
+				gildongs[i].arrY = -1;
 				return 1;
 			}
 			for (int j = 0; j < MAX_NUM_NPC; j++) { // 길동 뒤에 다른 길동이 있는 경우
 				if (gildongs[j].arrX == gildongs[i].arrX + dx && gildongs[j].arrY == gildongs[i].arrY + dy) {
 					walkCnt--;
 					gildong_run(i); // 길동이 도망가는 에니메이션
-					gildongs[i].posX += dx * CELL_WIDTH * 1000;
-					gildongs[i].posY += dy * CELL_WIDTH * 1000;
-					gildongs[i].arrX += dx * 2;
-					gildongs[i].arrY += dy * 2;
+					gildongs[i].posX = -100;
+					gildongs[i].posY = -100;
+					gildongs[i].arrX = -1;
+					gildongs[i].arrY = -1;
+
 					return 1;
 				}
 			}
@@ -151,19 +152,20 @@ int collision_pc_gogildong(int dx, int dy) { // pc와 길동 충돌
 					if (rocks[j].arrX == gildongs[i].arrX + dx && rocks[j].arrY == gildongs[i].arrY + dy) {
 						walkCnt--;
 						gildong_run(i); // 길동이 도망가는 에니메이션
-						gildongs[i].posX += dx * CELL_WIDTH * 1000;
-						gildongs[i].posY += dy * CELL_WIDTH * 1000;
-						gildongs[i].arrX += dx * 2;
-						gildongs[i].arrY += dy * 2;
+						gildongs[i].posX = -100;
+						gildongs[i].posY = -100;
+						gildongs[i].arrX = -1;
+						gildongs[i].arrY = -1;
+
 						return 1;
 					}
 			}
 
 
-			for (int j = 0; j < MAX_NUM_NPC; j++) {
-				if (door.arrX == gildongs[j].arrX + dx && door.arrY == gildongs[j].arrY + dy ) //상자 뒤에 길동
-					return 1;
+			if (door.arrX == gildongs[i].arrX + dx && door.arrY == gildongs[i].arrY + dy) { //상자 뒤에 길동
+				return 1;
 			}
+
 			
 
 
