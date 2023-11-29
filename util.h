@@ -54,7 +54,10 @@ int collision_pc_rock(int dx, int dy) {
 				if (gildongs[j].arrX == rocks[i].arrX + dx && gildongs[j].arrY == rocks[i].arrY + dy)
 					return 1;
 			}
-
+			for (int j = 0; j < MAX_NUM_NPC; j++) {
+				if (door.arrX == rocks[j].arrX + dx && door.arrY == rocks[j].arrY + dy) // 바위뒤에 상자
+					return 1;
+			}
 
 			// 충돌한 바위는 한칸 밀려야 함
 			rocks[i].posX += dx * CELL_WIDTH;
@@ -144,6 +147,11 @@ int collision_pc_gogildong(int dx, int dy) { // pc와 길동 충돌
 						return 1;
 					}
 			}
+			for (int j = 0; j < MAX_NUM_NPC; j++) {
+				if (door.arrX == gildongs[j].arrX + dx && door.arrY == gildongs[j].arrY + dy ) //상자 뒤에 길동
+					return 1;
+			}
+			
 
 
 			// 충돌한 길동은 한 칸 밀려야 함
