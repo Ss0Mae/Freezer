@@ -120,7 +120,7 @@ void stage4_initPos() {
 	key.arrX = pc.arrX + 5;
 	key.arrY = pc.arrY + 4;
 
-	walkCnt = 24;
+	walkCnt = 25;
 }
 
 void stage4() {

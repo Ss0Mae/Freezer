@@ -37,6 +37,7 @@ void stage5_initPos() {
 	door.arrX = -1;
 	door.arrY = -1;
 
+
 	// pc
 	pc.posX = 650;
 	pc.posY = 40;
@@ -67,34 +68,39 @@ void stage5_initPos() {
 	rocks[1].arrX = pc.arrX + 1;
 	rocks[1].arrY = pc.arrY + 1;
 
-	rocks[3].posX = pc.posX + CELL_WIDTH * 0;
-	rocks[3].posY = pc.posY + CELL_WIDTH * 3;
-	rocks[3].arrX = pc.arrX + 0;
-	rocks[3].arrY = pc.arrY + 3;
+	rocks[2].posX = pc.posX + CELL_WIDTH * 0;
+	rocks[2].posY = pc.posY + CELL_WIDTH * 1;
+	rocks[2].arrX = pc.arrX + 0;
+	rocks[2].arrY = pc.arrY + 1;
 
 
-	rocks[4].posX = pc.posX + CELL_WIDTH * 1;
+	rocks[3].posX = pc.posX + CELL_WIDTH * 1;
+	rocks[3].posY = pc.posY + CELL_WIDTH * 4;
+	rocks[3].arrX = pc.arrX + 1;
+	rocks[3].arrY = pc.arrY + 4;
+
+
+	rocks[4].posX = pc.posX + CELL_WIDTH * 2;
 	rocks[4].posY = pc.posY + CELL_WIDTH * 4;
-	rocks[4].arrX = pc.arrX + 1;
+	rocks[4].arrX = pc.arrX + 2;
 	rocks[4].arrY = pc.arrY + 4;
 
 
-	rocks[5].posX = pc.posX + CELL_WIDTH * 2;
-	rocks[5].posY = pc.posY + CELL_WIDTH * 4;
-	rocks[5].arrX = pc.arrX + 2;
-	rocks[5].arrY = pc.arrY + 4;
+	rocks[5].posX = pc.posX + CELL_WIDTH * 1;
+	rocks[5].posY = pc.posY + CELL_WIDTH * 5;
+	rocks[5].arrX = pc.arrX + 1;
+	rocks[5].arrY = pc.arrY + 5;
 
 
-	rocks[6].posX = pc.posX + CELL_WIDTH * 1;
-	rocks[6].posY = pc.posY + CELL_WIDTH * 5;
-	rocks[6].arrX = pc.arrX + 1;
-	rocks[6].arrY = pc.arrY + 5;
+	rocks[6].posX = pc.posX + CELL_WIDTH * 3;
+	rocks[6].posY = pc.posY + CELL_WIDTH * 6;
+	rocks[6].arrX = pc.arrX + 3;
+	rocks[6].arrY = pc.arrY + 6;
 
-
-	rocks[7].posX = pc.posX + CELL_WIDTH * 3;
-	rocks[7].posY = pc.posY + CELL_WIDTH * 6;
-	rocks[7].arrX = pc.arrX + 3;
-	rocks[7].arrY = pc.arrY + 6;
+	rocks[7].posX = pc.posX + CELL_WIDTH * 0;
+	rocks[7].posY = pc.posY + CELL_WIDTH * 3;
+	rocks[7].arrX = pc.arrX + 0;
+	rocks[7].arrY = pc.arrY + 3;
 
 
 	// ≥√¿Â∞Ì
@@ -129,6 +135,12 @@ void stage5_initPos() {
 	key.arrX = pc.arrX + 1;
 	key.arrY = pc.arrY + 2;
 
+
+	// Ω≈πﬂ
+	shoe.posX = pc.posX + CELL_WIDTH * 2;
+	shoe.posY = pc.posY + CELL_WIDTH * 3;
+	shoe.arrX = pc.arrX + 2;
+	shoe.arrY = pc.arrY + 3;
 
 
 	walkCnt = 43;

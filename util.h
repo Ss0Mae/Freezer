@@ -58,18 +58,19 @@ int collision_pc_rock(int dx, int dy) {
 				return 1;
 			}
 			for (int j = 0; j < MAX_NUM_NPC; j++) { // 바위 뒤에 다른 바위가 있는 경우
-				if (rocks[j].arrX == rocks[i].arrX + dx && rocks[j].arrY == rocks[i].arrY + dy)
+				if (rocks[j].arrX == rocks[i].arrX + dx && rocks[j].arrY == rocks[i].arrY + dy) {
 					return 1;
+				}
 			}
-
+			
 			for (int j = 0; j < MAX_NUM_NPC; j++) { // 바위 뒤에 길동이 있는 경우
-				if (gildongs[j].arrX == rocks[i].arrX + dx && gildongs[j].arrY == rocks[i].arrY + dy)
+				if (gildongs[j].arrX == rocks[i].arrX + dx && gildongs[j].arrY == rocks[i].arrY + dy){
 					return 1;
+				}
 			}
-			for (int j = 0; j < MAX_NUM_NPC; j++) {
-				if (door.arrX == rocks[j].arrX + dx && door.arrY == rocks[j].arrY + dy) // 바위뒤에 상자
+				if (door.arrX == rocks[i].arrX + dx && door.arrY == rocks[i].arrY + dy) { // 바위뒤에 상자
 					return 1;
-			}
+				}
 
 			// 충돌한 바위는 한칸 밀려야 함
 			rocks[i].posX += dx * CELL_WIDTH;
@@ -147,8 +148,6 @@ int collision_pc_gogildong(int dx, int dy) { // pc와 길동 충돌
 			}
 
 			for (int j = 0; j < MAX_NUM_NPC; j++) { // 길동 뒤에 바위가 있는 경우
-				if (rocks[j].arrX == gildongs[i].arrX + dx && rocks[j].arrY == gildongs[i].arrY + dy)
-
 					if (rocks[j].arrX == gildongs[i].arrX + dx && rocks[j].arrY == gildongs[i].arrY + dy) {
 						walkCnt--;
 						gildong_run(i); // 길동이 도망가는 에니메이션
@@ -187,8 +186,10 @@ int collision_pc_refrigerator() {
 	return 0;
 }
 
-// pc와 키 충돌검사
-void collision_pc_key() {
+// pc와 아이템 충돌검사
+void collision_pc_item() {
+
+	// 키 충돌
 	if (key.arrX == pc.arrX && key.arrY == pc.arrY) {
 		key_flag = 1;
 		key.arrX = -1;
@@ -197,6 +198,17 @@ void collision_pc_key() {
 		key.posY = -100;
 		return;
 	}
+
+	// 신발 충돌
+	if (shoe.arrX == pc.arrX && shoe.arrY == pc.arrY) {
+		walkCnt+=2; // 걸음수 하나 증가
+		shoe.arrX = -1;
+		shoe.arrY = -1;
+		shoe.posX = -100;
+		shoe.posY = -100;
+		return;
+	}
+
 }
 
 // pc와 문 충돌검사
@@ -275,6 +287,10 @@ void drawStage(int isGildongRun, int idx) {
 			drawTexture(gildong_img, gildongs[i].posX, gildongs[i].posY);
 		}
 	}
+
+	// 신발 그리기
+	drawTexture(shoe_img, shoe.posX, shoe.posY);
+
 
 	// 걸음수 그리기
 	if (walkCnt >= 0)
@@ -372,7 +388,7 @@ int processKeyInput() {
 				pc.posX += CELL_WIDTH;
 				pc.arrX++;
 				collision_pc_crab();
-				collision_pc_key();
+				collision_pc_item();
 				break;
 			case 1073741904: // left
 				direction_flag = 0;
@@ -386,7 +402,7 @@ int processKeyInput() {
 				pc.posX -= CELL_WIDTH;
 				pc.arrX--;
 				collision_pc_crab();
-				collision_pc_key();
+				collision_pc_item();
 				break;
 			case 1073741905: // down
 				if (collision_pc_map(0, 1)) break;
@@ -399,7 +415,7 @@ int processKeyInput() {
 				pc.posY += CELL_WIDTH;
 				pc.arrY++;
 				collision_pc_crab();
-				collision_pc_key();
+				collision_pc_item();
 				break;
 			case 1073741906: // up
 				if (collision_pc_map(0, -1)) break;
@@ -412,7 +428,7 @@ int processKeyInput() {
 				pc.posY -= CELL_WIDTH;
 				pc.arrY--;
 				collision_pc_crab();
-				collision_pc_key();
+				collision_pc_item();
 				break;
 			case 27: // ESC
 				exit(0);
