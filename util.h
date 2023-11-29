@@ -14,7 +14,7 @@ void collision_pc_crab();
 
 int direction_flag = 1;
 int key_flag = 0;
-
+	
 
 void crabUpDown() {
 
@@ -253,8 +253,6 @@ void drawStage(int isGildongRun, int idx) {
 
 	// pc 그리기
 	drawTexture(pc_img, pc.posX, pc.posY);
-	if (walkCnt >= 0)
-		drawTexture(walkCnt_imgs[walkCnt], 60, 463);
 
 
 	// 길동 그리기
@@ -272,7 +270,7 @@ void drawStage(int isGildongRun, int idx) {
 
 	// 걸음수 그리기
 	if (walkCnt >= 0)
-		drawTexture(walkCnt_imgs[walkCnt], 136, 485);
+		drawTexture(walkCnt_imgs[walkCnt], 60, 463);
 }
 
 void pc_melting() {
