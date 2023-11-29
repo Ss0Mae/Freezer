@@ -143,13 +143,13 @@ void stage5_initPos() {
 	shoe.arrY = pc.arrY + 3;
 
 
-	walkCnt = 43;
+	walkCnt = 44;
 }
 
 void stage5() {
 	
 	curStage = 5;
-	walkForcrab = 43;
+	walkForcrab = 44;
 
 	crab_img = loadTexture("./assets/crab_down.png");
 
