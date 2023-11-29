@@ -24,6 +24,7 @@ SDL_Texture* game_over_img;
 SDL_Texture* crab_img;
 SDL_Texture* key_img;
 SDL_Texture* door_img;
+SDL_Texture* shoe_img;
 void loadImg() {
 
 	pc_img = loadTexture("./assets/pc_left.png");
@@ -34,6 +35,7 @@ void loadImg() {
 	rock_img = loadTexture("./assets/rock.png");
 	key_img = loadTexture("./assets/key.png");
 	door_img = loadTexture("./assets/treasurebox.png");
+	shoe_img = loadTexture("./assets/shoe.png");
 	map1_img = loadTexture("./assets/map1.png");
 	map2_img = loadTexture("./assets/map2.png");
 	map3_img = loadTexture("./assets/map3.png");

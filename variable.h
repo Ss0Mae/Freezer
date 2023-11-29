@@ -83,6 +83,14 @@ typedef struct Door {
 	int arrY;
 }Door;
 
+typedef struct Shoe {
+	int posX;
+	int posY;
+
+	int arrX;
+	int arrY;
+}Shoe;
+
 //남은 걸음수
 int walkCnt;
 
@@ -97,6 +105,7 @@ Gildong gildongs[MAX_NUM_NPC];
 Crab crabs[MAX_NUM_NPC];
 Key key;
 Door door; 
+Shoe shoe; 
 
 int maps[10][15][15] = {
 	{{0}},
@@ -141,7 +150,7 @@ int maps[10][15][15] = {
 	},
 
 
-	// 스테이지 4  그려주세용
+	// 스테이지 4  
 	{
 		{1, 1, 1, 1, 1, 1, 1, 1},
 		{1, 1, 1, 1, 0, 0, 1, 1},
@@ -165,7 +174,8 @@ int maps[10][15][15] = {
 		{1, 1, 0, 0, 0, 0, 0, 0, 1, 1},
 		{1, 1, 0, 0, 0, 0, 0, 1, 1, 1},
 		{1, 1, 1, 1, 1, 0, 0, 0, 1, 1},
-		{1, 1, 1, 1, 1, 0, 0, 1, 1, 1}
+		{1, 1, 1, 1, 1, 0, 0, 1, 1, 1},
+		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
 	}
 
 
