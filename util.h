@@ -19,24 +19,25 @@ int key_flag = 0;
 void crabUpDown() {
 
 	SDL_RenderClear(renderer);
+	if (curStage >=4) {
+		// 게가 올라오고 내려오고
+			if (walkForcrab % 2 == 0) {
+				crab_img = loadTexture("./assets/crab_up.png");
+				for (int i = 0; i < MAX_NUM_NPC; i++) {
+					drawTexture(crab_img, crabs[i].posX, crabs[i].posY);
+				}
+			}
+			else {
+				crab_img = loadTexture("./assets/crab_down.png");
+				for (int i = 0; i < MAX_NUM_NPC; i++) {
+					drawTexture(crab_img, crabs[i].posX, crabs[i].posY);
+				}
+			}
 
-	//게가 올라오고 내려오고
-	if (walkForcrab % 2 == 0) {
-		crab_img = loadTexture("./assets/crab_up.png");
-		for (int i = 0; i < MAX_NUM_NPC; i++) {
-			drawTexture(crab_img, crabs[i].posX, crabs[i].posY);
-		}
+		drawStage(0, -1);
+		SDL_RenderPresent(renderer);
+
 	}
-	else {
-		crab_img = loadTexture("./assets/crab_down.png");
-		for (int i = 0; i < MAX_NUM_NPC; i++) {
-			drawTexture(crab_img, crabs[i].posX, crabs[i].posY);
-		}
-	}
-
-	drawStage(0, -1);
-	SDL_RenderPresent(renderer);
-
 
 }
 
@@ -103,10 +104,17 @@ void collision_pc_crab() {
 	for (int i = 0; i < MAX_NUM_NPC; i++) {
 
 		if (crabs[i].arrX == pc.arrX && crabs[i].arrY == pc.arrY) { // 게의위치와 pc의위치가 같다면
-			if (walkForcrab % 2 == 0 && (curStage == 5 || curStage == 4)) { // 올라와있는 게만 충돌처리
+			if (walkForcrab % 2 == 0 && (curStage >= 4)) { // 올라와있는 게만 충돌처리
 				walkCnt--;
 				pc_damage(); // pc가 붉은색으로 변함
+				return;
 			}
+			if (curStage <= 3) {
+				walkCnt--;
+				pc_damage(); // pc가 붉은색으로 변함
+				return;
+			}
+
 		}
 	}
 }
