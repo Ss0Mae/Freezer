@@ -236,7 +236,7 @@ void drawStage(int isGildongRun, int idx) {
 	}
 
 	drawTexture(refrigerator_img, refrigerator.posX, refrigerator.posY);
-	drawTexture(roundCnt_img[curStage], 1062, 485);
+	drawTexture(roundCnt_img[curStage], 1058, 463);
 	drawTexture(key_img, key.posX, key.posY);
 	drawTexture(door_img, door.posX, door.posY);
 
@@ -251,7 +251,7 @@ void drawStage(int isGildongRun, int idx) {
 
 	drawTexture(pc_img, pc.posX, pc.posY);
 	if (walkCnt >= 0)
-		drawTexture(walkCnt_imgs[walkCnt], 136, 485);
+		drawTexture(walkCnt_imgs[walkCnt], 60, 463);
 
 
 	// 길동 그리기
