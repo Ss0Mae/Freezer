@@ -126,6 +126,7 @@ void stage4_initPos() {
 void stage4() {
 
 	curStage = 4;
+	walkForcrab = 26;
 
 	stage4_initPos();
 
