@@ -38,6 +38,10 @@ void stage1_initPos() {
 	door.arrX = -1;
 	door.arrY = -1;
 
+	shoe.posX = -100;
+	shoe.posY = -100;
+	shoe.arrX = -1;
+	shoe.arrY = -1;
 	// pc
 	pc.posX = 830;
 	pc.posY = 110;

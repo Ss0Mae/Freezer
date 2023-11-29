@@ -27,7 +27,10 @@ void stage4_initPos() {
 		crabs[i].arrX = -1;
 		crabs[i].arrY = -1;
 	}
-
+	shoe.posX = -100;
+	shoe.posY = -100;
+	shoe.arrX = -1;
+	shoe.arrY = -1;
 	// pc
 	pc.posX = 520;
 	pc.posY = 225;
