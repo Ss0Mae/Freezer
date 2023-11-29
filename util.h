@@ -19,19 +19,19 @@ int key_flag = 0;
 void crabUpDown() {
 
 	SDL_RenderClear(renderer);
-	if (curStage >=4) {
+	if (curStage >= 4) {
 		// 게가 올라오고 내려오고
 			if (walkForcrab % 2 == 0) {
 				crab_img = loadTexture("./assets/crab_up.png");
-				for (int i = 0; i < MAX_NUM_NPC; i++) {
+				/*for (int i = 0; i < MAX_NUM_NPC; i++) {
 					drawTexture(crab_img, crabs[i].posX, crabs[i].posY);
-				}
+				}*/
 			}
 			else {
 				crab_img = loadTexture("./assets/crab_down.png");
-				for (int i = 0; i < MAX_NUM_NPC; i++) {
+				/*for (int i = 0; i < MAX_NUM_NPC; i++) {
 					drawTexture(crab_img, crabs[i].posX, crabs[i].posY);
-				}
+				}*/
 			}
 
 		drawStage(0, -1);
@@ -147,18 +147,18 @@ int collision_pc_gogildong(int dx, int dy) { // pc와 길동 충돌
 			}
 
 			for (int j = 0; j < MAX_NUM_NPC; j++) { // 길동 뒤에 바위가 있는 경우
-				if (rocks[j].arrX == gildongs[i].arrX + dx && rocks[j].arrY == gildongs[i].arrY + dy)
-
-					if (rocks[j].arrX == gildongs[i].arrX + dx && rocks[j].arrY == gildongs[i].arrY + dy) {
-						walkCnt--;
-						gildong_run(i); // 길동이 도망가는 에니메이션
-						gildongs[i].posX += dx * CELL_WIDTH * 1000;
-						gildongs[i].posY += dy * CELL_WIDTH * 1000;
-						gildongs[i].arrX += dx * 2;
-						gildongs[i].arrY += dy * 2;
-						return 1;
-					}
+				if (rocks[j].arrX == gildongs[i].arrX + dx && rocks[j].arrY == gildongs[i].arrY + dy) {
+					walkCnt--;
+					gildong_run(i); // 길동이 도망가는 에니메이션
+					gildongs[i].posX += dx * CELL_WIDTH * 1000;
+					gildongs[i].posY += dy * CELL_WIDTH * 1000;
+					gildongs[i].arrX += dx * 2;
+					gildongs[i].arrY += dy * 2;
+					return 1;
+				}
 			}
+
+
 			for (int j = 0; j < MAX_NUM_NPC; j++) {
 				if (door.arrX == gildongs[j].arrX + dx && door.arrY == gildongs[j].arrY + dy ) //상자 뒤에 길동
 					return 1;
