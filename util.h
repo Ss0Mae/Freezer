@@ -10,6 +10,7 @@ void gildong_run(int i);
 void pc_melting();
 void drawStage(int isGildongRun, int idx);
 void crabUpDown();
+void collision_pc_crab();
 
 int direction_flag = 1;
 int key_flag = 0;
@@ -50,6 +51,8 @@ int collision_pc_map(int dx, int dy) {
 int collision_pc_rock(int dx, int dy) {
 	for (int i = 0; i < MAX_NUM_NPC; i++) { // 바위를 순회하며 각각 pc와 충돌검사
 		if (rocks[i].arrX == pc.arrX + dx && rocks[i].arrY == pc.arrY + dy) {
+			collision_pc_crab();
+
 			if (maps[curStage][rocks[i].arrY + dy][rocks[i].arrX + dx] == 1) { // 바위 뒤에 벽이 있는 경우
 				return 1;
 			}
@@ -97,12 +100,10 @@ void pc_damage() {
 
 //pc 와 게 충돌
 void collision_pc_crab() {
-	printf("%d\n", walkForcrab);
 	for (int i = 0; i < MAX_NUM_NPC; i++) {
 
 		if (crabs[i].arrX == pc.arrX && crabs[i].arrY == pc.arrY) { // 게의위치와 pc의위치가 같다면
 			if (walkForcrab % 2 == 0 && (curStage == 5 || curStage == 4)) { // 올라와있는 게만 충돌처리
-				printf("충돌!\n");
 				walkCnt--;
 				pc_damage(); // pc가 붉은색으로 변함
 			}
@@ -112,9 +113,10 @@ void collision_pc_crab() {
 
 int collision_pc_gogildong(int dx, int dy) { // pc와 길동 충돌
 
-
 	for (int i = 0; i < MAX_NUM_NPC; i++) {
 		if (gildongs[i].arrX == pc.arrX + dx && gildongs[i].arrY == pc.arrY + dy) {
+			collision_pc_crab();
+
 			if (maps[curStage][gildongs[i].arrY + dy][gildongs[i].arrX + dx] == 1) { // 길동 뒤에 벽 (사라짐)
 				walkCnt--;
 				gildong_run(i); // 길동이 도망가는 에니메이션
@@ -249,6 +251,7 @@ void drawStage(int isGildongRun, int idx) {
 	}
 
 
+	// pc 그리기
 	drawTexture(pc_img, pc.posX, pc.posY);
 	if (walkCnt >= 0)
 		drawTexture(walkCnt_imgs[walkCnt], 60, 463);
@@ -266,6 +269,10 @@ void drawStage(int isGildongRun, int idx) {
 			drawTexture(gildong_img, gildongs[i].posX, gildongs[i].posY);
 		}
 	}
+
+	// 걸음수 그리기
+	if (walkCnt >= 0)
+		drawTexture(walkCnt_imgs[walkCnt], 136, 485);
 }
 
 void pc_melting() {
