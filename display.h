@@ -47,7 +47,7 @@ void loadImg() {
 	}
 
 
-	for (int i = 1; i <= 5; i++) {
+	for (int i = 1; i <= 9; i++) {
 		char path[50];
 		sprintf(path, "./assets/roundCnt_%d.png", i);
 		roundCnt_img[i] = loadTexture(path);
