@@ -103,16 +103,15 @@ void stage1_initPos() {
 void stage1() {
 
 	curStage = 1;
-
 	stage1_initPos();
 
 	while (1) {
 
 		SDL_RenderClear(renderer);
 
-		if (processKeyInput() == -1) { // R키 누르면 재시작
-			stage1();
-		}
+		if (processKeyInput() == -1)  // R키 누르면 재시작
+			stage1_initPos();
+
 		drawStage(0, -1);
 		SDL_RenderPresent(renderer);
 

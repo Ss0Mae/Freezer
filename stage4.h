@@ -150,14 +150,13 @@ void stage4() {
 
 		SDL_RenderClear(renderer);
 
-		if (processKeyInput() == -1) { // R키 누르면 재시작
-			stage4();
-		}
+		if (processKeyInput() == -1)  // R키 누르면 재시작
+			stage4_initPos();
+
 		drawStage(0, -1);
 		SDL_RenderPresent(renderer);
 
 		if (collision_pc_refrigerator()) {
-			printf("클리어");
 			gameClear();
 			break;
 		}

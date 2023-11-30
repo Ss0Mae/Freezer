@@ -165,9 +165,9 @@ void stage5() {
 	while (1) {
 		SDL_RenderClear(renderer);
 
-		if (processKeyInput() == -1) { // R키 누르면 재시작
-			stage5();
-		}
+		if (processKeyInput() == -1) // R키 누르면 재시작
+			stage5_initPos();
+
 
 		drawStage(0, -1);
 
