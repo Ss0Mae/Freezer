@@ -42,6 +42,8 @@ void stage5_initPos() {
 	shoe.arrX = -1;
 	shoe.arrY = -1;
 
+	walkForcrab = 45;
+
 	// --------------------- ÁÂÇ¥Âï±â ------------------------
 
 	// pc
@@ -150,7 +152,7 @@ void stage5_initPos() {
 
 
 	walkCnt = 41;
-	walkForcrab = 45;
+	
 }
 
 void stage5() {
