@@ -157,30 +157,21 @@ int collision_pc_gogildong(int dx, int dy) { // pc와 길동 충돌
 					return 1;
 				}
 			}
-			for (int j = 0; j < MAX_NUM_NPC; j++) { //길동뒤에 게가 있고 게가 나와있을때
-				if (crabs[j].arrX == gildongs[i].arrX + dx && crabs[j].arrY == gildongs[i].arrY + dy && (walkForcrab % 2 == 0 || curStage <= 3)) {
-					gildongs[i].posX += dx * CELL_WIDTH;
-					gildongs[i].posY += dy * CELL_WIDTH;
-					gildongs[i].arrX += dx;
-					gildongs[i].arrY += dy;
-					gildong_run(i); // 길동이 도망가는 에니메이션
-					gildongs[i].posX = -100;
-					gildongs[i].posY = -100;
-					gildongs[i].arrX = -1;
-					gildongs[i].arrY = -1;
-					return 1;
-				}
-			}
-			for (int j = 0; j < MAX_NUM_NPC; j++) { //길동뒤에 게가 있고 게가 나와있을때
-				if (crabs[j].arrX == gildongs[i].arrX  && crabs[j].arrY == gildongs[i].arrY  && (walkForcrab % 2 == 0 || curStage <= 3)) {
-					gildong_run(i); // 길동이 도망가는 에니메이션
-					gildongs[i].posX = -100;
-					gildongs[i].posY = -100;
-					gildongs[i].arrX = -1;
-					gildongs[i].arrY = -1;
-					return 1;
-				}
-			}
+			//for (int j = 0; j < MAX_NUM_NPC; j++) { //길동뒤에 게가 있고 게가 나와있을때
+			//	if (crabs[j].arrX == gildongs[i].arrX + dx && crabs[j].arrY == gildongs[i].arrY + dy && (walkForcrab % 2 == 0 || curStage <= 3)) {
+			//		gildongs[i].posX += dx * CELL_WIDTH;
+			//		gildongs[i].posY += dy * CELL_WIDTH;
+			//		gildongs[i].arrX += dx;
+			//		gildongs[i].arrY += dy;
+			//		gildong_run(i); // 길동이 도망가는 에니메이션
+			//		gildongs[i].posX = -100;
+			//		gildongs[i].posY = -100;
+			//		gildongs[i].arrX = -1;
+			//		gildongs[i].arrY = -1;
+			//		return 1;
+			//	}
+			//}
+	
 			if (door.arrX == gildongs[i].arrX + dx && door.arrY == gildongs[i].arrY + dy) { //상자 뒤에 길동
 				return 1;
 			}
@@ -200,35 +191,35 @@ int collision_pc_gogildong(int dx, int dy) { // pc와 길동 충돌
 	}
 	return 0;
 }
-
-/*추가된 부분 */
-void collision_gildong_crabs(int dx, int dy) {
-	for (int i = 0; i < MAX_NUM_NPC; i++) {
-		for (int j = 0; j < MAX_NUM_NPC; j++){ //길동뒤에 게가 있고 게가 나와있을때
-				if (crabs[j].arrX == gildongs[i].arrX + dx && crabs[j].arrY == gildongs[i].arrY + dy && (walkForcrab % 2 == 0 || curStage <= 3)) {
-					gildongs[i].posX += dx * CELL_WIDTH;
-					gildongs[i].posY += dy * CELL_WIDTH;
-					gildongs[i].arrX += dx;
-					gildongs[i].arrY += dy;
-					gildong_run(i); // 길동이 도망가는 에니메이션
-					gildongs[i].posX = -100;
-					gildongs[i].posY = -100;
-					gildongs[i].arrX = -1;
-					gildongs[i].arrY = -1;
-					return;
-				}
-				if (gildongs[i].arrX == crabs[j].arrX && gildongs[i].arrY == crabs[j].arrY)
-				{
-					gildong_run(i); // 길동이 도망가는 에니메이션
-					gildongs[i].posX = -100;
-					gildongs[i].posY = -100;
-					gildongs[i].arrX = -1;
-					gildongs[i].arrY = -1;
-					return;
-				}
-			}
-	}
-}
+//
+///*추가된 부분 */
+//void collision_gildong_crabs(int dx, int dy) {
+//	for (int i = 0; i < MAX_NUM_NPC; i++) {
+//		for (int j = 0; j < MAX_NUM_NPC; j++){ //길동뒤에 게가 있고 게가 나와있을때
+//				if (crabs[j].arrX == gildongs[i].arrX + dx && crabs[j].arrY == gildongs[i].arrY + dy && (walkForcrab % 2 == 0 || curStage <= 3)) {
+//					gildongs[i].posX += dx * CELL_WIDTH;
+//					gildongs[i].posY += dy * CELL_WIDTH;
+//					gildongs[i].arrX += dx;
+//					gildongs[i].arrY += dy;
+//					gildong_run(i); // 길동이 도망가는 에니메이션
+//					gildongs[i].posX = -100;
+//					gildongs[i].posY = -100;
+//					gildongs[i].arrX = -1;
+//					gildongs[i].arrY = -1;
+//					return;
+//				}
+//				if (gildongs[i].arrX == crabs[j].arrX && gildongs[i].arrY == crabs[j].arrY)
+//				{
+//					gildong_run(i); // 길동이 도망가는 에니메이션
+//					gildongs[i].posX = -100;
+//					gildongs[i].posY = -100;
+//					gildongs[i].arrX = -1;
+//					gildongs[i].arrY = -1;
+//					return;
+//				}
+//			}
+//	}
+//}
 /*추가된 부분 끝*/
 
 
@@ -445,7 +436,6 @@ int processKeyInput() {
 				if (collision_pc_gogildong(1, 0) == 1) break;
 				if (collision_pc_door(1, 0)) break;
 				if (collision_pc_rock(1, 0)) break;
-				//collision_gildong_crabs(1, 0);
 				walkCnt--;
 				pc.posX += CELL_WIDTH;
 				pc.arrX++;
@@ -460,7 +450,6 @@ int processKeyInput() {
 				if (collision_pc_gogildong(-1, 0)) break;
 				if (collision_pc_door(-1, 0)) break;
 				if (collision_pc_rock(-1, 0)) break;
-				//collision_gildong_crabs(-1, 0);
 				walkCnt--;
 				pc.posX -= CELL_WIDTH;
 				pc.arrX--;
@@ -474,7 +463,6 @@ int processKeyInput() {
 				if (collision_pc_gogildong(0, 1)) break;
 				if (collision_pc_door(0, 1)) break;
 				if (collision_pc_rock(0, 1)) break;
-				//collision_gildong_crabs(0, 1);
 				walkCnt--;
 				pc.posY += CELL_WIDTH;
 				pc.arrY++;
@@ -488,7 +476,6 @@ int processKeyInput() {
 				if (collision_pc_gogildong(0, -1)) break;
 				if (collision_pc_door(0, -1)) break;
 				if (collision_pc_rock(0, -1)) break;
-				//collision_gildong_crabs(0, 1);
 				walkCnt--;
 				pc.posY -= CELL_WIDTH;
 				pc.arrY--;

@@ -150,12 +150,12 @@ void stage5_initPos() {
 
 
 	walkCnt = 41;
+	walkForcrab = 45;
 }
 
 void stage5() {
 	
 	curStage = 5;
-	walkForcrab = 45;
 
 	crab_img = loadTexture("./assets/crab_down.png");
 
