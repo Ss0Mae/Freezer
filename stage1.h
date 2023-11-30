@@ -123,7 +123,7 @@ void stage1() {
 		if (walkCnt <= 0) {
 			pc_melting();
 			gameOver();
-			stage1();
+			stage1_initPos();
 		}
 	}
 }

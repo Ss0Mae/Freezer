@@ -166,7 +166,7 @@ void stage4() {
 		if (walkCnt <= 0) {
 			pc_melting();
 			gameOver();
-			stage4();
+			stage4_initPos();
 		}
 	}
 }
