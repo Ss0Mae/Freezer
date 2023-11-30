@@ -63,11 +63,11 @@ void loadImg() {
 void gameClear() {
 	drawTexture(game_clear_img, 0, 0);
 	SDL_RenderPresent(renderer);
-	Sleep(3000);
+	Sleep(1500);
 }
 
 void gameOver() {
 	drawTexture(game_over_img, 0, 0);
 	SDL_RenderPresent(renderer);
-	Sleep(3000);
+	Sleep(1500);
 }
