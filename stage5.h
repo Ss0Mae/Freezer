@@ -152,7 +152,8 @@ void stage5_initPos() {
 
 
 	walkCnt = 41;
-	
+	walkForcrab = 1;
+
 }
 
 void stage5() {

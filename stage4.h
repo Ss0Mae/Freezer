@@ -138,7 +138,7 @@ void stage4_initPos() {
 	key.arrY = pc.arrY + 4;
 
 	walkCnt = 25;
-	
+	walkForcrab = 0;
 }
 
 void stage4() {
