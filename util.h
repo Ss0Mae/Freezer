@@ -17,6 +17,7 @@ int key_flag = 0;
 
 
 void crabUpDown() {
+	walkForcrab--;
 
 	SDL_RenderClear(renderer);
 	if (curStage >= 4) {
@@ -372,7 +373,6 @@ int processKeyInput() {
 			case 1073741903: // right
 				direction_flag = 1;
 				if (collision_pc_map(1, 0)) break;
-				walkForcrab--;
 				crabUpDown();
 				if (collision_pc_gogildong(1, 0) == 1) break;
 				if (collision_pc_door(1, 0)) break;
@@ -386,7 +386,6 @@ int processKeyInput() {
 			case 1073741904: // left
 				direction_flag = 0;
 				if (collision_pc_map(-1, 0)) break;
-				walkForcrab--;
 				crabUpDown();
 				if (collision_pc_gogildong(-1, 0)) break;
 				if (collision_pc_door(-1, 0)) break;
@@ -399,7 +398,6 @@ int processKeyInput() {
 				break;
 			case 1073741905: // down
 				if (collision_pc_map(0, 1)) break;
-				walkForcrab--;
 				crabUpDown();
 				if (collision_pc_gogildong(0, 1)) break;
 				if (collision_pc_door(0, 1)) break;
@@ -412,7 +410,6 @@ int processKeyInput() {
 				break;
 			case 1073741906: // up
 				if (collision_pc_map(0, -1)) break;
-				walkForcrab--;
 				crabUpDown();
 				if (collision_pc_gogildong(0, -1)) break;
 				if (collision_pc_door(0, -1)) break;
