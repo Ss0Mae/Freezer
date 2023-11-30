@@ -138,6 +138,7 @@
     <ClInclude Include="stage1.h" />
     <ClInclude Include="stage2.h" />
     <ClInclude Include="stage3.h" />
+    <ClInclude Include="stage4.h" />
     <ClInclude Include="stage5.h" />
     <ClInclude Include="util.h" />
     <ClInclude Include="variable.h" />
