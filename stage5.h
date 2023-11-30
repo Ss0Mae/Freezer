@@ -150,25 +150,24 @@ void stage5_initPos() {
 
 
 	walkCnt = 41;
-	walkForcrab = 1;
+	walkForcrab = 0;
 
 }
 
 void stage5() {
 	
 	curStage = 5;
-
-	crab_img = loadTexture("./assets/crab_down.png");
-
-
 	stage5_initPos();
+	crabUpDown();
 
 	while (1) {
 		SDL_RenderClear(renderer);
 
-		if (processKeyInput() == -1) // R키 누르면 재시작
-			stage5_initPos();
 
+		if (processKeyInput() == -1) { // R키 누르면 재시작
+			stage5_initPos();
+			crabUpDown();
+		}
 
 		drawStage(0, -1);
 
@@ -183,6 +182,7 @@ void stage5() {
 		if (walkCnt <= 0) {
 			pc_melting();
 			gameOver();
+			crabUpDown();
 			stage5_initPos();
 
 		}

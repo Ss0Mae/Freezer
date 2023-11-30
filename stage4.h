@@ -137,7 +137,7 @@ void stage4_initPos() {
 	key.arrY = pc.arrY + 4;
 
 	walkCnt = 25;
-	walkForcrab = 0;
+	walkForcrab = 1;
 }
 
 void stage4() {
@@ -145,13 +145,16 @@ void stage4() {
 	curStage = 4;
 
 	stage4_initPos();
-
+	crabUpDown();
 	while (1) {
 
 		SDL_RenderClear(renderer);
 
-		if (processKeyInput() == -1)  // R키 누르면 재시작
+		if (processKeyInput() == -1) {  // R키 누르면 재시작
 			stage4_initPos();
+			crabUpDown();
+		}
+
 
 		drawStage(0, -1);
 		SDL_RenderPresent(renderer);
@@ -167,6 +170,7 @@ void stage4() {
 			pc_melting();
 			gameOver();
 			stage4_initPos();
+			crabUpDown();
 		}
 	}
 }
