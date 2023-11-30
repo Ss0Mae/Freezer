@@ -21,7 +21,7 @@ int main(int argc, char** argv) {
 
 	//stage1();
 	//stage2();
-	stage3();
+	//stage3();
 	stage4();
 	stage5();
 	
