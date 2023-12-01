@@ -10,7 +10,7 @@
 
 void stage4_initPos() {
 
-	// 게임에 쓰이는 NPC를 제외하고는 게임 화면의 바깥쪽에 그려줌
+	// NPC, 아이템 위치 초기화
 	for (int i = 0; i < MAX_NUM_NPC; i++) {
 		gildongs[i].posX = -100;
 		gildongs[i].posY = -100;
@@ -27,10 +27,23 @@ void stage4_initPos() {
 		crabs[i].arrX = -1;
 		crabs[i].arrY = -1;
 	}
+	key.posX = -100;
+	key.posY = -100;
+	key.arrX = -1;
+	key.arrY = -1;
+
+	door.posX = -100;
+	door.posY = -100;
+	door.arrX = -1;
+	door.arrY = -1;
+
 	shoe.posX = -100;
 	shoe.posY = -100;
 	shoe.arrX = -1;
 	shoe.arrY = -1;
+
+	// --------------------- 좌표찍기 ------------------------
+
 	// pc
 	pc.posX = 520;
 	pc.posY = 225;
@@ -124,22 +137,26 @@ void stage4_initPos() {
 	key.arrY = pc.arrY + 4;
 
 	walkCnt = 25;
+	walkForcrab = 1;
+	key_flag = 0;
 }
 
 void stage4() {
 
 	curStage = 4;
-	walkForcrab = 26;
 
 	stage4_initPos();
-
+	crabUpDown();
 	while (1) {
 
 		SDL_RenderClear(renderer);
 
-		if (processKeyInput() == -1) { // R키 누르면 재시작
-			stage4();
+		if (processKeyInput() == -1) {  // R키 누르면 재시작
+			stage4_initPos();
+			crabUpDown();
 		}
+
+
 		drawStage(0, -1);
 		SDL_RenderPresent(renderer);
 
@@ -153,7 +170,8 @@ void stage4() {
 		if (walkCnt <= 0) {
 			pc_melting();
 			gameOver();
-			stage4();
+			stage4_initPos();
+			crabUpDown();
 		}
 	}
 }

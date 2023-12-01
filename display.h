@@ -27,6 +27,8 @@ SDL_Texture* door_img;
 SDL_Texture* shoe_img;
 void loadImg() {
 
+	game_clear_img = loadTexture("./assets/game_clear.png");
+	game_over_img = loadTexture("./assets/game_over.png");
 	pc_img = loadTexture("./assets/pc_left.png");
 	refrigerator_img = loadTexture("./assets/refrigerator.png");
 	gildong_img = loadTexture("./assets/gildong.png");
@@ -41,6 +43,7 @@ void loadImg() {
 	map3_img = loadTexture("./assets/map3.png");
 	map4_img = loadTexture("./assets/map4.png");
 	map5_img = loadTexture("./assets/map5.png");
+
 
 	for (int i = 0; i <= 50; i++) {
 		char path[50];
@@ -58,15 +61,13 @@ void loadImg() {
 }
 
 void gameClear() {
-	game_clear_img = loadTexture("./assets/game_clear.png");
 	drawTexture(game_clear_img, 0, 0);
 	SDL_RenderPresent(renderer);
-	Sleep(3000);
+	Sleep(1500);
 }
 
 void gameOver() {
-	game_over_img = loadTexture("./assets/game_over.png");
 	drawTexture(game_over_img, 0, 0);
 	SDL_RenderPresent(renderer);
-	Sleep(3000);
+	Sleep(1500);
 }
