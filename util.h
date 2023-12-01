@@ -44,7 +44,7 @@ int collision_pc_map(int dx, int dy) {
 int collision_pc_rock(int dx, int dy) {
 	for (int i = 0; i < MAX_NUM_NPC; i++) { // 바위를 순회하며 각각 pc와 충돌검사
 		if (rocks[i].arrX == pc.arrX + dx && rocks[i].arrY == pc.arrY + dy) {
-			collision_pc_crab();
+
 
 			if (maps[curStage][rocks[i].arrY + dy][rocks[i].arrX + dx] == 1) { // 바위 뒤에 벽이 있는 경우
 				return 1;
@@ -71,6 +71,7 @@ int collision_pc_rock(int dx, int dy) {
 			rocks[i].arrY += dy;
 			walkCnt--;
 			crabUpDown();
+			collision_pc_crab();
 			return 1;
 		}
 	}
