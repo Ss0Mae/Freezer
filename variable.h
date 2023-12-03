@@ -91,6 +91,22 @@ typedef struct Shoe {
 	int arrY;
 }Shoe;
 
+typedef struct Poison {
+	int posX;
+	int posY;
+
+	int arrX;
+	int arrY;
+}Poison;
+
+typedef struct Shield {
+	int posX;
+	int posY;
+
+	int arrX;
+	int arrY;
+}Shield;
+
 //남은 걸음수
 int walkCnt=23;
 
@@ -106,6 +122,8 @@ Crab crabs[MAX_NUM_NPC];
 Key key;
 Door door; 
 Shoe shoe; 
+Poison poison;
+Shield shield;
 
 int maps[10][15][15] = {
 	{{0}},

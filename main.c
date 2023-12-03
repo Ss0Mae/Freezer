@@ -21,9 +21,9 @@ int main(int argc, char** argv) {
 	loadImg();
 
 	/*stage1();
-	stage2();
+	stage2();*/
 	stage3();
-	stage4();*/
+	stage4();
 	//stage5();
 	stage6();
 	

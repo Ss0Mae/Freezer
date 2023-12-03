@@ -148,17 +148,12 @@ void stage6_initPos() {
 	key.arrY = pc.arrY + 0;
 
 
-	// ½Å¹ß
-	shoe.posX = pc.posX + CELL_WIDTH * 2;
-	shoe.posY = pc.posY + CELL_WIDTH * 4;
-	shoe.arrX = pc.arrX + 2;
-	shoe.arrY = pc.arrY + 4;
 
 
 	walkCnt = 24;
 	walkForcrab = 0;
 	key_flag = 0;
-
+	shield_flag = 0;
 }
 
 void stage6() {

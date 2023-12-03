@@ -16,7 +16,8 @@ void collision_pc_crab();
 
 int direction_flag = 1;
 int key_flag = 0;
-
+int poison_flag = 0;
+int shield_flag = 0;
 
 void crabUpDown() {
 	walkForcrab--;
@@ -102,9 +103,14 @@ void pc_damage() {
 
 //pc 와 게 충돌
 void collision_pc_crab() {
+	
 	for (int i = 0; i < MAX_NUM_NPC; i++) {
 
-		if (crabs[i].arrX == pc.arrX && crabs[i].arrY == pc.arrY) { // 게의위치와 pc의위치가 같다면
+		if (crabs[i].arrX == pc.arrX && crabs[i].arrY == pc.arrY ) { // 게의위치와 pc의위치가 같다면
+			if (shield_flag == 1) {
+				shield_flag = 0;
+				return;
+			}
 			if (walkForcrab % 2 == 0 && (curStage >= 4)) { // 올라와있는 게만 충돌처리
 				walkCnt--;
 				pc_damage(); // pc가 붉은색으로 변함
@@ -118,6 +124,7 @@ void collision_pc_crab() {
 
 		}
 	}
+	
 }
 
 int collision_pc_gogildong(int dx, int dy) { // pc와 길동 충돌
@@ -248,6 +255,16 @@ void collision_pc_item() {
 		return;
 	}
 
+	// 쉴드 충돌
+	if (shield.arrX == pc.arrX && shield.arrY == pc.arrY) {
+		shield_flag = 1;
+		shield.arrX = -1;
+		shield.arrY = -1;
+		shield.posX = -100;
+		shield.posY = -100;
+		return;
+	}
+
 	// 신발 충돌
 	if (shoe.arrX == pc.arrX && shoe.arrY == pc.arrY) {
 		walkCnt += 2; // 걸음수 하나 증가
@@ -321,6 +338,7 @@ void drawStage(int isGildongRun, int idx) {
 
 	drawTexture(refrigerator_img, refrigerator.posX, refrigerator.posY);
 	drawTexture(key_img, key.posX, key.posY);
+	drawTexture(shield_img, shield.posX, shield.posY);
 	drawTexture(door_img, door.posX, door.posY);
 
 
