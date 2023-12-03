@@ -151,8 +151,9 @@ void stage5_initPos() {
 	shoe.arrY = pc.arrY + 4;
 
 
-	walkCnt = 41;
+	walkCnt = 42;
 	walkForcrab = 0;
+	key_flag = 0;
 
 }
 
