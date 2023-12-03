@@ -13,6 +13,9 @@ SDL_Texture* map2_img;
 SDL_Texture* map3_img;
 SDL_Texture* map4_img;
 SDL_Texture* map5_img;
+SDL_Texture* map6_img;
+SDL_Texture* map7_img;
+SDL_Texture* map8_img;
 SDL_Texture* refrigerator_img;
 SDL_Texture* gildong_img;
 SDL_Texture* gildong_run_img;
@@ -43,6 +46,9 @@ void loadImg() {
 	map3_img = loadTexture("./assets/map3.png");
 	map4_img = loadTexture("./assets/map4.png");
 	map5_img = loadTexture("./assets/map5.png");
+	map6_img = loadTexture("./assets/map6.png");
+	map7_img = loadTexture("./assets/map7.png");
+	map8_img = loadTexture("./assets/map8.png");
 
 
 	for (int i = 0; i <= 50; i++) {

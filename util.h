@@ -299,6 +299,18 @@ void drawStage(int isGildongRun, int idx) {
 	case 5:
 		drawTexture(map5_img, 0, 0);
 		break;
+
+	case 6:
+		drawTexture(map6_img, 0, 0);
+		break;
+
+	case 7:
+		drawTexture(map7_img, 0, 0);
+		break;
+
+	case 8:
+		drawTexture(map8_img, 0, 0);
+		break;
 	}
 
 

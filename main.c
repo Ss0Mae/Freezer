@@ -11,6 +11,7 @@
 #include "stage3.h"
 #include "stage4.h"
 #include "stage5.h"
+#include "stage6.h"
 
 
 
@@ -23,7 +24,8 @@ int main(int argc, char** argv) {
 	stage2();
 	stage3();
 	stage4();*/
-	stage5();
+	//stage5();
+	stage6();
 	
 	closeAll(); // SDL 메모리 해제
 	return 0;
