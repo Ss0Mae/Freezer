@@ -151,7 +151,8 @@ void stage3() {
 		if (walkCnt <= 0) {
 			pc_melting();
 			gameOver();
-			stage3();
+			stage3_initPos();
+
 		}
 	}
 }

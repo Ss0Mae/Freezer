@@ -76,6 +76,7 @@ int collision_pc_rock(int dx, int dy) {
 			rocks[i].arrX += dx;
 			rocks[i].arrY += dy;
 			walkCnt--;
+			crabUpDown();
 			return 1;
 		}
 	}
@@ -122,6 +123,7 @@ int collision_pc_gogildong(int dx, int dy) { // pc와 길동 충돌
 
 	for (int i = 0; i < MAX_NUM_NPC; i++) {
 		if (gildongs[i].arrX == pc.arrX + dx && gildongs[i].arrY == pc.arrY + dy) {
+			crabUpDown();
 			collision_pc_crab();
 
 			if (maps[curStage][gildongs[i].arrY + dy][gildongs[i].arrX + dx] == 1) { // 길동 뒤에 벽 (사라짐)
@@ -157,6 +159,7 @@ int collision_pc_gogildong(int dx, int dy) { // pc와 길동 충돌
 
 					return 1;
 				}
+
 			}
 			//for (int j = 0; j < MAX_NUM_NPC; j++) { //길동뒤에 게가 있고 게가 나와있을때
 			//	if (crabs[j].arrX == gildongs[i].arrX + dx && crabs[j].arrY == gildongs[i].arrY + dy && (walkForcrab % 2 == 0 || curStage <= 3)) {
@@ -266,6 +269,7 @@ int collision_pc_door(int dx, int dy) {
 			door.posY = -100;
 			door.arrX = -1;
 			door.arrY = -1;
+			crabUpDown();
 			return 0;
 		}
 	}
@@ -432,10 +436,10 @@ int processKeyInput() {
 			case 1073741903: // right
 				direction_flag = 1;
 				if (collision_pc_map(1, 0)) break;
-				crabUpDown();
 				if (collision_pc_gogildong(1, 0) == 1) break;
 				if (collision_pc_door(1, 0)) break;
 				if (collision_pc_rock(1, 0)) break;
+				crabUpDown();
 				walkCnt--;
 				pc.posX += CELL_WIDTH;
 				pc.arrX++;
@@ -445,10 +449,10 @@ int processKeyInput() {
 			case 1073741904: // left
 				direction_flag = 0;
 				if (collision_pc_map(-1, 0)) break;
-				crabUpDown();
 				if (collision_pc_gogildong(-1, 0)) break;
 				if (collision_pc_door(-1, 0)) break;
 				if (collision_pc_rock(-1, 0)) break;
+				crabUpDown();
 				walkCnt--;
 				pc.posX -= CELL_WIDTH;
 				pc.arrX--;
@@ -457,10 +461,10 @@ int processKeyInput() {
 				break;
 			case 1073741905: // down
 				if (collision_pc_map(0, 1)) break;
-				crabUpDown();
 				if (collision_pc_gogildong(0, 1)) break;
 				if (collision_pc_door(0, 1)) break;
 				if (collision_pc_rock(0, 1)) break;
+				crabUpDown();
 				walkCnt--;
 				pc.posY += CELL_WIDTH;
 				pc.arrY++;
@@ -469,10 +473,10 @@ int processKeyInput() {
 				break;
 			case 1073741906: // up
 				if (collision_pc_map(0, -1)) break;
-				crabUpDown();
 				if (collision_pc_gogildong(0, -1)) break;
 				if (collision_pc_door(0, -1)) break;
 				if (collision_pc_rock(0, -1)) break;
+				crabUpDown();
 				walkCnt--;
 				pc.posY -= CELL_WIDTH;
 				pc.arrY--;

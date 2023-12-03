@@ -151,7 +151,7 @@ void stage2() {
 
 			pc_melting();
 			gameOver();
-			stage2();
+			stage2_initPos();
 		}
 	}
 }
