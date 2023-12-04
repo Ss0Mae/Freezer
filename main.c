@@ -26,8 +26,9 @@ int main(int argc, char** argv) {
 	stage3();
 	stage4();
 	stage5();
-	stage6();*/
-	stage7();
+	stage6();
+	stage7();*/
+	stage8();
 	
 	closeAll(); // SDL 메모리 해제
 	return 0;

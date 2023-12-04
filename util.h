@@ -91,7 +91,6 @@ int collision_pc_rock(int dx, int dy) {
 void pc_damage() {
 
 	SDL_RenderClear(renderer);
-
 	// pc의 색이 변함
 	pc_img = direction_flag == 1 ? loadTexture("./assets/pc_right_damage.png") : loadTexture("./assets/pc_left_damage.png");
 	drawStage(0, -1);
