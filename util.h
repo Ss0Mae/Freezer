@@ -544,5 +544,7 @@ int processKeyInput() {
 	}
 		SDL_PollEvent(&event);
 		pc_img = direction_flag == 1 ? loadTexture("./assets/pc_right.png") : loadTexture("./assets/pc_left.png");
+		if (direction_flag == 1 && shield_flag == 1) pc_img = loadTexture("./assets/pc_right_shield.png");
+		else if (direction_flag == 0 && shield_flag == 1) pc_img = loadTexture("./assets/pc_left_shield.png");
 		return 1;
 }
