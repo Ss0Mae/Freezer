@@ -13,15 +13,16 @@ void pc_melting();
 void drawStage(int isGildongRun, int idx);
 void crabUpDown();
 void collision_pc_crab();
+void pc_damage();
 
 int direction_flag = 1;
 int key_flag = 0;
 int poison_flag = 0;
 int shield_flag = 0;
+int poison_cnt = 0;
 
 void crabUpDown() {
 	walkForcrab--;
-
 	SDL_RenderClear(renderer);
 	if (curStage >= 4) {
 		// 게가 올라오고 내려오고
@@ -46,7 +47,17 @@ int collision_pc_map(int dx, int dy) {
 	return 0;
 }
 
-
+void pc_poison() {
+	if (poison_cnt == 3 || poison_cnt == 6) {
+		walkCnt--;
+		pc_damage(); // pc가 붉은색으로 변함
+		if (poison_cnt == 6) {
+			poison_cnt = 0;
+			poison_flag = 0;
+		}
+		return;
+	}
+}
 // pc와 바위 충돌
 int collision_pc_rock(int dx, int dy) {
 	for (int i = 0; i < MAX_NUM_NPC; i++) { // 바위를 순회하며 각각 pc와 충돌검사
@@ -261,6 +272,16 @@ void collision_pc_item() {
 		shield.arrY = -1;
 		shield.posX = -100;
 		shield.posY = -100;
+		return;
+	}
+
+	// 독 충돌
+	if (poison.arrX == pc.arrX && poison.arrY == pc.arrY) {
+		poison_flag = 1;
+		poison.arrX = -1;
+		poison.arrY = -1;
+		poison.posX = -100;
+		poison.posY = -100;
 		return;
 	}
 
