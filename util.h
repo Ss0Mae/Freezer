@@ -60,6 +60,7 @@ void pc_poison() {
 		return;
 	}
 }
+
 // pc와 바위 충돌
 int collision_pc_rock(int dx, int dy) {
 	for (int i = 0; i < MAX_NUM_NPC; i++) { // 바위를 순회하며 각각 pc와 충돌검사
