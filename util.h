@@ -48,6 +48,8 @@ int collision_pc_map(int dx, int dy) {
 }
 
 void pc_poison() {
+	if (poison_flag == 1)
+		poison_cnt++;
 	if (poison_cnt == 3 || poison_cnt == 6) {
 		walkCnt--;
 		pc_damage(); // pc가 붉은색으로 변함
@@ -88,6 +90,7 @@ int collision_pc_rock(int dx, int dy) {
 			rocks[i].arrX += dx;
 			rocks[i].arrY += dy;
 			walkCnt--;
+			pc_poison();
 			crabUpDown();
 			collision_pc_crab();
 			return 1;
@@ -206,6 +209,7 @@ int collision_pc_gogildong(int dx, int dy) { // pc와 길동 충돌
 			gildongs[i].posY += dy * CELL_WIDTH;
 			gildongs[i].arrX += dx;
 			gildongs[i].arrY += dy;
+			pc_poison();
 			walkCnt--;
 			return 1;
 
@@ -307,6 +311,7 @@ int collision_pc_door(int dx, int dy) {
 			door.posY = -100;
 			door.arrX = -1;
 			door.arrY = -1;
+			pc_poison();
 			crabUpDown();
 			return 0;
 		}
@@ -358,6 +363,7 @@ void drawStage(int isGildongRun, int idx) {
 
 	drawTexture(refrigerator_img, refrigerator.posX, refrigerator.posY);
 	drawTexture(key_img, key.posX, key.posY);
+	drawTexture(poison_img, poison.posX, poison.posY);
 	drawTexture(shield_img, shield.posX, shield.posY);
 	drawTexture(door_img, door.posX, door.posY);
 
@@ -491,6 +497,7 @@ int processKeyInput() {
 				if (collision_pc_door(1, 0)) break;
 				if (collision_pc_rock(1, 0)) break;
 				crabUpDown();
+				pc_poison();
 				walkCnt--;
 				pc.posX += CELL_WIDTH;
 				pc.arrX++;
@@ -504,6 +511,7 @@ int processKeyInput() {
 				if (collision_pc_door(-1, 0)) break;
 				if (collision_pc_rock(-1, 0)) break;
 				crabUpDown();
+				pc_poison();
 				walkCnt--;
 				pc.posX -= CELL_WIDTH;
 				pc.arrX--;
@@ -516,6 +524,7 @@ int processKeyInput() {
 				if (collision_pc_door(0, 1)) break;
 				if (collision_pc_rock(0, 1)) break;
 				crabUpDown();
+				pc_poison();
 				walkCnt--;
 				pc.posY += CELL_WIDTH;
 				pc.arrY++;
@@ -528,6 +537,7 @@ int processKeyInput() {
 				if (collision_pc_door(0, -1)) break;
 				if (collision_pc_rock(0, -1)) break;
 				crabUpDown();
+				pc_poison();
 				walkCnt--;
 				pc.posY -= CELL_WIDTH;
 				pc.arrY--;

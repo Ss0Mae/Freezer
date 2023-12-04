@@ -37,6 +37,11 @@ void stage7_initPos() {
 	shield.posY = -100;
 	shield.arrX = -1;
 	shield.arrY = -1;
+
+	poison.posX = -100;
+	poison.posY = -100;
+	poison.arrX = -1;
+	poison.arrY = -1;
 	// --------------------- ÁÂÇ¥Âï±â ------------------------
 
 	// pc
@@ -150,6 +155,8 @@ void stage7_initPos() {
 	walkForcrab = 0;
 	key_flag = 0;
 	shield_flag = 0;
+	poison_flag = 0;
+	poison_cnt = 0;
 }
 
 void stage7() {

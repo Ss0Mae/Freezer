@@ -42,6 +42,11 @@ void stage2_initPos() {
 	shoe.arrX = -1;
 	shoe.arrY = -1;
 
+	poison.posX = -100;
+	poison.posY = -100;
+	poison.arrX = -1;
+	poison.arrY = -1;
+
 	// --------------------- ÁÂÇ¥Âï±â ------------------------
 
 	// pc

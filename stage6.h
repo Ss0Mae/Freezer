@@ -33,6 +33,11 @@ void stage6_initPos() {
 	shoe.arrX = -1;
 	shoe.arrY = -1;
 
+	poison.posX = -100;
+	poison.posY = -100;
+	poison.arrX = -1;
+	poison.arrY = -1;
+
 
 	// --------------------- ÁÂÇ¥Âï±â ------------------------
 
@@ -154,6 +159,8 @@ void stage6_initPos() {
 	walkForcrab = 0;
 	key_flag = 0;
 	shield_flag = 0;
+	poison_flag = 0;
+	poison_cnt = 0;
 }
 
 void stage6() {
