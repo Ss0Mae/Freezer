@@ -28,6 +28,7 @@ SDL_Texture* crab_img;
 SDL_Texture* key_img;
 SDL_Texture* door_img;
 SDL_Texture* shoe_img;
+SDL_Texture* bulkup_img;
 SDL_Texture* poison_img;
 SDL_Texture* shield_img;
 SDL_Texture* bulkup_img;
@@ -46,6 +47,7 @@ void loadImg() {
 	shoe_img = loadTexture("./assets/shoe.png");
 	poison_img = loadTexture("./assets/poison.png");
 	shield_img = loadTexture("./assets/shield.png");
+	bulkup_img = loadTexture("./assets/bulkup.png");
 	map1_img = loadTexture("./assets/map1.png");
 	map2_img = loadTexture("./assets/map2.png");
 	map3_img = loadTexture("./assets/map3.png");

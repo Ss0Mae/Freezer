@@ -47,6 +47,17 @@ void stage1_initPos() {
 	poison.arrX = -1;
 	poison.arrY = -1;
 
+	shield.posX = -100;
+	shield.posY = -100;
+	shield.arrX = -1;
+	shield.arrY = -1;
+
+	bulkup.posX = -100;
+	bulkup.posY = -100;
+	bulkup.arrX = -1;
+	bulkup.arrY = -1;
+
+
 	// --------------------- ÁÂÇ¥Âï±â ------------------------
 
 	// pc
@@ -102,7 +113,14 @@ void stage1_initPos() {
 	refrigerator.arrX = pc.arrX + 1;
 	refrigerator.arrY = pc.arrY + 5;
 
+	bulkup.posX = pc.posX - CELL_WIDTH * 1;
+	bulkup.posY = pc.posY + CELL_WIDTH * 0;
+	bulkup.arrX = pc.arrX - 1;
+	bulkup.arrY = pc.arrY + 0;
+
 	walkCnt = 24;
+	bulkup_flag = 0;
+	bulkup_cnt = 0;
 }
 
 void stage1() {

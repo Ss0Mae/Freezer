@@ -47,6 +47,11 @@ void stage2_initPos() {
 	poison.arrX = -1;
 	poison.arrY = -1;
 
+	bulkup.posX = -100;
+	bulkup.posY = -100;
+	bulkup.arrX = -1;
+	bulkup.arrY = -1;
+
 	// --------------------- ÁÂÇ¥Âï±â ------------------------
 
 	// pc
@@ -128,6 +133,8 @@ void stage2_initPos() {
 	crabs[5].arrX = pc.arrX + 5;
 	crabs[5].arrY = pc.arrY - 1;
 	walkCnt = 26;
+	bulkup_flag = 0;
+	bulkup_cnt = 0;
 }
 
 void stage2() {

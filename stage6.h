@@ -33,11 +33,20 @@ void stage6_initPos() {
 	shoe.arrX = -1;
 	shoe.arrY = -1;
 
+	shield.posX = -100;
+	shield.posY = -100;
+	shield.arrX = -1;
+	shield.arrY = -1;
+
 	poison.posX = -100;
 	poison.posY = -100;
 	poison.arrX = -1;
 	poison.arrY = -1;
 
+	bulkup.posX = -100;
+	bulkup.posY = -100;
+	bulkup.arrX = -1;
+	bulkup.arrY = -1;
 
 	// --------------------- ÁÂÇ¥Âï±â ------------------------
 
@@ -78,10 +87,10 @@ void stage6_initPos() {
 	rocks[4].arrY = pc.arrY + 2;
 
 
-	rocks[5].posX = pc.posX + CELL_WIDTH * 4;
+	/*rocks[5].posX = pc.posX + CELL_WIDTH * 4;
 	rocks[5].posY = pc.posY + CELL_WIDTH * 2;
 	rocks[5].arrX = pc.arrX + 4;
-	rocks[5].arrY = pc.arrY + 2;
+	rocks[5].arrY = pc.arrY + 2;*/
 
 
 	rocks[6].posX = pc.posX + CELL_WIDTH * 5;
@@ -99,10 +108,10 @@ void stage6_initPos() {
 	rocks[8].arrX = pc.arrX + 3;
 	rocks[8].arrY = pc.arrY + 3;
 
-	rocks[9].posX = pc.posX + CELL_WIDTH * 5;
+	/*rocks[9].posX = pc.posX + CELL_WIDTH * 5;
 	rocks[9].posY = pc.posY + CELL_WIDTH * 3;
 	rocks[9].arrX = pc.arrX + 5;
-	rocks[9].arrY = pc.arrY + 3;
+	rocks[9].arrY = pc.arrY + 3;*/
 
 	rocks[10].posX = pc.posX + CELL_WIDTH * 6;
 	rocks[10].posY = pc.posY + CELL_WIDTH * 3;
@@ -119,7 +128,10 @@ void stage6_initPos() {
 	rocks[12].arrX = pc.arrX + 4;
 	rocks[12].arrY = pc.arrY + 4;
 
-
+	gildongs[0].posX = pc.posX + CELL_WIDTH * 5;
+	gildongs[0].posY = pc.posY + CELL_WIDTH * 3;
+	gildongs[0].arrX = pc.arrX + 5;
+	gildongs[0].arrY = pc.arrY + 3;
 	// ³ÃÀå°í
 	refrigerator.posX = pc.posX + CELL_WIDTH * 7;
 	refrigerator.posY = pc.posY + CELL_WIDTH * 2;
@@ -138,6 +150,16 @@ void stage6_initPos() {
 	crabs[1].arrX = pc.arrX + 3;
 	crabs[1].arrY = pc.arrY + 1;
 
+	crabs[2].posX = pc.posX + CELL_WIDTH * 4;
+	crabs[2].posY = pc.posY + CELL_WIDTH * 4;
+	crabs[2].arrX = pc.arrX + 4;
+	crabs[2].arrY = pc.arrY + 4;
+
+	crabs[3].posX = pc.posX + CELL_WIDTH * 5;
+	crabs[3].posY = pc.posY + CELL_WIDTH * 4;
+	crabs[3].arrX = pc.arrX + 5;
+	crabs[3].arrY = pc.arrY + 4;
+
 
 	// ÀÚ¹°¼è
 	door.posX = pc.posX + CELL_WIDTH * 5;
@@ -152,15 +174,20 @@ void stage6_initPos() {
 	key.arrX = pc.arrX + 2;
 	key.arrY = pc.arrY + 0;
 
+	poison.posX = pc.posX + CELL_WIDTH * 4;
+	poison.posY = pc.posY + CELL_WIDTH * 3;
+	poison.arrX = pc.arrX + 4;
+	poison.arrY = pc.arrY + 3;
 
 
-
-	walkCnt = 24;
-	walkForcrab = 0;
+	walkCnt = 23;
+	walkForcrab = 1;
 	key_flag = 0;
 	shield_flag = 0;
 	poison_flag = 0;
 	poison_cnt = 0;
+	bulkup_flag = 0;
+	bulkup_cnt = 0;
 }
 
 void stage6() {

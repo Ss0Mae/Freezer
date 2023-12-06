@@ -21,15 +21,16 @@ int main(int argc, char** argv) {
 	initAll(); // SDL 초기화
 	loadImg();
 
-	/*stage1();
-	stage2();*/
+	stage1();
+	//stage2();
 	//stage3();
-	stage4();
-	stage5();
-	stage6();
-	stage7();
-	stage8();
+	//stage4();
+	//stage5();
+	//stage6();
+	//stage7();
+	//stage8();
 	
 	closeAll(); // SDL 메모리 해제
 	return 0;
 }
+// 7스테이지에 쉴드하나랑 신발하나

@@ -107,6 +107,14 @@ typedef struct Shield {
 	int arrY;
 }Shield;
 
+typedef struct Bulkup {
+	int posX;
+	int posY;
+
+	int arrX;
+	int arrY;
+}Bulkup;
+
 //남은 걸음수
 int walkCnt=23;
 
@@ -124,6 +132,7 @@ Door door;
 Shoe shoe; 
 Poison poison;
 Shield shield;
+Bulkup bulkup;
 
 int maps[10][15][15] = {
 	{{0}},

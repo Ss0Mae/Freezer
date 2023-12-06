@@ -20,11 +20,13 @@ int key_flag = 0;
 int poison_flag = 0;
 int shield_flag = 0;
 int poison_cnt = 0;
+int bulkup_flag = 0;
+int bulkup_cnt = 0;
 
 void crabUpDown() {
 	walkForcrab--;
 	SDL_RenderClear(renderer);
-	if (curStage >= 4) {
+	if (curStage >= 4 && curStage!=6) {
 		// 게가 올라오고 내려오고
 		if (walkForcrab % 2 == 0) {
 			crab_img = loadTexture("./assets/crab_up.png");
@@ -60,6 +62,8 @@ void pc_poison() {
 		return;
 	}
 }
+
+
 // pc와 바위 충돌
 int collision_pc_rock(int dx, int dy) {
 	for (int i = 0; i < MAX_NUM_NPC; i++) { // 바위를 순회하며 각각 pc와 충돌검사
@@ -124,12 +128,12 @@ void collision_pc_crab() {
 				shield_flag = 0;
 				return;
 			}
-			if (walkForcrab % 2 == 0 && (curStage >= 4)) { // 올라와있는 게만 충돌처리
+			if (walkForcrab % 2 == 0 && (curStage >= 4 && curStage != 6)) { // 올라와있는 게만 충돌처리
 				walkCnt--;
 				pc_damage(); // pc가 붉은색으로 변함
 				return;
 			}
-			if (curStage <= 3) {
+			if (curStage <= 3 || curStage == 6) {
 				walkCnt--;
 				pc_damage(); // pc가 붉은색으로 변함
 				return;
@@ -182,27 +186,24 @@ int collision_pc_gogildong(int dx, int dy) { // pc와 길동 충돌
 				}
 
 			}
-			//for (int j = 0; j < MAX_NUM_NPC; j++) { //길동뒤에 게가 있고 게가 나와있을때
-			//	if (crabs[j].arrX == gildongs[i].arrX + dx && crabs[j].arrY == gildongs[i].arrY + dy && (walkForcrab % 2 == 0 || curStage <= 3)) {
-			//		gildongs[i].posX += dx * CELL_WIDTH;
-			//		gildongs[i].posY += dy * CELL_WIDTH;
-			//		gildongs[i].arrX += dx;
-			//		gildongs[i].arrY += dy;
-			//		gildong_run(i); // 길동이 도망가는 에니메이션
-			//		gildongs[i].posX = -100;
-			//		gildongs[i].posY = -100;
-			//		gildongs[i].arrX = -1;
-			//		gildongs[i].arrY = -1;
-			//		return 1;
-			//	}
-			//}
 	
 			if (door.arrX == gildongs[i].arrX + dx && door.arrY == gildongs[i].arrY + dy) { //상자 뒤에 길동
 				return 1;
 			}
 
 
-
+			if (bulkup_flag == 1) {
+				// 길동이랑 부딪히면 길동이 사라짐
+				walkCnt--;
+				gildong_run(i); // 길동이 도망가는 에니메이션
+				gildongs[i].posX = -100;
+				gildongs[i].posY = -100;
+				gildongs[i].arrX = -1;
+				gildongs[i].arrY = -1;
+				bulkup_cnt++;
+				if (bulkup_cnt % 3 == 0) bulkup_flag = 0;
+				return 1;
+			}
 
 			// 충돌한 길동은 한 칸 밀려야 함
 			gildongs[i].posX += dx * CELL_WIDTH;
@@ -217,36 +218,7 @@ int collision_pc_gogildong(int dx, int dy) { // pc와 길동 충돌
 	}
 	return 0;
 }
-//
-///*추가된 부분 */
-//void collision_gildong_crabs(int dx, int dy) {
-//	for (int i = 0; i < MAX_NUM_NPC; i++) {
-//		for (int j = 0; j < MAX_NUM_NPC; j++){ //길동뒤에 게가 있고 게가 나와있을때
-//				if (crabs[j].arrX == gildongs[i].arrX + dx && crabs[j].arrY == gildongs[i].arrY + dy && (walkForcrab % 2 == 0 || curStage <= 3)) {
-//					gildongs[i].posX += dx * CELL_WIDTH;
-//					gildongs[i].posY += dy * CELL_WIDTH;
-//					gildongs[i].arrX += dx;
-//					gildongs[i].arrY += dy;
-//					gildong_run(i); // 길동이 도망가는 에니메이션
-//					gildongs[i].posX = -100;
-//					gildongs[i].posY = -100;
-//					gildongs[i].arrX = -1;
-//					gildongs[i].arrY = -1;
-//					return;
-//				}
-//				if (gildongs[i].arrX == crabs[j].arrX && gildongs[i].arrY == crabs[j].arrY)
-//				{
-//					gildong_run(i); // 길동이 도망가는 에니메이션
-//					gildongs[i].posX = -100;
-//					gildongs[i].posY = -100;
-//					gildongs[i].arrX = -1;
-//					gildongs[i].arrY = -1;
-//					return;
-//				}
-//			}
-//	}
-//}
-/*추가된 부분 끝*/
+
 
 
 // pc와 냉장고 충돌 (스테이지 클리어)
@@ -256,19 +228,6 @@ int collision_pc_refrigerator() {
 	return 0;
 }
 
-//void collision_gildongs_crab() {
-//	int i = 0;
-//	for (int j = 0; j < 10; j++) {
-//		if (gildongs[i].arrX == crabs[j].arrX && gildongs[i].arrY == crabs[j].arrY && (curStage <= 3 || walkForcrab % 2 == 0)) {
-//			gildong_run(i); // 길동이 도망가는 에니메이션
-//			gildongs[i].posX = -100;
-//			gildongs[i].posY = -100;
-//			gildongs[i].arrX = -1;
-//			gildongs[i].arrY = -1;
-//		}
-//		i++;
-//	}
-//}
 
 // pc와 아이템 충돌검사
 void collision_pc_item() {
@@ -300,6 +259,16 @@ void collision_pc_item() {
 		poison.arrY = -1;
 		poison.posX = -100;
 		poison.posY = -100;
+		return;
+	}
+
+	// 벌크업 충돌
+	if (bulkup.arrX == pc.arrX && bulkup.arrY == pc.arrY) {
+		bulkup_flag = 1;
+		bulkup.arrX = -1;
+		bulkup.arrY = -1;
+		bulkup.posX = -100;
+		bulkup.posY = -100;
 		return;
 	}
 
@@ -380,7 +349,7 @@ void drawStage(int isGildongRun, int idx) {
 	drawTexture(poison_img, poison.posX, poison.posY);
 	drawTexture(shield_img, shield.posX, shield.posY);
 	drawTexture(door_img, door.posX, door.posY);
-
+	drawTexture(bulkup_img, bulkup.posX, bulkup.posY);
 
 	// 게 그리기
 	for (int i = 0; i < MAX_NUM_NPC; i++) {
@@ -568,7 +537,13 @@ int processKeyInput() {
 	}
 		SDL_PollEvent(&event);
 		pc_img = direction_flag == 1 ? loadTexture("./assets/pc_right.png") : loadTexture("./assets/pc_left.png");
-		if (direction_flag == 1 && shield_flag == 1) pc_img = loadTexture("./assets/pc_right_shield.png");
-		else if (direction_flag == 0 && shield_flag == 1) pc_img = loadTexture("./assets/pc_left_shield.png");
+		if (shield_flag == 1) {
+			if (direction_flag == 1) pc_img = loadTexture("./assets/pc_right_shield.png");
+			else pc_img = loadTexture("./assets/pc_left_shield.png");
+		}
+		if (bulkup_flag == 1) {
+			if (direction_flag == 1) pc_img = loadTexture("./assets/bulkup_right.png");
+			else pc_img = loadTexture("./assets/bulkup_left.png");
+		}
 		return 1;
 }

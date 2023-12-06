@@ -42,6 +42,11 @@ void stage8_initPos() {
 	poison.posY = -100;
 	poison.arrX = -1;
 	poison.arrY = -1;
+
+	bulkup.posX = -100;
+	bulkup.posY = -100;
+	bulkup.arrX = -1;
+	bulkup.arrY = -1;
 	// --------------------- ÁÂÇ¥Âï±â ------------------------
 
 	// pc
@@ -161,6 +166,8 @@ void stage8_initPos() {
 	shield_flag = 0;
 	poison_flag = 0;
 	poison_cnt = 0;
+	bulkup_flag = 0;
+	bulkup_cnt = 0;
 }
 
 void stage8() {
