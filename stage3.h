@@ -137,7 +137,7 @@ void stage3_initPos() {
 	key.arrX = pc.arrX - 7;
 	key.arrY = pc.arrY + 3;
 
-	shield.posX = pc.posX - CELL_WIDTH * 1;
+	/*shield.posX = pc.posX - CELL_WIDTH * 1;
 	shield.posY = pc.posY;
 	shield.arrX = pc.arrX - 1;
 	shield.arrY = pc.arrY;
@@ -145,7 +145,7 @@ void stage3_initPos() {
 	poison.posX = pc.posX - CELL_WIDTH * 2;
 	poison.posY = pc.posY + CELL_WIDTH * 0;
 	poison.arrX = pc.arrX - 2;
-	poison.arrY = pc.arrY + 0;
+	poison.arrY = pc.arrY + 0;*/
 
 	walkCnt = 35;
 	shield_flag = 0;

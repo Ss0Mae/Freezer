@@ -113,10 +113,6 @@ void stage1_initPos() {
 	refrigerator.arrX = pc.arrX + 1;
 	refrigerator.arrY = pc.arrY + 5;
 
-	bulkup.posX = pc.posX - CELL_WIDTH * 1;
-	bulkup.posY = pc.posY + CELL_WIDTH * 0;
-	bulkup.arrX = pc.arrX - 1;
-	bulkup.arrY = pc.arrY + 0;
 
 	walkCnt = 24;
 	bulkup_flag = 0;

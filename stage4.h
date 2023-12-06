@@ -152,10 +152,6 @@ void stage4_initPos() {
 	key.arrX = pc.arrX + 5;
 	key.arrY = pc.arrY + 4;
 
-	shield.posX = pc.posX + CELL_WIDTH * 0;
-	shield.posY = pc.posY + CELL_WIDTH * 1;
-	shield.arrX = pc.arrX + 0;
-	shield.arrY = pc.arrY + 1;
 
 	walkCnt = 25;
 	walkForcrab = 1;

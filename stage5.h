@@ -52,6 +52,10 @@ void stage5_initPos() {
 	bulkup.arrX = -1;
 	bulkup.arrY = -1;
 
+	shield.posX = -100;
+	shield.posY = -100;
+	shield.arrX = -1;
+	shield.arrY = -1;
 
 	// --------------------- ÁÂÇ¥Âï±â ------------------------
 

@@ -181,7 +181,7 @@ void stage6_initPos() {
 
 
 	walkCnt = 23;
-	walkForcrab = 1;
+	walkForcrab = 0;
 	key_flag = 0;
 	shield_flag = 0;
 	poison_flag = 0;
