@@ -52,7 +52,7 @@ void stage6_initPos() {
 
 	// pc
 	pc.posX = 500;
-	pc.posY = 180;
+	pc.posY = 160;
 	pc.arrX = 1;
 	pc.arrY = 1;
 
