@@ -80,10 +80,10 @@ void stage8_initPos() {
 	rocks[3].arrY = pc.arrY - 3;
 
 
-	rocks[4].posX = pc.posX - CELL_WIDTH * 1;
+	/*rocks[4].posX = pc.posX - CELL_WIDTH * 1;
 	rocks[4].posY = pc.posY - CELL_WIDTH * 2;
 	rocks[4].arrX = pc.arrX - 1;
-	rocks[4].arrY = pc.arrY - 2;
+	rocks[4].arrY = pc.arrY - 2;*/
 
 	rocks[5].posX = pc.posX + CELL_WIDTH * 2;
 	rocks[5].posY = pc.posY - CELL_WIDTH * 2;
@@ -135,6 +135,37 @@ void stage8_initPos() {
 	rocks[14].arrX = pc.arrX + 5;
 	rocks[14].arrY = pc.arrY + 0;
 
+	/*rocks[15].posX = pc.posX + CELL_WIDTH * 3;
+	rocks[15].posY = pc.posY - CELL_WIDTH * 3;
+	rocks[15].arrX = pc.arrX + 3;
+	rocks[15].arrY = pc.arrY - 3;*/
+
+	/*아이템 배치 구상 시작*/
+	/*crabs[0].posX = pc.posX + CELL_WIDTH * 8;
+	crabs[0].posY = pc.posY - CELL_WIDTH * 5;
+	crabs[0].arrX = pc.arrX + 8;
+	crabs[0].arrY = pc.arrY - 5;*/
+
+	gildongs[0].posX = pc.posX + CELL_WIDTH * 7;
+	gildongs[0].posY = pc.posY - CELL_WIDTH * 2;
+	gildongs[0].arrX = pc.arrX + 7;
+	gildongs[0].arrY = pc.arrY - 2;
+
+	gildongs[1].posX = pc.posX + CELL_WIDTH * 10;
+	gildongs[1].posY = pc.posY - CELL_WIDTH * 3;
+	gildongs[1].arrX = pc.arrX + 10;
+	gildongs[1].arrY = pc.arrY - 3;
+
+	gildongs[2].posX = pc.posX + CELL_WIDTH * 9;
+	gildongs[2].posY = pc.posY - CELL_WIDTH * 5;
+	gildongs[2].arrX = pc.arrX + 9;
+	gildongs[2].arrY = pc.arrY - 5;
+
+	bulkup.posX = pc.posX - CELL_WIDTH * 1;
+	bulkup.posY = pc.posY - CELL_WIDTH * 2;
+	bulkup.arrX = pc.arrX - 1;
+	bulkup.arrY = pc.arrY - 2;
+	/*아이템 배치 구상 끝*/
 
 	// 냉장고
 	refrigerator.posX = pc.posX + CELL_WIDTH * 3;
@@ -152,15 +183,15 @@ void stage8_initPos() {
 
 
 	// 키
-	key.posX = pc.posX + CELL_WIDTH * 7;
-	key.posY = pc.posY - CELL_WIDTH * 2;
-	key.arrX = pc.arrX + 7;
-	key.arrY = pc.arrY - 2;
+	key.posX = pc.posX + CELL_WIDTH * 6;
+	key.posY = pc.posY - CELL_WIDTH * 5;
+	key.arrX = pc.arrX + 6;
+	key.arrY = pc.arrY - 5;
 
 
 
 
-	walkCnt = 34;
+	walkCnt = 63; //34
 	walkForcrab = 0;
 	key_flag = 0;
 	shield_flag = 0;
@@ -200,7 +231,6 @@ void stage8() {
 			gameOver();
 			crabUpDown();
 			stage8_initPos();
-
 		}
 	}
 }

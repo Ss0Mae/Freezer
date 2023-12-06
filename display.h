@@ -59,8 +59,8 @@ void loadImg() {
 
 
 
-	for (int i = 0; i <= 50; i++) {
-		char path[50];
+	for (int i = 0; i <= 70; i++) {
+		char path[70];
 		sprintf(path, "./assets/walkCnt_%d.png", i);
 		walkCnt_imgs[i] = loadTexture(path);
 	}

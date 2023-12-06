@@ -201,7 +201,10 @@ int collision_pc_gogildong(int dx, int dy) { // pc와 길동 충돌
 				gildongs[i].arrX = -1;
 				gildongs[i].arrY = -1;
 				bulkup_cnt++;
-				if (bulkup_cnt % 3 == 0) bulkup_flag = 0;
+				if (bulkup_cnt % 3 == 0) {
+					bulkup_flag = 0;
+					pc.posX += 30;
+				}
 				return 1;
 			}
 
@@ -269,6 +272,7 @@ void collision_pc_item() {
 		bulkup.arrY = -1;
 		bulkup.posX = -100;
 		bulkup.posY = -100;
+		pc.posX -= 30;
 		return;
 	}
 

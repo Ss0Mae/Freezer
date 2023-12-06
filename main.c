@@ -1,4 +1,4 @@
-#define  _CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS
 #include <SDL.h>
 #include <SDL_image.h>
 #include <stdio.h>
@@ -21,14 +21,14 @@ int main(int argc, char** argv) {
 	initAll(); // SDL 초기화
 	loadImg();
 
-	stage1();
+	//stage1();
 	//stage2();
 	//stage3();
 	//stage4();
 	//stage5();
 	//stage6();
 	//stage7();
-	//stage8();
+	stage8();
 	
 	closeAll(); // SDL 메모리 해제
 	return 0;
