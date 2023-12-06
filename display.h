@@ -25,6 +25,7 @@ SDL_Texture* crab_img;
 SDL_Texture* key_img;
 SDL_Texture* door_img;
 SDL_Texture* shoe_img;
+
 void loadImg() {
 
 	game_clear_img = loadTexture("./assets/game_clear.png");

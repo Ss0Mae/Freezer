@@ -6,7 +6,7 @@
 #include <stdbool.h>
 
 #define CELL_WIDTH 70 // 게임판 한 칸의 너비
-#define MAX_NUM_NPC 30 // NPC 최대 개수
+#define MAX_NUM_NPC 15 // NPC 최대 개수
 
 // 현재 몇 스테이지인지 저장할 변수
 int curStage;

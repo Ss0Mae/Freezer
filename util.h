@@ -11,7 +11,7 @@ void pc_melting();
 void drawStage(int isGildongRun, int idx);
 void crabUpDown();
 void collision_pc_crab();
-
+//void collision_gildongs_crab();
 int direction_flag = 1;
 int key_flag = 0;
 
@@ -44,7 +44,7 @@ int collision_pc_map(int dx, int dy) {
 int collision_pc_rock(int dx, int dy) {
 	for (int i = 0; i < MAX_NUM_NPC; i++) { // 바위를 순회하며 각각 pc와 충돌검사
 		if (rocks[i].arrX == pc.arrX + dx && rocks[i].arrY == pc.arrY + dy) {
-			collision_pc_crab();
+
 
 			if (maps[curStage][rocks[i].arrY + dy][rocks[i].arrX + dx] == 1) { // 바위 뒤에 벽이 있는 경우
 				return 1;
@@ -71,6 +71,7 @@ int collision_pc_rock(int dx, int dy) {
 			rocks[i].arrY += dy;
 			walkCnt--;
 			crabUpDown();
+			collision_pc_crab();
 			return 1;
 		}
 	}
@@ -119,7 +120,7 @@ int collision_pc_gogildong(int dx, int dy) { // pc와 길동 충돌
 		if (gildongs[i].arrX == pc.arrX + dx && gildongs[i].arrY == pc.arrY + dy) {
 			crabUpDown();
 			collision_pc_crab();
-
+			//collision_gildongs_crab();
 			if (maps[curStage][gildongs[i].arrY + dy][gildongs[i].arrX + dx] == 1) { // 길동 뒤에 벽 (사라짐)
 				walkCnt--;
 				gildong_run(i); // 길동이 도망가는 에니메이션
@@ -184,6 +185,20 @@ int collision_pc_refrigerator() {
 		return 1;
 	return 0;
 }
+
+//void collision_gildongs_crab() {
+//	int i = 0;
+//	for (int j = 0; j < 10; j++) {
+//		if (gildongs[i].arrX == crabs[j].arrX && gildongs[i].arrY == crabs[j].arrY && (curStage <= 3 || walkForcrab % 2 == 0)) {
+//			gildong_run(i); // 길동이 도망가는 에니메이션
+//			gildongs[i].posX = -100;
+//			gildongs[i].posY = -100;
+//			gildongs[i].arrX = -1;
+//			gildongs[i].arrY = -1;
+//		}
+//		i++;
+//	}
+//}
 
 // pc와 아이템 충돌검사
 void collision_pc_item() {
