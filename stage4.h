@@ -42,6 +42,17 @@ void stage4_initPos() {
 	shoe.arrX = -1;
 	shoe.arrY = -1;
 
+	poison.posX = -100;
+	poison.posY = -100;
+	poison.arrX = -1;
+	poison.arrY = -1;
+
+	shield.posX = -100;
+	shield.posY = -100;
+	shield.arrX = -1;
+	shield.arrY = -1;
+
+	walkForcrab = 26;
 	// --------------------- ÁÂÇ¥Âï±â ------------------------
 
 	// pc
@@ -136,9 +147,17 @@ void stage4_initPos() {
 	key.arrX = pc.arrX + 5;
 	key.arrY = pc.arrY + 4;
 
+	shield.posX = pc.posX + CELL_WIDTH * 0;
+	shield.posY = pc.posY + CELL_WIDTH * 1;
+	shield.arrX = pc.arrX + 0;
+	shield.arrY = pc.arrY + 1;
+
 	walkCnt = 25;
 	walkForcrab = 1;
 	key_flag = 0;
+	shield_flag = 0;
+	poison_flag = 0;
+	poison_cnt = 0;
 }
 
 void stage4() {
