@@ -3,6 +3,7 @@
 #include <conio.h>
 #include <stdio.h>
 #include <stdlib.h>
+
 int collision_pc_map(int dx, int dy);
 int collision_pc_rock(int dx, int dy);
 int collision_pc_gogildong(int dx, int dy);
@@ -543,8 +544,7 @@ int processKeyInput() {
 				return -1;
 				break;
 			}
-	}
-		SDL_PollEvent(&event);
+
 		pc_img = direction_flag == 1 ? loadTexture("./assets/pc_right.png") : loadTexture("./assets/pc_left.png");
 		if (shield_flag == 1) {
 			if (direction_flag == 1) pc_img = loadTexture("./assets/pc_right_shield.png");
@@ -554,5 +554,8 @@ int processKeyInput() {
 			if (direction_flag == 1) pc_img = loadTexture("./assets/bulkup_right.png");
 			else pc_img = loadTexture("./assets/bulkup_left.png");
 		}
+	}
+		SDL_PollEvent(&event);
+		
 		return 1;
 }
