@@ -47,7 +47,15 @@ void stage5_initPos() {
 	poison.arrX = -1;
 	poison.arrY = -1;
 
-	walkForcrab = 45;
+	bulkup.posX = -100;
+	bulkup.posY = -100;
+	bulkup.arrX = -1;
+	bulkup.arrY = -1;
+
+	shield.posX = -100;
+	shield.posY = -100;
+	shield.arrX = -1;
+	shield.arrY = -1;
 
 	// --------------------- ÁÂÇ¥Âï±â ------------------------
 
@@ -162,6 +170,8 @@ void stage5_initPos() {
 	shield_flag = 0;
 	poison_flag = 0;
 	poison_cnt = 0;
+	bulkup_flag = 0;
+	bulkup_cnt = 0;
 }
 
 void stage5() {

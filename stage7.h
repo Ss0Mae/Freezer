@@ -42,6 +42,11 @@ void stage7_initPos() {
 	poison.posY = -100;
 	poison.arrX = -1;
 	poison.arrY = -1;
+
+	bulkup.posX = -100;
+	bulkup.posY = -100;
+	bulkup.arrX = -1;
+	bulkup.arrY = -1;
 	// --------------------- ÁÂÇ¥Âï±â ------------------------
 
 	// pc
@@ -61,10 +66,15 @@ void stage7_initPos() {
 	gildongs[1].arrX = pc.arrX - 2;
 	gildongs[1].arrY = pc.arrY - 1;
 
-	gildongs[2].posX = pc.posX - CELL_WIDTH * 3;
+	/*gildongs[2].posX = pc.posX - CELL_WIDTH * 3;
 	gildongs[2].posY = pc.posY + CELL_WIDTH * 0;
 	gildongs[2].arrX = pc.arrX - 3;
-	gildongs[2].arrY = pc.arrY + 0;
+	gildongs[2].arrY = pc.arrY + 0;*/
+
+	/*gildongs[3].posX = pc.posX - CELL_WIDTH * 1;
+	gildongs[3].posY = pc.posY - CELL_WIDTH * 2;
+	gildongs[3].arrX = pc.arrX - 1;
+	gildongs[3].arrY = pc.arrY - 2;*/
 
 	// ¹ÙÀ§
 	rocks[0].posX = pc.posX - CELL_WIDTH * 2;
@@ -119,20 +129,20 @@ void stage7_initPos() {
 	crabs[2].arrX = pc.arrX - 5;
 	crabs[2].arrY = pc.arrY + 2;
 
-	crabs[3].posX = pc.posX - CELL_WIDTH * 4;
+	/*crabs[3].posX = pc.posX - CELL_WIDTH * 4;
 	crabs[3].posY = pc.posY + CELL_WIDTH * 2;
 	crabs[3].arrX = pc.arrX - 4;
-	crabs[3].arrY = pc.arrY + 2;
+	crabs[3].arrY = pc.arrY + 2;*/
 
 	crabs[4].posX = pc.posX - CELL_WIDTH * 3;
 	crabs[4].posY = pc.posY + CELL_WIDTH * 2;
 	crabs[4].arrX = pc.arrX - 3;
 	crabs[4].arrY = pc.arrY + 2;
 
-	crabs[5].posX = pc.posX - CELL_WIDTH * 2;
-	crabs[5].posY = pc.posY + CELL_WIDTH * 2;
-	crabs[5].arrX = pc.arrX - 2;
-	crabs[5].arrY = pc.arrY + 2;
+	//crabs[5].posX = pc.posX - CELL_WIDTH * 2;
+	//crabs[5].posY = pc.posY + CELL_WIDTH * 2;
+	//crabs[5].arrX = pc.arrX - 2;
+	//crabs[5].arrY = pc.arrY + 2;
 
 
 	// ÀÚ¹°¼è
@@ -148,7 +158,15 @@ void stage7_initPos() {
 	key.arrX = pc.arrX - 4;
 	key.arrY = pc.arrY - 2;
 
+	shield.posX = pc.posX - CELL_WIDTH * 3;
+	shield.posY = pc.posY - CELL_WIDTH * 1;
+	shield.arrX = pc.arrX - 3;
+	shield.arrY = pc.arrY - 1;
 
+	shoe.posX = pc.posX - CELL_WIDTH * 3;
+	shoe.posY = pc.posY - CELL_WIDTH * 0;
+	shoe.arrX = pc.arrX - 3;
+	shoe.arrY = pc.arrY - 0;
 
 
 	walkCnt = 33;
@@ -157,6 +175,8 @@ void stage7_initPos() {
 	shield_flag = 0;
 	poison_flag = 0;
 	poison_cnt = 0;
+	bulkup_flag = 0;
+	bulkup_cnt = 0;
 }
 
 void stage7() {

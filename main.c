@@ -1,4 +1,4 @@
-#define  _CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS
 #include <SDL.h>
 #include <SDL_image.h>
 #include <stdio.h>
@@ -22,9 +22,9 @@ int main(int argc, char** argv) {
 	loadImg();
 
 	/*stage1();
-	stage2();*/
+	stage2();
 	stage3();
-	stage4();
+	stage4();*/
 	stage5();
 	stage6();
 	stage7();
@@ -33,3 +33,4 @@ int main(int argc, char** argv) {
 	closeAll(); // SDL 메모리 해제
 	return 0;
 }
+// 7스테이지에 쉴드하나랑 신발하나
