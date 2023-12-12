@@ -3,6 +3,7 @@
 #include <conio.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 int collision_pc_map(int dx, int dy);
 int collision_pc_rock(int dx, int dy);
@@ -15,6 +16,7 @@ void drawStage(int isGildongRun, int idx);
 void crabUpDown();
 void collision_pc_crab();
 void pc_damage();
+void getTime(clock_t startTime);
 
 int direction_flag = 1;
 int key_flag = 0;
@@ -387,11 +389,15 @@ void drawStage(int isGildongRun, int idx) {
 	// 신발 그리기
 	drawTexture(shoe_img, shoe.posX, shoe.posY);
 
-
 	// 걸음수 그리기
 	if (walkCnt >= 0)
-		drawTexture(walkCnt_imgs[walkCnt], 100, 463);
-	drawTexture(roundCnt_img[curStage], 1018, 463);
+		drawTexture(walkCnt_imgs[walkCnt], 90, 463);
+	drawTexture(roundCnt_img[curStage], 1028, 463);
+
+	// 남은시간
+	for (int i = 0; i <= curTime * 50 && curTime <= stageTime; i++) {
+		drawTexture(timegage_img, (500 + i) / 5, 100);
+	}
 
 }
 
@@ -558,4 +564,10 @@ int processKeyInput() {
 		SDL_PollEvent(&event);
 		
 		return 1;
+}
+
+
+void getTime(clock_t startTime) {
+	clock_t endTime = clock();
+	curTime = (double)(endTime - startTime) / CLOCKS_PER_SEC;
 }

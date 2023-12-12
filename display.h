@@ -31,7 +31,8 @@ SDL_Texture* shoe_img;
 SDL_Texture* bulkup_img;
 SDL_Texture* poison_img;
 SDL_Texture* shield_img;
-SDL_Texture* bulkup_img;
+SDL_Texture* timegage_img;
+
 void loadImg() {
 
 	game_clear_img = loadTexture("./assets/game_clear.png");
@@ -48,6 +49,7 @@ void loadImg() {
 	poison_img = loadTexture("./assets/poison.png");
 	shield_img = loadTexture("./assets/shield.png");
 	bulkup_img = loadTexture("./assets/bulkup.png");
+	timegage_img = loadTexture("./assets/timegage.png");
 	map1_img = loadTexture("./assets/map1.png");
 	map2_img = loadTexture("./assets/map2.png");
 	map3_img = loadTexture("./assets/map3.png");

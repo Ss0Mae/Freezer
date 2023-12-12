@@ -117,15 +117,17 @@ void stage1_initPos() {
 	walkCnt = 24;
 	bulkup_flag = 0;
 	bulkup_cnt = 0;
+	startTime = clock();
 }
 
 void stage1() {
+
 
 	curStage = 1;
 	stage1_initPos();
 
 	while (1) {
-
+		getTime(startTime);
 		SDL_RenderClear(renderer);
 
 		if (processKeyInput() == -1)  // R키 누르면 재시작
@@ -138,11 +140,12 @@ void stage1() {
 			gameClear();
 			break;
 		}
-
-		if (walkCnt <= 0) {
+		if (walkCnt <= 0 || curTime > stageTime) {
 			pc_melting();
 			gameOver();
 			stage1_initPos();
 		}
+
+
 	}
 }
