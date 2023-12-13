@@ -33,6 +33,7 @@ SDL_Texture* bulkup_img;
 SDL_Texture* poison_img;
 SDL_Texture* shield_img;
 SDL_Texture* timegage_img;
+SDL_Texture* timegage_red_img;
 SDL_Texture* timerBody_img;
 SDL_Texture* title_img;
 SDL_Texture* end_img;
@@ -54,6 +55,7 @@ void loadImg() {
 	shield_img = loadTexture("./assets/shield.png");
 	bulkup_img = loadTexture("./assets/bulkup.png");
 	timegage_img = loadTexture("./assets/timegage.png");
+	timegage_red_img = loadTexture("./assets/timegage_red.png");
 	timerBody_img = loadTexture("./assets/timerBody.png");
 	map1_img = loadTexture("./assets/map1.png");
 	map2_img = loadTexture("./assets/map2.png");

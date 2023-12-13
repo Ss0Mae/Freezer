@@ -26,6 +26,7 @@ int main(int argc, char** argv) {
 	initAll(); // SDL 초기화
 	loadImg();
 
+
 	title();
 	stage1();
 	stage2();
