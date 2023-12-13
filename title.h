@@ -30,28 +30,28 @@ void title() {
 	SDL_RenderPresent(renderer);
 
 	if (keyinputTitle() == 1) {
-		title_img = loadTexture("./assets/giudeScreen1.jpg");
+		title_img = loadTexture("./assets/guideScreen1.jpg");
 		SDL_RenderClear(renderer);
 		drawTexture(title_img, 0, 0);
 		SDL_RenderPresent(renderer);
 	}
 
 	if (keyinputTitle() == 1) {
-		title_img = loadTexture("./assets/giudeScreen2.jpg");
+		title_img = loadTexture("./assets/guideScreen2.jpg");
 		SDL_RenderClear(renderer);
 		drawTexture(title_img, 0, 0);
 		SDL_RenderPresent(renderer);
 	}
 
 	if (keyinputTitle() == 1) {
-		title_img = loadTexture("./assets/giudeScreen3.jpg");
+		title_img = loadTexture("./assets/guideScreen3.jpg");
 		SDL_RenderClear(renderer);
 		drawTexture(title_img, 0, 0);
 		SDL_RenderPresent(renderer);
 	}
 
 	if (keyinputTitle() == 1) {
-		title_img = loadTexture("./assets/giudeScreen4.jpg");
+		title_img = loadTexture("./assets/guideScreen4.jpg");
 		SDL_RenderClear(renderer);
 		drawTexture(title_img, 0, 0);
 		SDL_RenderPresent(renderer);
