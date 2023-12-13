@@ -3,6 +3,7 @@
 #include <conio.h>
 #include <stdio.h>
 #include <stdlib.h>
+
 int collision_pc_map(int dx, int dy);
 int collision_pc_rock(int dx, int dy);
 int collision_pc_gogildong(int dx, int dy);
@@ -26,7 +27,12 @@ int bulkup_cnt = 0;
 void crabUpDown() {
 	walkForcrab--;
 	SDL_RenderClear(renderer);
-	if (curStage >= 4 && curStage!=6) {
+	if (curStage == 6) {
+		crab_img = loadTexture("./assets/crab_up.png");
+		for (int i = 0; i < MAX_NUM_NPC; i++)
+			drawTexture(crab_img, crabs[i].posX, crabs[i].posY);
+	}
+	else if (curStage >= 4 ) {
 		// 게가 올라오고 내려오고
 		if (walkForcrab % 2 == 0) {
 			crab_img = loadTexture("./assets/crab_up.png");
@@ -538,8 +544,7 @@ int processKeyInput() {
 				return -1;
 				break;
 			}
-	}
-		SDL_PollEvent(&event);
+
 		pc_img = direction_flag == 1 ? loadTexture("./assets/pc_right.png") : loadTexture("./assets/pc_left.png");
 		if (shield_flag == 1) {
 			if (direction_flag == 1) pc_img = loadTexture("./assets/pc_right_shield.png");
@@ -549,5 +554,8 @@ int processKeyInput() {
 			if (direction_flag == 1) pc_img = loadTexture("./assets/bulkup_right.png");
 			else pc_img = loadTexture("./assets/bulkup_left.png");
 		}
+	}
+		SDL_PollEvent(&event);
+		
 		return 1;
 }
