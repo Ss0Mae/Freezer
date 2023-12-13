@@ -1,4 +1,8 @@
 #pragma once
+
+#pragma comment(lib, "winmm")
+#include <mmsystem.h>
+
 #include <Windows.h>
 #include <conio.h>
 #include <stdio.h>
@@ -18,7 +22,7 @@ void collision_pc_crab();
 void pc_damage();
 void getTime(clock_t startTime);
 
-int direction_flag = 1;
+int direction_flag = 0;
 int key_flag = 0;
 int poison_flag = 0;
 int shield_flag = 0;
@@ -400,8 +404,7 @@ void drawStage(int isGildongRun, int idx) {
 
 	// 타이머
 	drawTexture(timerBody_img, 100, 90);
-	getTime(startTime);
-
+	if(walkCnt > 0) getTime(startTime);
 	for (int i = 1; i <= (385 - 120) * (curTime / stageTime); i += 1) { // 120 ~ 385 : 게이지의 시작 ~ 끝 좌표
 		if (120 + i > 385) continue;
 		drawTexture(timegage_img, 120 + i, 105);
@@ -451,6 +454,9 @@ void pc_melting() {
 
 
 void gildong_run(int i) {
+
+	PlaySound((TEXT("./assets/run.wav")), NULL, SND_ASYNC || SND_ASYNC);
+
 
 	SDL_RenderClear(renderer);
 	gildong_run_img = loadTexture("./assets/gildong_run_1.png");
@@ -514,6 +520,7 @@ int processKeyInput() {
 				crabUpDown();
 				pc_poison();
 				walkCnt--;
+				PlaySound((TEXT("./assets/pcMove.wav")), NULL, SND_ASYNC || SND_ASYNC);
 				pc.posX += CELL_WIDTH;
 				pc.arrX++;
 				collision_pc_crab();
@@ -528,6 +535,7 @@ int processKeyInput() {
 				crabUpDown();
 				pc_poison();
 				walkCnt--;
+				PlaySound((TEXT("./assets/pcMove.wav")), NULL, SND_ASYNC || SND_ASYNC);
 				pc.posX -= CELL_WIDTH;
 				pc.arrX--;
 				collision_pc_crab();
@@ -541,6 +549,7 @@ int processKeyInput() {
 				crabUpDown();
 				pc_poison();
 				walkCnt--;
+				PlaySound((TEXT("./assets/pcMove.wav")), NULL, SND_ASYNC || SND_ASYNC);
 				pc.posY += CELL_WIDTH;
 				pc.arrY++;
 				collision_pc_crab();
@@ -554,6 +563,7 @@ int processKeyInput() {
 				crabUpDown();
 				pc_poison();
 				walkCnt--;
+				PlaySound((TEXT("./assets/pcMove.wav")), NULL, SND_ASYNC || SND_ASYNC);
 				pc.posY -= CELL_WIDTH;
 				pc.arrY--;
 				collision_pc_crab();

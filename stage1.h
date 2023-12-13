@@ -5,7 +5,6 @@
 #include <stdbool.h>
 #include "util.h"
 #include "sdl.h"
-#include "stage2.h"
 
 
 void stage1_initPos() {
@@ -119,6 +118,7 @@ void stage1_initPos() {
 	bulkup_cnt = 0;
 	startTime = clock();
 }
+
 
 void stage1() {
 

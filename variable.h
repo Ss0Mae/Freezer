@@ -6,6 +6,8 @@
 #include <stdbool.h>
 #include <time.h>
 
+
+
 #define CELL_WIDTH 70 // 게임판 한 칸의 너비
 #define MAX_NUM_NPC 20 // NPC 최대 개수
 
