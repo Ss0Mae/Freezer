@@ -26,6 +26,8 @@ int poison_cnt = 0;
 int bulkup_flag = 0;
 int bulkup_cnt = 0;
 
+
+
 void crabUpDown() {
 	walkForcrab--;
 	SDL_RenderClear(renderer);
@@ -122,6 +124,8 @@ void pc_damage() {
 	drawStage(0, -1);
 	SDL_RenderPresent(renderer);
 	Sleep(150);
+	for (int i = 0; i < 10000; i++) SDL_PollEvent(&trashEvent);
+
 	pc_img = direction_flag == 1 ? loadTexture("./assets/pc_right.png") : loadTexture("./assets/pc_left.png");
 
 }
@@ -158,7 +162,7 @@ int collision_pc_gogildong(int dx, int dy) { // pc와 길동 충돌
 		if (gildongs[i].arrX == pc.arrX + dx && gildongs[i].arrY == pc.arrY + dy) {
 			crabUpDown();
 			collision_pc_crab();
-			//collision_gildongs_crab();
+			
 			if (maps[curStage][gildongs[i].arrY + dy][gildongs[i].arrX + dx] == 1) { // 길동 뒤에 벽 (사라짐)
 				walkCnt--;
 				gildong_run(i); // 길동이 도망가는 에니메이션
@@ -394,10 +398,14 @@ void drawStage(int isGildongRun, int idx) {
 		drawTexture(walkCnt_imgs[walkCnt], 90, 463);
 	drawTexture(roundCnt_img[curStage], 1028, 463);
 
-	// 남은시간
-	for (int i = 0; i <= curTime * 50 && curTime <= stageTime; i++) {
-		drawTexture(timegage_img, (500 + i) / 5, 100);
+	// 타이머
+	drawTexture(timerBody_img, 100, 90);
+	getTime(startTime);
+
+	for (int i = 0; i < (380 - 120) / stageTime * curTime   && curTime <= stageTime; i+= 1) {
+		drawTexture(timegage_img, 120 + i, 105); // 600  / 5 ~ 2000 / 5
 	}
+
 
 }
 
@@ -409,12 +417,15 @@ void pc_melting() {
 		drawStage(0, -1);
 		SDL_RenderPresent(renderer);
 		Sleep(1000);
+		for (int i = 0; i < 10000; i++) SDL_PollEvent(&trashEvent);
 
 		SDL_RenderClear(renderer);
 		pc_img = loadTexture("./assets/pc_right_melt3.png");
 		drawStage(0, -1);
 		SDL_RenderPresent(renderer);
 		Sleep(1000);
+		for (int i = 0; i < 10000; i++) SDL_PollEvent(&trashEvent);
+
 	}
 	else {
 		SDL_RenderClear(renderer);
@@ -422,14 +433,19 @@ void pc_melting() {
 		drawStage(0, -1);
 		SDL_RenderPresent(renderer);
 		Sleep(1000);
+		for (int i = 0; i < 10000; i++) SDL_PollEvent(&trashEvent);
+
 
 		SDL_RenderClear(renderer);
 		pc_img = loadTexture("./assets/pc_left_melt3.png");
 		drawStage(0, -1);
 		SDL_RenderPresent(renderer);
 		Sleep(1000);
+		for (int i = 0; i < 10000; i++) SDL_PollEvent(&trashEvent);
+
 	}
 	pc_img = loadTexture("./assets/pc_left.png");
+	
 }
 
 
@@ -441,49 +457,48 @@ void gildong_run(int i) {
 	drawTexture(gildong_run_img, gildongs[i].posX, gildongs[i].posY);
 	SDL_RenderPresent(renderer);
 	Sleep(130);
-	while (_kbhit()) {
-		int k = _getch();
-	}
+	for (int i = 0; i < 10000; i++) SDL_PollEvent(&trashEvent);
+
+	
 	SDL_RenderClear(renderer);
 	gildong_run_img = loadTexture("./assets/gildong_run_2.png");
 	drawStage(1, i);
 	drawTexture(gildong_run_img, gildongs[i].posX, gildongs[i].posY);
 	SDL_RenderPresent(renderer);
 	Sleep(130);
-	while (_kbhit()) {
-		int k = _getch();
-	}
+	for (int i = 0; i < 10000; i++) SDL_PollEvent(&trashEvent);
+
+	
 	SDL_RenderClear(renderer);
 	gildong_run_img = loadTexture("./assets/gildong_run_3.png");
 	drawStage(1, i);
 	drawTexture(gildong_run_img, gildongs[i].posX, gildongs[i].posY);
 	SDL_RenderPresent(renderer);
 	Sleep(130);
-	while (_kbhit()) {
-		int k = _getch();
-	}
+	for (int i = 0; i < 10000; i++) SDL_PollEvent(&trashEvent);
+
+	
 	SDL_RenderClear(renderer);
 	gildong_run_img = loadTexture("./assets/gildong_run_4.png");
 	drawStage(1, i);
 	drawTexture(gildong_run_img, gildongs[i].posX, gildongs[i].posY);
 	SDL_RenderPresent(renderer);
 	Sleep(130);
-	while (_kbhit()) {
-		int k = _getch();
-	}
+	for (int i = 0; i < 10000; i++) SDL_PollEvent(&trashEvent);
+
 	SDL_RenderClear(renderer);
 	gildong_run_img = loadTexture("./assets/gildong_run_5.png");
 	drawStage(1, i);
 	drawTexture(gildong_run_img, gildongs[i].posX, gildongs[i].posY);
 	SDL_RenderPresent(renderer);
 	Sleep(130);
-	while (_kbhit()) {
-		int k = _getch();
-	}
+	for (int i = 0; i < 10000; i++) SDL_PollEvent(&trashEvent);
+
+	
+
 }
 
 
-SDL_Event event;
 int processKeyInput() {
 	if (SDL_PollEvent(&event)) {
 
@@ -561,7 +576,7 @@ int processKeyInput() {
 			else pc_img = loadTexture("./assets/bulkup_left.png");
 		}
 	}
-		SDL_PollEvent(&event);
+
 		
 		return 1;
 }

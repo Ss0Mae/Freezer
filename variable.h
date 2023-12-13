@@ -18,7 +18,7 @@ int walkForcrab;
 // ½Ã°£
 clock_t startTime;
 double curTime;
-double stageTime = 3;
+double stageTime = 30;
 
 typedef struct Pc {
 
@@ -249,3 +249,6 @@ int maps[10][20][20] = {
 
 };
 
+
+SDL_Event event;
+SDL_Event trashEvent;

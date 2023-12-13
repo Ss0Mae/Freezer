@@ -127,7 +127,7 @@ void stage1() {
 	stage1_initPos();
 
 	while (1) {
-		getTime(startTime);
+
 		SDL_RenderClear(renderer);
 
 		if (processKeyInput() == -1)  // R키 누르면 재시작
@@ -140,6 +140,7 @@ void stage1() {
 			gameClear();
 			break;
 		}
+
 		if (walkCnt <= 0 || curTime > stageTime) {
 			pc_melting();
 			gameOver();

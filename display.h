@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <Windows.h>
+#include "variable.h"
 #include "sdl.h"
 
 SDL_Texture* pc_img;
@@ -32,6 +33,8 @@ SDL_Texture* bulkup_img;
 SDL_Texture* poison_img;
 SDL_Texture* shield_img;
 SDL_Texture* timegage_img;
+SDL_Texture* timerBody_img;
+
 
 void loadImg() {
 
@@ -50,6 +53,7 @@ void loadImg() {
 	shield_img = loadTexture("./assets/shield.png");
 	bulkup_img = loadTexture("./assets/bulkup.png");
 	timegage_img = loadTexture("./assets/timegage.png");
+	timerBody_img = loadTexture("./assets/timerBody.png");
 	map1_img = loadTexture("./assets/map1.png");
 	map2_img = loadTexture("./assets/map2.png");
 	map3_img = loadTexture("./assets/map3.png");
@@ -80,10 +84,14 @@ void gameClear() {
 	drawTexture(game_clear_img, 0, 0);
 	SDL_RenderPresent(renderer);
 	Sleep(1500);
+	for (int i = 0; i < 20000; i++) SDL_PollEvent(&trashEvent);
+
 }
 
 void gameOver() {
 	drawTexture(game_over_img, 0, 0);
 	SDL_RenderPresent(renderer);
 	Sleep(1500);
+	for (int i = 0; i < 20000; i++) SDL_PollEvent(&trashEvent);
+
 }

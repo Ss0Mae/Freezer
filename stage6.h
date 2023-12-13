@@ -188,6 +188,9 @@ void stage6_initPos() {
 	poison_cnt = 0;
 	bulkup_flag = 0;
 	bulkup_cnt = 0;
+
+	startTime = clock();
+
 }
 
 void stage6() {
@@ -215,7 +218,7 @@ void stage6() {
 			break;
 		}
 
-		if (walkCnt <= 0) {
+		if (walkCnt <= 0 || curTime > stageTime) {
 			pc_melting();
 			gameOver();
 			crabUpDown();
