@@ -253,6 +253,7 @@ void collision_pc_item() {
 
 	// 키 충돌
 	if (key.arrX == pc.arrX && key.arrY == pc.arrY) {
+		PlaySound((TEXT("./assets/getItem.wav")), NULL, SND_ASYNC);
 		key_flag = 1;
 		key.arrX = -1;
 		key.arrY = -1;
@@ -263,6 +264,7 @@ void collision_pc_item() {
 
 	// 쉴드 충돌
 	if (shield.arrX == pc.arrX && shield.arrY == pc.arrY) {
+		PlaySound((TEXT("./assets/getItem.wav")), NULL, SND_ASYNC);
 		shield_flag = 1;
 		shield.arrX = -1;
 		shield.arrY = -1;
@@ -273,6 +275,7 @@ void collision_pc_item() {
 
 	// 독 충돌
 	if (poison.arrX == pc.arrX && poison.arrY == pc.arrY) {
+		PlaySound((TEXT("./assets/getItem.wav")), NULL, SND_ASYNC);
 		poison_flag = 1;
 		poison.arrX = -1;
 		poison.arrY = -1;
@@ -283,6 +286,7 @@ void collision_pc_item() {
 
 	// 벌크업 충돌
 	if (bulkup.arrX == pc.arrX && bulkup.arrY == pc.arrY) {
+		PlaySound((TEXT("./assets/getItem.wav")), NULL, SND_ASYNC);
 		bulkup_flag = 1;
 		bulkup.arrX = -1;
 		bulkup.arrY = -1;
@@ -294,6 +298,7 @@ void collision_pc_item() {
 
 	// 신발 충돌
 	if (shoe.arrX == pc.arrX && shoe.arrY == pc.arrY) {
+	PlaySound((TEXT("./assets/getItem.wav")), NULL, SND_ASYNC);
 		walkCnt += 2; // 걸음수 하나 증가
 		shoe.arrX = -1;
 		shoe.arrY = -1;
@@ -507,8 +512,7 @@ void gildong_run(int i) {
 
 
 int processKeyInput() {
-	if (SDL_PollEvent(&event)) {
-
+	while (SDL_PollEvent(&event)) {
 		if (event.type == SDL_KEYDOWN)
 			switch (event.key.keysym.sym) {
 			case 1073741903: // right
@@ -520,7 +524,6 @@ int processKeyInput() {
 				crabUpDown();
 				pc_poison();
 				walkCnt--;
-				PlaySound((TEXT("./assets/pcMove.wav")), NULL, SND_ASYNC || SND_ASYNC);
 				pc.posX += CELL_WIDTH;
 				pc.arrX++;
 				collision_pc_crab();
@@ -535,7 +538,6 @@ int processKeyInput() {
 				crabUpDown();
 				pc_poison();
 				walkCnt--;
-				PlaySound((TEXT("./assets/pcMove.wav")), NULL, SND_ASYNC || SND_ASYNC);
 				pc.posX -= CELL_WIDTH;
 				pc.arrX--;
 				collision_pc_crab();
@@ -549,7 +551,6 @@ int processKeyInput() {
 				crabUpDown();
 				pc_poison();
 				walkCnt--;
-				PlaySound((TEXT("./assets/pcMove.wav")), NULL, SND_ASYNC || SND_ASYNC);
 				pc.posY += CELL_WIDTH;
 				pc.arrY++;
 				collision_pc_crab();
@@ -563,7 +564,6 @@ int processKeyInput() {
 				crabUpDown();
 				pc_poison();
 				walkCnt--;
-				PlaySound((TEXT("./assets/pcMove.wav")), NULL, SND_ASYNC || SND_ASYNC);
 				pc.posY -= CELL_WIDTH;
 				pc.arrY--;
 				collision_pc_crab();
@@ -588,7 +588,6 @@ int processKeyInput() {
 		}
 	}
 
-		
 		return 1;
 }
 

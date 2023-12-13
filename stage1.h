@@ -122,7 +122,6 @@ void stage1_initPos() {
 
 void stage1() {
 
-
 	curStage = 1;
 	stage1_initPos();
 

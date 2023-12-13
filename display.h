@@ -90,6 +90,7 @@ void gameClear() {
 }
 
 void gameOver() {
+	PlaySound((TEXT("./assets/gameOver.wav")), NULL, SND_ASYNC);
 	drawTexture(game_over_img, 0, 0);
 	SDL_RenderPresent(renderer);
 	Sleep(1500);
