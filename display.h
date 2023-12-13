@@ -32,6 +32,8 @@ SDL_Texture* bulkup_img;
 SDL_Texture* poison_img;
 SDL_Texture* shield_img;
 SDL_Texture* bulkup_img;
+SDL_Texture* title_img;
+
 void loadImg() {
 
 	game_clear_img = loadTexture("./assets/game_clear.png");
@@ -56,6 +58,7 @@ void loadImg() {
 	map6_img = loadTexture("./assets/map6.png");
 	map7_img = loadTexture("./assets/map7.png");
 	map8_img = loadTexture("./assets/map8.png");
+	title_img = loadTexture("./assets/titleScreen.jpg");
 
 
 

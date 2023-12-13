@@ -14,13 +14,14 @@
 #include "stage6.h"
 #include "stage7.h"
 #include "stage8.h"
-
+#include "title.h"
 
 int main(int argc, char** argv) {
 
 	initAll(); // SDL √ ±‚»≠
 	loadImg();
 
+	title();
 	stage1();
 	stage2();
 	stage3();
