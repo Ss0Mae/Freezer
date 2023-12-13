@@ -18,7 +18,7 @@
 
 int main(int argc, char** argv) {
 
-	initAll(); // SDL ÃÊ±âÈ­
+	initAll(); // SDL ì´ˆê¸°í™”
 	loadImg();
 
 	title();
@@ -31,7 +31,9 @@ int main(int argc, char** argv) {
 	stage7();
 	stage8();
 	
-	closeAll(); // SDL ¸Þ¸ð¸® ÇØÁ¦
+	closeAll(); // SDL ë©”ëª¨ë¦¬ í•´ì œ
 	return 0;
 }
-// 7½ºÅ×ÀÌÁö¿¡ ½¯µåÇÏ³ª¶û ½Å¹ßÇÏ³ª
+
+
+

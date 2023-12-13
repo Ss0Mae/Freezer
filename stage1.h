@@ -117,9 +117,11 @@ void stage1_initPos() {
 	walkCnt = 24;
 	bulkup_flag = 0;
 	bulkup_cnt = 0;
+	startTime = clock();
 }
 
 void stage1() {
+
 
 	curStage = 1;
 	stage1_initPos();
@@ -139,10 +141,12 @@ void stage1() {
 			break;
 		}
 
-		if (walkCnt <= 0) {
+		if (walkCnt <= 0 || curTime > stageTime) {
 			pc_melting();
 			gameOver();
 			stage1_initPos();
 		}
+
+
 	}
 }
