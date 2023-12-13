@@ -34,7 +34,7 @@ SDL_Texture* poison_img;
 SDL_Texture* shield_img;
 SDL_Texture* timegage_img;
 SDL_Texture* timerBody_img;
-
+SDL_Texture* title_img;
 
 void loadImg() {
 
@@ -62,6 +62,7 @@ void loadImg() {
 	map6_img = loadTexture("./assets/map6.png");
 	map7_img = loadTexture("./assets/map7.png");
 	map8_img = loadTexture("./assets/map8.png");
+	title_img = loadTexture("./assets/titleScreen.jpg");
 
 
 
