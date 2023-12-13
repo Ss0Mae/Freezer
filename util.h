@@ -419,7 +419,7 @@ void drawStage(int isGildongRun, int idx) {
 	for (int i = 1; i <= (385 - 120) * (curTime / stageTime); i += 1) { // 120 ~ 385 : 게이지의 시작 ~ 끝 좌표
 		if (120 + i > 385) continue;
 		if (stageTime - curTime <= 5) { 
-			timerFlag == 0 && PlaySound((TEXT("./assets/getItemSound.wav")), NULL, SND_ASYNC);
+			timerFlag == 0 && PlaySound((TEXT("./assets/remain5SecondSound.wav")), NULL, SND_ASYNC);
 			timerFlag = 1;
 			drawTexture(timegage_red_img, 120 + i, 105); 
 		}

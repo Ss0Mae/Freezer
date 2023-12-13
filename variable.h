@@ -20,7 +20,7 @@ int walkForcrab;
 // ½Ã°£
 clock_t startTime;
 double curTime;
-double stageTime = 10;
+double stageTime = 30;
 
 typedef struct Pc {
 
