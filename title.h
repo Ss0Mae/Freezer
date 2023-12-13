@@ -14,10 +14,8 @@ int keyinputTitle() {
 	while (1) {
 		if (SDL_PollEvent(&event)) {
 			if (event.type == SDL_KEYDOWN) {
-				if (event.key.keysym.sym == SDLK_SPACE) {
 					return 1;
 					break;
-				}
 			}
 		}
 	}

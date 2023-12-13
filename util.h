@@ -402,8 +402,9 @@ void drawStage(int isGildongRun, int idx) {
 	drawTexture(timerBody_img, 100, 90);
 	getTime(startTime);
 
-	for (int i = 0; i < (380 - 120) / stageTime * curTime   && curTime <= stageTime; i+= 1) {
-		drawTexture(timegage_img, 120 + i, 105); // 600  / 5 ~ 2000 / 5
+	for (int i = 1; i <= (385 - 120) * (curTime / stageTime); i += 1) { // 120 ~ 385 : 게이지의 시작 ~ 끝 좌표
+		if (120 + i > 385) continue;
+		drawTexture(timegage_img, 120 + i, 105);
 	}
 
 
