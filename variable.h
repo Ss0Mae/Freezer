@@ -83,13 +83,13 @@ typedef struct Key{
 	int arrY;
 }Key;
 
-typedef struct Door {
+typedef struct Lock {
 	int posX;
 	int posY;
 
 	int arrX;
 	int arrY;
-}Door;
+}Lock;
 
 typedef struct Shoe {
 	int posX;
@@ -136,7 +136,7 @@ Rock rocks[MAX_NUM_NPC];
 Gildong gildongs[MAX_NUM_NPC];
 Crab crabs[MAX_NUM_NPC];
 Key key;
-Door door; 
+Lock lock; 
 Shoe shoe; 
 Poison poison;
 Shield shield;

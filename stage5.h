@@ -32,10 +32,10 @@ void stage5_initPos() {
 	key.arrX = -1;
 	key.arrY = -1;
 
-	door.posX = -100;
-	door.posY = -100;
-	door.arrX = -1;
-	door.arrY = -1;
+	lock.posX = -100;
+	lock.posY = -100;
+	lock.arrX = -1;
+	lock.arrY = -1;
 
 	shoe.posX = -100;
 	shoe.posY = -100;
@@ -144,10 +144,10 @@ void stage5_initPos() {
 
 
 	// ÀÚ¹°¼è
-	door.posX = pc.posX + CELL_WIDTH * 2;
-	door.posY = pc.posY + CELL_WIDTH * 6;
-	door.arrX = pc.arrX + 2;
-	door.arrY = pc.arrY + 6;
+	lock.posX = pc.posX + CELL_WIDTH * 2;
+	lock.posY = pc.posY + CELL_WIDTH * 6;
+	lock.arrX = pc.arrX + 2;
+	lock.arrY = pc.arrY + 6;
 
 
 	// Å°

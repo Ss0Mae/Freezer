@@ -98,11 +98,12 @@ int collision_pc_rock(int dx, int dy) {
 					return 1;
 				}
 			}
-			if (door.arrX == rocks[i].arrX + dx && door.arrY == rocks[i].arrY + dy) { // 바위뒤에 상자
+			if (lock.arrX == rocks[i].arrX + dx && lock.arrY == rocks[i].arrY + dy) { // 바위뒤에 상자
 				return 1;
 			}
 
 			// 충돌한 바위는 한칸 밀려야 함
+			PlaySound((TEXT("./assets/pushStoneSound.wav")), NULL, SND_ASYNC);
 			rocks[i].posX += dx * CELL_WIDTH;
 			rocks[i].posY += dy * CELL_WIDTH;
 			rocks[i].arrX += dx;
@@ -122,14 +123,14 @@ int collision_pc_rock(int dx, int dy) {
 
 void pc_damage() {
 
+	PlaySound((TEXT("./assets/damagedSound.wav")), NULL, SND_ASYNC);
 	SDL_RenderClear(renderer);
 	// pc의 색이 변함
 	pc_img = direction_flag == 1 ? loadTexture("./assets/pc_right_damage.png") : loadTexture("./assets/pc_left_damage.png");
 	drawStage(0, -1);
 	SDL_RenderPresent(renderer);
 	Sleep(150);
-	for (int i = 0; i < 10000; i++) SDL_PollEvent(&trashEvent);
-
+	for (int i = 0; i < 100; i++) SDL_PollEvent(&trashEvent);
 	pc_img = direction_flag == 1 ? loadTexture("./assets/pc_right.png") : loadTexture("./assets/pc_left.png");
 
 }
@@ -203,7 +204,7 @@ int collision_pc_gogildong(int dx, int dy) { // pc와 길동 충돌
 
 			}
 	
-			if (door.arrX == gildongs[i].arrX + dx && door.arrY == gildongs[i].arrY + dy) { //상자 뒤에 길동
+			if (lock.arrX == gildongs[i].arrX + dx && lock.arrY == gildongs[i].arrY + dy) { // 자물쇠 뒤에 길동
 				return 1;
 			}
 
@@ -225,6 +226,7 @@ int collision_pc_gogildong(int dx, int dy) { // pc와 길동 충돌
 			}
 
 			// 충돌한 길동은 한 칸 밀려야 함
+			PlaySound((TEXT("./assets/pushGildongSound.wav")), NULL, SND_ASYNC);
 			gildongs[i].posX += dx * CELL_WIDTH;
 			gildongs[i].posY += dy * CELL_WIDTH;
 			gildongs[i].arrX += dx;
@@ -253,7 +255,7 @@ void collision_pc_item() {
 
 	// 키 충돌
 	if (key.arrX == pc.arrX && key.arrY == pc.arrY) {
-		PlaySound((TEXT("./assets/getItem.wav")), NULL, SND_ASYNC);
+		PlaySound((TEXT("./assets/getItemSound.wav")), NULL, SND_ASYNC);
 		key_flag = 1;
 		key.arrX = -1;
 		key.arrY = -1;
@@ -264,7 +266,7 @@ void collision_pc_item() {
 
 	// 쉴드 충돌
 	if (shield.arrX == pc.arrX && shield.arrY == pc.arrY) {
-		PlaySound((TEXT("./assets/getItem.wav")), NULL, SND_ASYNC);
+		PlaySound((TEXT("./assets/getItemSound.wav")), NULL, SND_ASYNC);
 		shield_flag = 1;
 		shield.arrX = -1;
 		shield.arrY = -1;
@@ -275,7 +277,7 @@ void collision_pc_item() {
 
 	// 독 충돌
 	if (poison.arrX == pc.arrX && poison.arrY == pc.arrY) {
-		PlaySound((TEXT("./assets/getItem.wav")), NULL, SND_ASYNC);
+		PlaySound((TEXT("./assets/poisonSound.wav")), NULL, SND_ASYNC);
 		poison_flag = 1;
 		poison.arrX = -1;
 		poison.arrY = -1;
@@ -286,7 +288,7 @@ void collision_pc_item() {
 
 	// 벌크업 충돌
 	if (bulkup.arrX == pc.arrX && bulkup.arrY == pc.arrY) {
-		PlaySound((TEXT("./assets/getItem.wav")), NULL, SND_ASYNC);
+		PlaySound((TEXT("./assets/getItemSound.wav")), NULL, SND_ASYNC);
 		bulkup_flag = 1;
 		bulkup.arrX = -1;
 		bulkup.arrY = -1;
@@ -298,7 +300,7 @@ void collision_pc_item() {
 
 	// 신발 충돌
 	if (shoe.arrX == pc.arrX && shoe.arrY == pc.arrY) {
-	PlaySound((TEXT("./assets/getItem.wav")), NULL, SND_ASYNC);
+	PlaySound((TEXT("./assets/getItemSound.wav")), NULL, SND_ASYNC);
 		walkCnt += 2; // 걸음수 하나 증가
 		shoe.arrX = -1;
 		shoe.arrY = -1;
@@ -309,16 +311,17 @@ void collision_pc_item() {
 
 }
 
-// pc와 문 충돌검사
-int collision_pc_door(int dx, int dy) {
-	if (door.arrX == pc.arrX + dx && door.arrY == pc.arrY + dy) {
+// pc와 자물쇠 충돌검사
+int collision_pc_lock(int dx, int dy) {
+	if (lock.arrX == pc.arrX + dx && lock.arrY == pc.arrY + dy) {
 		if (key_flag == 0)
 			return 1;
 		if (key_flag == 1) {
-			door.posX = -100;
-			door.posY = -100;
-			door.arrX = -1;
-			door.arrY = -1;
+			PlaySound((TEXT("./assets/releaseLockSound.wav")), NULL, SND_ASYNC);
+			lock.posX = -100;
+			lock.posY = -100;
+			lock.arrX = -1;
+			lock.arrY = -1;
 			pc_poison();
 			crabUpDown();
 			return 0;
@@ -373,7 +376,7 @@ void drawStage(int isGildongRun, int idx) {
 	drawTexture(key_img, key.posX, key.posY);
 	drawTexture(poison_img, poison.posX, poison.posY);
 	drawTexture(shield_img, shield.posX, shield.posY);
-	drawTexture(door_img, door.posX, door.posY);
+	drawTexture(lock_img, lock.posX, lock.posY);
 	drawTexture(bulkup_img, bulkup.posX, bulkup.posY);
 
 	// 게 그리기
@@ -460,7 +463,7 @@ void pc_melting() {
 
 void gildong_run(int i) {
 
-	PlaySound((TEXT("./assets/run.wav")), NULL, SND_ASYNC || SND_ASYNC);
+	PlaySound((TEXT("./assets/runSound.wav")), NULL, SND_ASYNC || SND_ASYNC);
 
 
 	SDL_RenderClear(renderer);
@@ -519,7 +522,7 @@ int processKeyInput() {
 				direction_flag = 1;
 				if (collision_pc_map(1, 0)) break;
 				if (collision_pc_gogildong(1, 0) == 1) break;
-				if (collision_pc_door(1, 0)) break;
+				if (collision_pc_lock(1, 0)) break;
 				if (collision_pc_rock(1, 0)) break;
 				crabUpDown();
 				pc_poison();
@@ -533,7 +536,7 @@ int processKeyInput() {
 				direction_flag = 0;
 				if (collision_pc_map(-1, 0)) break;
 				if (collision_pc_gogildong(-1, 0)) break;
-				if (collision_pc_door(-1, 0)) break;
+				if (collision_pc_lock(-1, 0)) break;
 				if (collision_pc_rock(-1, 0)) break;
 				crabUpDown();
 				pc_poison();
@@ -546,7 +549,7 @@ int processKeyInput() {
 			case 1073741905: // down
 				if (collision_pc_map(0, 1)) break;
 				if (collision_pc_gogildong(0, 1)) break;
-				if (collision_pc_door(0, 1)) break;
+				if (collision_pc_lock(0, 1)) break;
 				if (collision_pc_rock(0, 1)) break;
 				crabUpDown();
 				pc_poison();
@@ -559,7 +562,7 @@ int processKeyInput() {
 			case 1073741906: // up
 				if (collision_pc_map(0, -1)) break;
 				if (collision_pc_gogildong(0, -1)) break;
-				if (collision_pc_door(0, -1)) break;
+				if (collision_pc_lock(0, -1)) break;
 				if (collision_pc_rock(0, -1)) break;
 				crabUpDown();
 				pc_poison();

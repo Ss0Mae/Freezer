@@ -32,10 +32,10 @@ void stage2_initPos() {
 	key.arrX = -1;
 	key.arrY = -1;
 
-	door.posX = -100;
-	door.posY = -100;
-	door.arrX = -1;
-	door.arrY = -1;
+	lock.posX = -100;
+	lock.posY = -100;
+	lock.arrX = -1;
+	lock.arrY = -1;
 
 	shoe.posX = -100;
 	shoe.posY = -100;

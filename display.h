@@ -27,7 +27,7 @@ SDL_Texture* game_clear_img;
 SDL_Texture* game_over_img;
 SDL_Texture* crab_img;
 SDL_Texture* key_img;
-SDL_Texture* door_img;
+SDL_Texture* lock_img;
 SDL_Texture* shoe_img;
 SDL_Texture* bulkup_img;
 SDL_Texture* poison_img;
@@ -35,6 +35,7 @@ SDL_Texture* shield_img;
 SDL_Texture* timegage_img;
 SDL_Texture* timerBody_img;
 SDL_Texture* title_img;
+SDL_Texture* end_img;
 
 void loadImg() {
 
@@ -47,7 +48,7 @@ void loadImg() {
 	crab_img = loadTexture("./assets/crab_up.png");
 	rock_img = loadTexture("./assets/rock.png");
 	key_img = loadTexture("./assets/key.png");
-	door_img = loadTexture("./assets/treasurebox.png");
+	lock_img = loadTexture("./assets/lock.png");
 	shoe_img = loadTexture("./assets/shoe.png");
 	poison_img = loadTexture("./assets/poison.png");
 	shield_img = loadTexture("./assets/shield.png");
@@ -62,8 +63,8 @@ void loadImg() {
 	map6_img = loadTexture("./assets/map6.png");
 	map7_img = loadTexture("./assets/map7.png");
 	map8_img = loadTexture("./assets/map8.png");
-	title_img = loadTexture("./assets/titleScreen.jpg");
-
+	title_img = loadTexture("./assets/titleScreen.png");
+	end_img = loadTexture("./assets/endingScreen.png");
 
 
 	for (int i = 0; i <= 70; i++) {
@@ -82,18 +83,19 @@ void loadImg() {
 }
 
 void gameClear() {
+	PlaySound((TEXT("./assets/stageClearSound.wav")), NULL, SND_ASYNC);
 	drawTexture(game_clear_img, 0, 0);
 	SDL_RenderPresent(renderer);
-	Sleep(1500);
+	Sleep(2000);
 	for (int i = 0; i < 20000; i++) SDL_PollEvent(&trashEvent);
 
 }
 
 void gameOver() {
-	PlaySound((TEXT("./assets/gameOver.wav")), NULL, SND_ASYNC);
+	PlaySound((TEXT("./assets/gameOverSound.wav")), NULL, SND_ASYNC);
 	drawTexture(game_over_img, 0, 0);
 	SDL_RenderPresent(renderer);
-	Sleep(1500);
+	Sleep(2000);
 	for (int i = 0; i < 20000; i++) SDL_PollEvent(&trashEvent);
 
 }

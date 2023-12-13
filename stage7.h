@@ -146,10 +146,10 @@ void stage7_initPos() {
 
 
 	// ÀÚ¹°¼è
-	door.posX = pc.posX - CELL_WIDTH * 1;
-	door.posY = pc.posY - CELL_WIDTH * 3;
-	door.arrX = pc.arrX - 1;
-	door.arrY = pc.arrY - 3;
+	lock.posX = pc.posX - CELL_WIDTH * 1;
+	lock.posY = pc.posY - CELL_WIDTH * 3;
+	lock.arrX = pc.arrX - 1;
+	lock.arrY = pc.arrY - 3;
 
 
 	// Å°
