@@ -24,11 +24,7 @@ int keyinputTitle() {
 void title() {
 
 	// 오디오 랙 제거용 더미사운드
-	for (int i = 0; i < 5; i++) {
-		PlaySound((TEXT("./assets/emptySound.wav")), NULL, SND_ASYNC | SND_LOOP);
-		PlaySound((TEXT("./assets/emptySound2.wav")), NULL, SND_ASYNC | SND_LOOP);
-		PlaySound((TEXT("./assets/emptySound3.wav")), NULL, SND_ASYNC | SND_LOOP);
-	}
+		PlaySound((TEXT("./assets/emptySound.wav")), NULL, SND_ASYNC);
 
 
 	// 타이틀 화면
@@ -37,6 +33,7 @@ void title() {
 	SDL_RenderPresent(renderer);
 
 	if (keyinputTitle() == 1) {
+		PlaySound((TEXT("./assets/emptySound2.wav")), NULL, SND_ASYNC);
 		title_img = loadTexture("./assets/guideScreen1.png");
 		SDL_RenderClear(renderer);
 		drawTexture(title_img, 0, 0);
@@ -44,6 +41,7 @@ void title() {
 	}
 
 	if (keyinputTitle() == 1) {
+		PlaySound((TEXT("./assets/emptySound3.wav")), NULL, SND_ASYNC);
 		title_img = loadTexture("./assets/guideScreen2.png");
 		SDL_RenderClear(renderer);
 		drawTexture(title_img, 0, 0);
@@ -51,6 +49,7 @@ void title() {
 	}
 
 	if (keyinputTitle() == 1) {
+		PlaySound((TEXT("./assets/emptySound.wav")), NULL, SND_ASYNC);
 		title_img = loadTexture("./assets/guideScreen3.png");
 		SDL_RenderClear(renderer);
 		drawTexture(title_img, 0, 0);
@@ -58,6 +57,7 @@ void title() {
 	}
 
 	if (keyinputTitle() == 1) {
+		PlaySound((TEXT("./assets/emptySound.wav")), NULL, SND_ASYNC);
 		title_img = loadTexture("./assets/guideScreen4.png");
 		SDL_RenderClear(renderer);
 		drawTexture(title_img, 0, 0);
