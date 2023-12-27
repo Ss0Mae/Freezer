@@ -146,10 +146,10 @@ void stage7_initPos() {
 
 
 	// ÀÚ¹°¼è
-	door.posX = pc.posX - CELL_WIDTH * 1;
-	door.posY = pc.posY - CELL_WIDTH * 3;
-	door.arrX = pc.arrX - 1;
-	door.arrY = pc.arrY - 3;
+	lock.posX = pc.posX - CELL_WIDTH * 1;
+	lock.posY = pc.posY - CELL_WIDTH * 3;
+	lock.arrX = pc.arrX - 1;
+	lock.arrY = pc.arrY - 3;
 
 
 	// Å°
@@ -177,6 +177,8 @@ void stage7_initPos() {
 	poison_cnt = 0;
 	bulkup_flag = 0;
 	bulkup_cnt = 0;
+	startTime = clock();
+
 }
 
 void stage7() {
@@ -204,7 +206,7 @@ void stage7() {
 			break;
 		}
 
-		if (walkCnt <= 0) {
+		if (walkCnt <= 0 || curTime > stageTime) {
 			pc_melting();
 			gameOver();
 			crabUpDown();

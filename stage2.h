@@ -32,10 +32,10 @@ void stage2_initPos() {
 	key.arrX = -1;
 	key.arrY = -1;
 
-	door.posX = -100;
-	door.posY = -100;
-	door.arrX = -1;
-	door.arrY = -1;
+	lock.posX = -100;
+	lock.posY = -100;
+	lock.arrX = -1;
+	lock.arrY = -1;
 
 	shoe.posX = -100;
 	shoe.posY = -100;
@@ -135,6 +135,8 @@ void stage2_initPos() {
 	walkCnt = 26;
 	bulkup_flag = 0;
 	bulkup_cnt = 0;
+	startTime = clock();
+
 }
 
 void stage2() {
@@ -159,7 +161,7 @@ void stage2() {
 		}
 
 
-		if (walkCnt <= 0) {
+		if (walkCnt <= 0 || curTime > stageTime) {
 
 			pc_melting();
 			gameOver();

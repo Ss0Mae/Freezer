@@ -128,10 +128,22 @@ void stage6_initPos() {
 	rocks[12].arrX = pc.arrX + 4;
 	rocks[12].arrY = pc.arrY + 4;
 
+	
+
 	gildongs[0].posX = pc.posX + CELL_WIDTH * 5;
 	gildongs[0].posY = pc.posY + CELL_WIDTH * 3;
 	gildongs[0].arrX = pc.arrX + 5;
 	gildongs[0].arrY = pc.arrY + 3;
+
+	gildongs[1].posX = pc.posX + CELL_WIDTH * 6;
+	gildongs[1].posY = pc.posY + CELL_WIDTH * 1;
+	gildongs[1].arrX = pc.arrX + 6;
+	gildongs[1].arrY = pc.arrY + 1;
+	
+	
+	
+	
+
 	// ≥√¿Â∞Ì
 	refrigerator.posX = pc.posX + CELL_WIDTH * 7;
 	refrigerator.posY = pc.posY + CELL_WIDTH * 2;
@@ -155,17 +167,24 @@ void stage6_initPos() {
 	crabs[2].arrX = pc.arrX + 4;
 	crabs[2].arrY = pc.arrY + 4;
 
+
+
 	crabs[3].posX = pc.posX + CELL_WIDTH * 5;
 	crabs[3].posY = pc.posY + CELL_WIDTH * 4;
 	crabs[3].arrX = pc.arrX + 5;
 	crabs[3].arrY = pc.arrY + 4;
 
+	crabs[4].posX = pc.posX + CELL_WIDTH * 4;
+	crabs[4].posY = pc.posY + CELL_WIDTH * 1;
+	crabs[4].arrX = pc.arrX + 4;
+	crabs[4].arrY = pc.arrY + 1;
+
 
 	// ¿⁄π∞ºË
-	door.posX = pc.posX + CELL_WIDTH * 5;
-	door.posY = pc.posY + CELL_WIDTH * 1;
-	door.arrX = pc.arrX + 5;
-	door.arrY = pc.arrY + 1;
+	lock.posX = pc.posX + CELL_WIDTH * 5;
+	lock.posY = pc.posY + CELL_WIDTH * 1;
+	lock.arrX = pc.arrX + 5;
+	lock.arrY = pc.arrY + 1;
 
 
 	// ≈∞
@@ -188,6 +207,9 @@ void stage6_initPos() {
 	poison_cnt = 0;
 	bulkup_flag = 0;
 	bulkup_cnt = 0;
+
+	startTime = clock();
+
 }
 
 void stage6() {
@@ -215,7 +237,7 @@ void stage6() {
 			break;
 		}
 
-		if (walkCnt <= 0) {
+		if (walkCnt <= 0 || curTime > stageTime) {
 			pc_melting();
 			gameOver();
 			crabUpDown();

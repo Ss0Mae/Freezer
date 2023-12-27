@@ -1,8 +1,14 @@
 #pragma once
+
+#pragma comment(lib, "winmm")
+#include <mmsystem.h>
+
 #include <Windows.h>
 #include <conio.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
+
 int collision_pc_map(int dx, int dy);
 int collision_pc_rock(int dx, int dy);
 int collision_pc_gogildong(int dx, int dy);
@@ -14,8 +20,9 @@ void drawStage(int isGildongRun, int idx);
 void crabUpDown();
 void collision_pc_crab();
 void pc_damage();
+void getTime(clock_t startTime);
 
-int direction_flag = 1;
+int direction_flag = 0;
 int key_flag = 0;
 int poison_flag = 0;
 int shield_flag = 0;
@@ -23,10 +30,17 @@ int poison_cnt = 0;
 int bulkup_flag = 0;
 int bulkup_cnt = 0;
 
+
+
 void crabUpDown() {
 	walkForcrab--;
 	SDL_RenderClear(renderer);
-	if (curStage >= 4 && curStage!=6) {
+	if (curStage == 6) {
+		crab_img = loadTexture("./assets/crab_up.png");
+		for (int i = 0; i < MAX_NUM_NPC; i++)
+			drawTexture(crab_img, crabs[i].posX, crabs[i].posY);
+	}
+	else if (curStage >= 4) {
 		// 게가 올라오고 내려오고
 		if (walkForcrab % 2 == 0) {
 			crab_img = loadTexture("./assets/crab_up.png");
@@ -84,11 +98,12 @@ int collision_pc_rock(int dx, int dy) {
 					return 1;
 				}
 			}
-			if (door.arrX == rocks[i].arrX + dx && door.arrY == rocks[i].arrY + dy) { // 바위뒤에 상자
+			if (lock.arrX == rocks[i].arrX + dx && lock.arrY == rocks[i].arrY + dy) { // 바위뒤에 상자
 				return 1;
 			}
 
 			// 충돌한 바위는 한칸 밀려야 함
+			PlaySound((TEXT("./assets/pushStoneSound.wav")), NULL, SND_ASYNC);
 			rocks[i].posX += dx * CELL_WIDTH;
 			rocks[i].posY += dy * CELL_WIDTH;
 			rocks[i].arrX += dx;
@@ -108,22 +123,24 @@ int collision_pc_rock(int dx, int dy) {
 
 void pc_damage() {
 
+	PlaySound((TEXT("./assets/damagedSound.wav")), NULL, SND_ASYNC);
 	SDL_RenderClear(renderer);
 	// pc의 색이 변함
 	pc_img = direction_flag == 1 ? loadTexture("./assets/pc_right_damage.png") : loadTexture("./assets/pc_left_damage.png");
 	drawStage(0, -1);
 	SDL_RenderPresent(renderer);
 	Sleep(150);
+	for (int i = 0; i < 100; i++) SDL_PollEvent(&trashEvent);
 	pc_img = direction_flag == 1 ? loadTexture("./assets/pc_right.png") : loadTexture("./assets/pc_left.png");
 
 }
 
 //pc 와 게 충돌
 void collision_pc_crab() {
-	
+
 	for (int i = 0; i < MAX_NUM_NPC; i++) {
 
-		if (crabs[i].arrX == pc.arrX && crabs[i].arrY == pc.arrY ) { // 게의위치와 pc의위치가 같다면
+		if (crabs[i].arrX == pc.arrX && crabs[i].arrY == pc.arrY) { // 게의위치와 pc의위치가 같다면
 			if (shield_flag == 1 && (walkForcrab % 2 == 0 || curStage <= 3)) {
 				shield_flag = 0;
 				return;
@@ -141,7 +158,7 @@ void collision_pc_crab() {
 
 		}
 	}
-	
+
 }
 
 int collision_pc_gogildong(int dx, int dy) { // pc와 길동 충돌
@@ -150,7 +167,7 @@ int collision_pc_gogildong(int dx, int dy) { // pc와 길동 충돌
 		if (gildongs[i].arrX == pc.arrX + dx && gildongs[i].arrY == pc.arrY + dy) {
 			crabUpDown();
 			collision_pc_crab();
-			//collision_gildongs_crab();
+
 			if (maps[curStage][gildongs[i].arrY + dy][gildongs[i].arrX + dx] == 1) { // 길동 뒤에 벽 (사라짐)
 				walkCnt--;
 				gildong_run(i); // 길동이 도망가는 에니메이션
@@ -186,8 +203,8 @@ int collision_pc_gogildong(int dx, int dy) { // pc와 길동 충돌
 				}
 
 			}
-	
-			if (door.arrX == gildongs[i].arrX + dx && door.arrY == gildongs[i].arrY + dy) { //상자 뒤에 길동
+
+			if (lock.arrX == gildongs[i].arrX + dx && lock.arrY == gildongs[i].arrY + dy) { // 자물쇠 뒤에 길동
 				return 1;
 			}
 
@@ -209,6 +226,7 @@ int collision_pc_gogildong(int dx, int dy) { // pc와 길동 충돌
 			}
 
 			// 충돌한 길동은 한 칸 밀려야 함
+			PlaySound((TEXT("./assets/pushGildongSound.wav")), NULL, SND_ASYNC);
 			gildongs[i].posX += dx * CELL_WIDTH;
 			gildongs[i].posY += dy * CELL_WIDTH;
 			gildongs[i].arrX += dx;
@@ -237,6 +255,7 @@ void collision_pc_item() {
 
 	// 키 충돌
 	if (key.arrX == pc.arrX && key.arrY == pc.arrY) {
+		PlaySound((TEXT("./assets/getItemSound.wav")), NULL, SND_ASYNC);
 		key_flag = 1;
 		key.arrX = -1;
 		key.arrY = -1;
@@ -247,6 +266,7 @@ void collision_pc_item() {
 
 	// 쉴드 충돌
 	if (shield.arrX == pc.arrX && shield.arrY == pc.arrY) {
+		PlaySound((TEXT("./assets/getItemSound.wav")), NULL, SND_ASYNC);
 		shield_flag = 1;
 		shield.arrX = -1;
 		shield.arrY = -1;
@@ -257,6 +277,7 @@ void collision_pc_item() {
 
 	// 독 충돌
 	if (poison.arrX == pc.arrX && poison.arrY == pc.arrY) {
+		PlaySound((TEXT("./assets/poisonSound.wav")), NULL, SND_ASYNC);
 		poison_flag = 1;
 		poison.arrX = -1;
 		poison.arrY = -1;
@@ -267,6 +288,7 @@ void collision_pc_item() {
 
 	// 벌크업 충돌
 	if (bulkup.arrX == pc.arrX && bulkup.arrY == pc.arrY) {
+		PlaySound((TEXT("./assets/getItemSound.wav")), NULL, SND_ASYNC);
 		bulkup_flag = 1;
 		bulkup.arrX = -1;
 		bulkup.arrY = -1;
@@ -278,6 +300,7 @@ void collision_pc_item() {
 
 	// 신발 충돌
 	if (shoe.arrX == pc.arrX && shoe.arrY == pc.arrY) {
+		PlaySound((TEXT("./assets/getItemSound.wav")), NULL, SND_ASYNC);
 		walkCnt += 2; // 걸음수 하나 증가
 		shoe.arrX = -1;
 		shoe.arrY = -1;
@@ -288,16 +311,17 @@ void collision_pc_item() {
 
 }
 
-// pc와 문 충돌검사
-int collision_pc_door(int dx, int dy) {
-	if (door.arrX == pc.arrX + dx && door.arrY == pc.arrY + dy) {
+// pc와 자물쇠 충돌검사
+int collision_pc_lock(int dx, int dy) {
+	if (lock.arrX == pc.arrX + dx && lock.arrY == pc.arrY + dy) {
 		if (key_flag == 0)
 			return 1;
 		if (key_flag == 1) {
-			door.posX = -100;
-			door.posY = -100;
-			door.arrX = -1;
-			door.arrY = -1;
+			PlaySound((TEXT("./assets/releaseLockSound.wav")), NULL, SND_ASYNC);
+			lock.posX = -100;
+			lock.posY = -100;
+			lock.arrX = -1;
+			lock.arrY = -1;
 			pc_poison();
 			crabUpDown();
 			return 0;
@@ -306,6 +330,8 @@ int collision_pc_door(int dx, int dy) {
 	return 0;
 }
 
+
+int timerFlag = 0;
 void drawStage(int isGildongRun, int idx) {
 
 	switch (curStage) {
@@ -352,7 +378,7 @@ void drawStage(int isGildongRun, int idx) {
 	drawTexture(key_img, key.posX, key.posY);
 	drawTexture(poison_img, poison.posX, poison.posY);
 	drawTexture(shield_img, shield.posX, shield.posY);
-	drawTexture(door_img, door.posX, door.posY);
+	drawTexture(lock_img, lock.posX, lock.posY);
 	drawTexture(bulkup_img, bulkup.posX, bulkup.posY);
 
 	// 게 그리기
@@ -381,11 +407,28 @@ void drawStage(int isGildongRun, int idx) {
 	// 신발 그리기
 	drawTexture(shoe_img, shoe.posX, shoe.posY);
 
-
 	// 걸음수 그리기
 	if (walkCnt >= 0)
-		drawTexture(walkCnt_imgs[walkCnt], 100, 463);
-	drawTexture(roundCnt_img[curStage], 1018, 463);
+		drawTexture(walkCnt_imgs[walkCnt], 90, 463);
+	drawTexture(roundCnt_img[curStage], 1028, 463);
+
+	// 타이머
+	drawTexture(timerBody_img, 100, 90);
+	if (walkCnt > 0) getTime(startTime);
+
+	for (int i = 1; i <= (385 - 120) * (curTime / stageTime); i += 1) { // 120 ~ 385 : 게이지의 시작 ~ 끝 좌표
+		if (120 + i > 385) continue;
+		if (stageTime - curTime <= 5) { 
+			timerFlag == 0 && PlaySound((TEXT("./assets/remain5SecondSound.wav")), NULL, SND_ASYNC);
+			timerFlag = 1;
+			drawTexture(timegage_red_img, 120 + i, 105); 
+		}
+		else {
+			timerFlag = 0;
+			drawTexture(timegage_img, 120 + i, 105);
+		}
+	}
+
 
 }
 
@@ -397,12 +440,15 @@ void pc_melting() {
 		drawStage(0, -1);
 		SDL_RenderPresent(renderer);
 		Sleep(1000);
+		for (int i = 0; i < 10000; i++) SDL_PollEvent(&trashEvent);
 
 		SDL_RenderClear(renderer);
 		pc_img = loadTexture("./assets/pc_right_melt3.png");
 		drawStage(0, -1);
 		SDL_RenderPresent(renderer);
 		Sleep(1000);
+		for (int i = 0; i < 10000; i++) SDL_PollEvent(&trashEvent);
+
 	}
 	else {
 		SDL_RenderClear(renderer);
@@ -410,18 +456,26 @@ void pc_melting() {
 		drawStage(0, -1);
 		SDL_RenderPresent(renderer);
 		Sleep(1000);
+		for (int i = 0; i < 10000; i++) SDL_PollEvent(&trashEvent);
+
 
 		SDL_RenderClear(renderer);
 		pc_img = loadTexture("./assets/pc_left_melt3.png");
 		drawStage(0, -1);
 		SDL_RenderPresent(renderer);
 		Sleep(1000);
+		for (int i = 0; i < 10000; i++) SDL_PollEvent(&trashEvent);
+
 	}
 	pc_img = loadTexture("./assets/pc_left.png");
+
 }
 
 
 void gildong_run(int i) {
+
+	PlaySound((TEXT("./assets/runSound.wav")), NULL, SND_ASYNC || SND_ASYNC);
+
 
 	SDL_RenderClear(renderer);
 	gildong_run_img = loadTexture("./assets/gildong_run_1.png");
@@ -429,59 +483,57 @@ void gildong_run(int i) {
 	drawTexture(gildong_run_img, gildongs[i].posX, gildongs[i].posY);
 	SDL_RenderPresent(renderer);
 	Sleep(130);
-	while (_kbhit()) {
-		int k = _getch();
-	}
+	for (int i = 0; i < 10000; i++) SDL_PollEvent(&trashEvent);
+
+
 	SDL_RenderClear(renderer);
 	gildong_run_img = loadTexture("./assets/gildong_run_2.png");
 	drawStage(1, i);
 	drawTexture(gildong_run_img, gildongs[i].posX, gildongs[i].posY);
 	SDL_RenderPresent(renderer);
 	Sleep(130);
-	while (_kbhit()) {
-		int k = _getch();
-	}
+	for (int i = 0; i < 10000; i++) SDL_PollEvent(&trashEvent);
+
+
 	SDL_RenderClear(renderer);
 	gildong_run_img = loadTexture("./assets/gildong_run_3.png");
 	drawStage(1, i);
 	drawTexture(gildong_run_img, gildongs[i].posX, gildongs[i].posY);
 	SDL_RenderPresent(renderer);
 	Sleep(130);
-	while (_kbhit()) {
-		int k = _getch();
-	}
+	for (int i = 0; i < 10000; i++) SDL_PollEvent(&trashEvent);
+
+
 	SDL_RenderClear(renderer);
 	gildong_run_img = loadTexture("./assets/gildong_run_4.png");
 	drawStage(1, i);
 	drawTexture(gildong_run_img, gildongs[i].posX, gildongs[i].posY);
 	SDL_RenderPresent(renderer);
 	Sleep(130);
-	while (_kbhit()) {
-		int k = _getch();
-	}
+	for (int i = 0; i < 10000; i++) SDL_PollEvent(&trashEvent);
+
 	SDL_RenderClear(renderer);
 	gildong_run_img = loadTexture("./assets/gildong_run_5.png");
 	drawStage(1, i);
 	drawTexture(gildong_run_img, gildongs[i].posX, gildongs[i].posY);
 	SDL_RenderPresent(renderer);
 	Sleep(130);
-	while (_kbhit()) {
-		int k = _getch();
-	}
+	for (int i = 0; i < 10000; i++) SDL_PollEvent(&trashEvent);
+
+
+
 }
 
 
-SDL_Event event;
 int processKeyInput() {
-	if (SDL_PollEvent(&event)) {
-
+	while (SDL_PollEvent(&event)) {
 		if (event.type == SDL_KEYDOWN)
 			switch (event.key.keysym.sym) {
 			case 1073741903: // right
 				direction_flag = 1;
 				if (collision_pc_map(1, 0)) break;
 				if (collision_pc_gogildong(1, 0) == 1) break;
-				if (collision_pc_door(1, 0)) break;
+				if (collision_pc_lock(1, 0)) break;
 				if (collision_pc_rock(1, 0)) break;
 				crabUpDown();
 				pc_poison();
@@ -495,7 +547,7 @@ int processKeyInput() {
 				direction_flag = 0;
 				if (collision_pc_map(-1, 0)) break;
 				if (collision_pc_gogildong(-1, 0)) break;
-				if (collision_pc_door(-1, 0)) break;
+				if (collision_pc_lock(-1, 0)) break;
 				if (collision_pc_rock(-1, 0)) break;
 				crabUpDown();
 				pc_poison();
@@ -508,7 +560,7 @@ int processKeyInput() {
 			case 1073741905: // down
 				if (collision_pc_map(0, 1)) break;
 				if (collision_pc_gogildong(0, 1)) break;
-				if (collision_pc_door(0, 1)) break;
+				if (collision_pc_lock(0, 1)) break;
 				if (collision_pc_rock(0, 1)) break;
 				crabUpDown();
 				pc_poison();
@@ -521,7 +573,7 @@ int processKeyInput() {
 			case 1073741906: // up
 				if (collision_pc_map(0, -1)) break;
 				if (collision_pc_gogildong(0, -1)) break;
-				if (collision_pc_door(0, -1)) break;
+				if (collision_pc_lock(0, -1)) break;
 				if (collision_pc_rock(0, -1)) break;
 				crabUpDown();
 				pc_poison();
@@ -538,8 +590,7 @@ int processKeyInput() {
 				return -1;
 				break;
 			}
-	}
-		SDL_PollEvent(&event);
+
 		pc_img = direction_flag == 1 ? loadTexture("./assets/pc_right.png") : loadTexture("./assets/pc_left.png");
 		if (shield_flag == 1) {
 			if (direction_flag == 1) pc_img = loadTexture("./assets/pc_right_shield.png");
@@ -549,5 +600,13 @@ int processKeyInput() {
 			if (direction_flag == 1) pc_img = loadTexture("./assets/bulkup_right.png");
 			else pc_img = loadTexture("./assets/bulkup_left.png");
 		}
-		return 1;
+	}
+
+	return 1;
+}
+
+
+void getTime(clock_t startTime) {
+	clock_t endTime = clock();
+	curTime = (double)(endTime - startTime) / CLOCKS_PER_SEC;
 }

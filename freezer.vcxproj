@@ -143,6 +143,7 @@
     <ClInclude Include="stage6.h" />
     <ClInclude Include="stage7.h" />
     <ClInclude Include="stage8.h" />
+    <ClInclude Include="title.h" />
     <ClInclude Include="util.h" />
     <ClInclude Include="variable.h" />
   </ItemGroup>

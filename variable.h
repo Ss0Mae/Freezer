@@ -4,6 +4,9 @@
 #include <SDL_image.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include <time.h>
+
+
 
 #define CELL_WIDTH 70 // 게임판 한 칸의 너비
 #define MAX_NUM_NPC 20 // NPC 최대 개수
@@ -13,6 +16,11 @@ int curStage;
 
 // 걸음 여부에 따른 게 이미지 변화를 위한 변수
 int walkForcrab;
+
+// 시간
+clock_t startTime;
+double curTime;
+double stageTime = 30;
 
 typedef struct Pc {
 
@@ -75,13 +83,13 @@ typedef struct Key{
 	int arrY;
 }Key;
 
-typedef struct Door {
+typedef struct Lock {
 	int posX;
 	int posY;
 
 	int arrX;
 	int arrY;
-}Door;
+}Lock;
 
 typedef struct Shoe {
 	int posX;
@@ -128,7 +136,7 @@ Rock rocks[MAX_NUM_NPC];
 Gildong gildongs[MAX_NUM_NPC];
 Crab crabs[MAX_NUM_NPC];
 Key key;
-Door door; 
+Lock lock; 
 Shoe shoe; 
 Poison poison;
 Shield shield;
@@ -243,3 +251,6 @@ int maps[10][20][20] = {
 
 };
 
+
+SDL_Event event;
+SDL_Event trashEvent;

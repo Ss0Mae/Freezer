@@ -5,7 +5,6 @@
 #include <stdbool.h>
 #include "util.h"
 #include "sdl.h"
-#include "stage2.h"
 
 
 void stage1_initPos() {
@@ -32,10 +31,10 @@ void stage1_initPos() {
 	key.arrX = -1;
 	key.arrY = -1;
 
-	door.posX = -100;
-	door.posY = -100;
-	door.arrX = -1;
-	door.arrY = -1;
+	lock.posX = -100;
+	lock.posY = -100;
+	lock.arrX = -1;
+	lock.arrY = -1;
 
 	shoe.posX = -100;
 	shoe.posY = -100;
@@ -117,7 +116,9 @@ void stage1_initPos() {
 	walkCnt = 24;
 	bulkup_flag = 0;
 	bulkup_cnt = 0;
+	startTime = clock();
 }
+
 
 void stage1() {
 
@@ -139,10 +140,12 @@ void stage1() {
 			break;
 		}
 
-		if (walkCnt <= 0) {
+		if (walkCnt <= 0 || curTime > stageTime) {
 			pc_melting();
 			gameOver();
 			stage1_initPos();
 		}
+
+
 	}
 }

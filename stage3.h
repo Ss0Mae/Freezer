@@ -32,10 +32,10 @@ void stage3_initPos() {
 	key.arrX = -1;
 	key.arrY = -1;
 
-	door.posX = -100;
-	door.posY = -100;
-	door.arrX = -1;
-	door.arrY = -1;
+	lock.posX = -100;
+	lock.posY = -100;
+	lock.arrX = -1;
+	lock.arrY = -1;
 
 	shoe.posX = -100;
 	shoe.posY = -100;
@@ -126,10 +126,10 @@ void stage3_initPos() {
 
 
 	// ÀÚ¹°¼è
-	door.posX = pc.posX - CELL_WIDTH * 1;
-	door.posY = pc.posY - CELL_WIDTH * 1;
-	door.arrX = pc.arrX - 1;
-	door.arrY = pc.arrY - 1;
+	lock.posX = pc.posX - CELL_WIDTH * 1;
+	lock.posY = pc.posY - CELL_WIDTH * 1;
+	lock.arrX = pc.arrX - 1;
+	lock.arrY = pc.arrY - 1;
 	
 	// Å°
 	key.posX = pc.posX - CELL_WIDTH * 7;
@@ -137,15 +137,6 @@ void stage3_initPos() {
 	key.arrX = pc.arrX - 7;
 	key.arrY = pc.arrY + 3;
 
-	/*shield.posX = pc.posX - CELL_WIDTH * 1;
-	shield.posY = pc.posY;
-	shield.arrX = pc.arrX - 1;
-	shield.arrY = pc.arrY;
-
-	poison.posX = pc.posX - CELL_WIDTH * 2;
-	poison.posY = pc.posY + CELL_WIDTH * 0;
-	poison.arrX = pc.arrX - 2;
-	poison.arrY = pc.arrY + 0;*/
 
 	walkCnt = 35;
 	shield_flag = 0;
@@ -154,6 +145,8 @@ void stage3_initPos() {
 	poison_cnt = 0;
 	bulkup_flag = 0;
 	bulkup_cnt = 0;
+	startTime = clock();
+
 }
 
 void stage3() {
@@ -179,7 +172,7 @@ void stage3() {
 
 
 
-		if (walkCnt <= 0) {
+		if (walkCnt <= 0 || curTime > stageTime) {
 			pc_melting();
 			gameOver();
 			stage3_initPos();

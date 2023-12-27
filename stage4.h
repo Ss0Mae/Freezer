@@ -32,10 +32,10 @@ void stage4_initPos() {
 	key.arrX = -1;
 	key.arrY = -1;
 
-	door.posX = -100;
-	door.posY = -100;
-	door.arrX = -1;
-	door.arrY = -1;
+	lock.posX = -100;
+	lock.posY = -100;
+	lock.arrX = -1;
+	lock.arrY = -1;
 
 	shoe.posX = -100;
 	shoe.posY = -100;
@@ -141,10 +141,10 @@ void stage4_initPos() {
 	rocks[5].arrY = pc.arrY - 1;
 
 	// ÀÚ¹°¼è
-	door.posX = pc.posX + CELL_WIDTH * 3;
-	door.posY = pc.posY - CELL_WIDTH * 1;
-	door.arrX = pc.arrX + 3;
-	door.arrY = pc.arrY - 1;
+	lock.posX = pc.posX + CELL_WIDTH * 3;
+	lock.posY = pc.posY - CELL_WIDTH * 1;
+	lock.arrX = pc.arrX + 3;
+	lock.arrY = pc.arrY - 1;
 
 	// Å°
 	key.posX = pc.posX + CELL_WIDTH * 5;
@@ -161,6 +161,7 @@ void stage4_initPos() {
 	poison_cnt = 0;
 	bulkup_flag = 0;
 	bulkup_cnt = 0;
+	startTime = clock();
 
 }
 
@@ -190,7 +191,7 @@ void stage4() {
 
 
 
-		if (walkCnt <= 0) {
+		if (walkCnt <= 0 || curTime > stageTime) {
 			pc_melting();
 			gameOver();
 			stage4_initPos();
